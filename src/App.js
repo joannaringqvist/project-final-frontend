@@ -1,9 +1,9 @@
 import React from 'react'
 
+import PlantFeed from 'components/PlantFeed'
+
 export const App = () => {
   return (
-    <div>
-      Find me in src/app.js!
-    </div>
+    <PlantFeed />
   )
 }
