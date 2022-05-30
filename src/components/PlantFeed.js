@@ -1,36 +1,36 @@
 import React, { useState, useEffect } from 'react';
 import { API_URL } from 'utils/utils';
 
+/* eslint-disable */
+
 const PlantFeed = () => {
-  const [plants, setPlants] = useState('')
-
-  const options = {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json'
-    }
-  }
-
-  const fetchPlants = () => {
-    fetch(API_URL('plants'), options)
-      .then((res) => res.json())
-      .then((data) => setPlants(plants))
-      .finally(() => console.log(plants))
-      .catch((error) => console.error(error));
-  }
+  const [plants, setPlants] = useState([]);
 
   useEffect(() => {
-    fetchPlants();
+    fetch(API_URL('plants'))
+      .then((res) => res.json())
+      .then((data) => {
+        setPlants(data);
+      });
   }, []);
+  console.log(plants);
 
   return (
-    <div>
-      {/* <p>plantfeed</p>
-      {plants.map((plant) => (
-        <p key={plant._id}>{plant.plantName}</p>
-      ))} */}
-    </div>
-  )
+    <>
+      <div>
+        <p>Plantfeed!</p>
+      </div>
+      <section>
+        {plants.map((plant) => (
+          <>
+            <div key={plant._id}>{plant.plantName}</div>
+            <div key={plant._id}>{plant.typeOfPlant}</div>
+            <div key={plant._id}>{plant.information}</div>
+          </>
+        ))}
+      </section>
+    </>
+  );
 };
 
 export default PlantFeed;

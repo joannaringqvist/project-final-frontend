@@ -1,9 +1,8 @@
-import React from 'react'
-
-import PlantFeed from 'components/PlantFeed'
+import React from 'react';
+/* eslint-disable */
+import { API_URL } from 'utils/utils';
+import PlantFeed from 'components/PlantFeed';
 
 export const App = () => {
-  return (
-    <PlantFeed />
-  )
-}
+  return <PlantFeed />;
+};
