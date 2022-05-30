@@ -1,7 +1,9 @@
+/* eslint-disable */
 import React, { useState, useEffect } from 'react';
 import { API_URL } from 'utils/utils';
+import moment from 'moment';
 
-/* eslint-disable */
+import { PlantWrapper } from './plantfeed_styles';
 
 const PlantFeed = () => {
   const [plants, setPlants] = useState([]);
@@ -23,9 +25,12 @@ const PlantFeed = () => {
       <section>
         {plants.map((plant) => (
           <>
-            <div key={plant._id}>{plant.plantName}</div>
-            <div key={plant._id}>{plant.typeOfPlant}</div>
-            <div key={plant._id}>{plant.information}</div>
+            <PlantWrapper key={plant._id}>
+              <div>{plant.plantName}</div>
+              <div>{plant.typeOfPlant}</div>
+              <div>{plant.information}</div>
+              <div>{moment(plant.createdAt).fromNow()}</div>
+            </PlantWrapper>
           </>
         ))}
       </section>
