@@ -1,9 +1,10 @@
+/* eslint-disable */
 import { createSlice } from '@reduxjs/toolkit';
 
 const plants = createSlice({
   name: 'plants',
   initialState: {
-    plants: []
+    plants: [],
   },
   reducers: {
     setPlants: (store, action) => {
@@ -11,8 +12,13 @@ const plants = createSlice({
     },
     addPlant: (store, action) => {
       store.plants.unshift(action.payload);
-    }
-  }
+    },
+    deletePlant: (store, action) => {
+      const { id } = action.payload;
+      const plant = store.plants.find((p) => p.id === id);
+      store.plants.splice(store.plants.indexOf(plant), 1);
+    },
+  },
 });
 
 export default plants;
