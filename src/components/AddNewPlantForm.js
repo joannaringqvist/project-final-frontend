@@ -54,12 +54,19 @@ const AddNewPlantForm = () => {
           onChange={handlePlantNameChange}
         />
         <label htmlFor='plantType'>Type of plant</label>
-        <input
+        <select
           id='plantType'
-          type='text'
+          name='plant'
           value={plantType}
           onChange={handlePlantTypeChange}
-        />
+        >
+          <option value=''>Select type of plant</option>
+          <option value='tree'>Tree</option>
+          <option value='houseplant'>Houseplant</option>
+          <option value='perennial'>Perennial</option>
+          <option value='bush'>Bush</option>
+        </select>
+
         <label htmlFor='plantInformation'>Add more information</label>
         <textarea
           id='plantInformation'

@@ -54,6 +54,7 @@ const PlantFeed = () => {
               </button>
             </PlantWrapper>
           ))}
+          <p>You have {plantsList.length} plants registred.</p>
         </section>
       </>
     )

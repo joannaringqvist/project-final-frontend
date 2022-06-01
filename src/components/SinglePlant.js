@@ -30,11 +30,11 @@ const SinglePlant = () => {
   return (
     isLoading === false && (
       <>
-        <p>Hey</p>
         <p>{plantInfo.plantName}</p>
         <p>{plantInfo.plantInformation}</p>
         <p>{plantInfo.plantType}</p>
         <p>{moment(plantInfo.createdAt).fromNow()}</p>
+        <input type='checkbox'></input>
         <button onClick={onBackButtonClick}>BACK</button>
       </>
     )
