@@ -19,8 +19,9 @@ const PlantFeed = () => {
         dispatch(plants.actions.setPlants(data));
       });
   }, []);
-  const deleteOnePlant = () => {
-    fetch(API_URL(`plant/${plants.id}`), {
+
+  const deleteOnePlant = (plantId) => {
+    fetch(API_URL(`plant/${plantId}`), {
       method: 'DELETE',
     })
       .then((res) => res.json())
@@ -42,7 +43,9 @@ const PlantFeed = () => {
             <div>{plant.plantInformation}</div>
             <div>{moment(plant.createdAt).fromNow()}</div>
 
-            <button onClick={() => deleteOnePlant()}>DELETE PLANT</button>
+            <button onClick={() => deleteOnePlant(plant._id)}>
+              DELETE PLANT
+            </button>
           </PlantWrapper>
         ))}
       </section>
