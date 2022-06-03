@@ -8,14 +8,17 @@ import PlantFeed from 'components/PlantFeed';
 import AddNewPlantForm from 'components/AddNewPlantForm';
 import ProfilePage from 'components/ProfilePage';
 import Loading from 'components/Loading';
+import Register from 'components/Register';
+import Login from 'components/Login';
+import SinglePlant from 'components/SinglePlant';
 
 import plants from 'reducers/plants';
-import SinglePlant from 'components/SinglePlant';
+import user from 'reducers/user';
 import { ui } from './reducers/ui';
 
 const reducer = combineReducers({
   plants: plants.reducer,
-  ui: ui.reducer,
+  user: user.reducer
 });
 
 const store = configureStore({ reducer });
@@ -26,6 +29,8 @@ export const App = () => {
       <Loading />
       <BrowserRouter>
         <Routes>
+          <Route exact path='/register' element={<Register />}></Route>
+          <Route exact path='/login' element={<Login />}></Route>
           <Route exact path='/plants' element={<PlantFeed />}></Route>
           <Route exact path='/profile' element={<ProfilePage />}></Route>
           <Route exact path='/addplant' element={<AddNewPlantForm />}></Route>

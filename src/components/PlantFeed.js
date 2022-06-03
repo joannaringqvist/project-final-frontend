@@ -1,28 +1,51 @@
 /* eslint-disable */
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate, Link } from 'react-router-dom';
+
 import { API_URL } from 'utils/utils';
 import moment from 'moment';
-import { Link } from 'react-router-dom';
 import { PlantWrapper } from './plantfeed_styles';
 import plants from 'reducers/plants';
 import { ui } from 'reducers/ui';
 
+import user from "reducers/user";
+
+
+
 const PlantFeed = () => {
   const plantsList = useSelector((store) => store.plants.plants);
   const isLoading = useSelector((store) => store.ui.isLoading);
+  const accessToken = useSelector((store) => store.user.accessToken);
+  const username = useSelector((store) => store.user.username);
 
+  const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  
+    if(!accessToken) {
+      navigate('/login');
+    }
+
+
+    const options = {
+      method: 'GET',
+      header: {
+        'Content-Type': 'application/json',
+        'Authorization': accessToken
+      }
+    }
+
 
   useEffect(() => {
     dispatch(ui.actions.setLoading(true));
-    fetch(API_URL('plants'))
+    fetch(API_URL('plants'), options)
       .then((res) => res.json())
       .then((data) => {
         dispatch(plants.actions.setPlants(data));
         dispatch(ui.actions.setLoading(false));
       });
-  }, []);
+  }, [accessToken]);
 
   const deleteOnePlant = (plantId) => {
     fetch(API_URL(`plant/${plantId}`), {
@@ -36,29 +59,39 @@ const PlantFeed = () => {
 
   return (
     isLoading === false && (
-      <>
-        <div>
-          <p>Plantfeed!</p>
-        </div>
-        <section>
-          {plantsList.map((plant) => (
-            <PlantWrapper key={plant._id}>
-              <Link key={plant._id} to={`plant/${plant._id}`}>
+
+    <>
+      <div>
+        <p>Plantfeed for {username}!</p>
+        <button 
+          type="button"
+          onClick={() => {
+              navigate("/login");
+              dispatch(user.actions.setAccessToken(null));
+          }}
+          >
+            Log out
+          </button>
+
+      </div>
+      <section>
+        {plantsList.map((plant) => (
+          <PlantWrapper key={plant._id}>
+            <Link key={plant._id} to={`plant/${plant._id}`}>
                 {plant.plantName}
-              </Link>
+            </Link>
+            <div>{moment(plant.createdAt).fromNow()}</div>
 
-              <div>{moment(plant.createdAt).fromNow()}</div>
-
-              <button onClick={() => deleteOnePlant(plant._id)}>
-                DELETE PLANT
-              </button>
-            </PlantWrapper>
-          ))}
-          <p>You have {plantsList.length} plants registred.</p>
-        </section>
-      </>
-    )
-  );
+            <button onClick={() => deleteOnePlant(plant._id)}>
+              DELETE PLANT
+            </button>
+          </PlantWrapper>
+        ))}
+        <p>You have {plantsList.length} plants registred.</p>
+      </section>
+    </>
+  )
+  )
 };
 
 export default PlantFeed;
