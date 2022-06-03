@@ -18,7 +18,8 @@ import { ui } from './reducers/ui';
 
 const reducer = combineReducers({
   plants: plants.reducer,
-  user: user.reducer
+  user: user.reducer,
+  ui: ui.reducer
 });
 
 const store = configureStore({ reducer });

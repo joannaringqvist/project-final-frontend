@@ -8,6 +8,7 @@ import moment from 'moment';
 import { PlantWrapper } from './plantfeed_styles';
 import plants from 'reducers/plants';
 import { ui } from 'reducers/ui';
+import Loading from './Loading';
 
 import user from "reducers/user";
 
