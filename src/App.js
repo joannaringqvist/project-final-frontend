@@ -1,8 +1,8 @@
+/* eslint-disable */
 import React from 'react';
 import { Provider } from 'react-redux';
 import { configureStore, combineReducers } from '@reduxjs/toolkit';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-/* eslint-disable */
 import { API_URL } from 'utils/utils';
 import PlantFeed from 'components/PlantFeed';
 import AddNewPlantForm from 'components/AddNewPlantForm';
@@ -19,7 +19,7 @@ import { ui } from './reducers/ui';
 const reducer = combineReducers({
   plants: plants.reducer,
   user: user.reducer,
-  ui: ui.reducer
+  ui: ui.reducer,
 });
 
 const store = configureStore({ reducer });
