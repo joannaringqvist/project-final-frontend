@@ -36,6 +36,7 @@ const SinglePlant = () => {
         <p>{moment(plantInfo.createdAt).fromNow()}</p>
         <input type='checkbox'></input>
         <button onClick={onBackButtonClick}>BACK</button>
+        <button>EDIT</button>
       </>
     )
   );
