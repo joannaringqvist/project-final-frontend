@@ -19,6 +19,12 @@ const plants = createSlice({
       const plant = store.plants.find((p) => p.id === id);
       store.plants.splice(store.plants.indexOf(plant), 1);
     },
+    editPlant: (store, action) => {
+      const { id } = action.payload;
+      console.log(id);
+      // store.plants.find((p) => p.id === id);
+      // store.plants = action.payload;
+    },
   },
 });
 

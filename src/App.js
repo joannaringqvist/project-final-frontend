@@ -11,6 +11,7 @@ import Loading from 'components/Loading';
 import Register from 'components/Register';
 import Login from 'components/Login';
 import SinglePlant from 'components/SinglePlant';
+import Editform from 'components/Editform';
 
 import plants from 'reducers/plants';
 import user from 'reducers/user';
@@ -39,6 +40,11 @@ export const App = () => {
             exact
             path='/plants/plant/:plantId'
             element={<SinglePlant />}
+          ></Route>
+          <Route
+            exact
+            path='/plants/plant/:plantId/update'
+            element={<Editform />}
           ></Route>
           {/* <Route exact path='movie/:movieId' element={<Details />}></Route> */}
           {/* <AddNewPlantForm /> */}
