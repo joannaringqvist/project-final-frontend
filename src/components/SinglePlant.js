@@ -7,6 +7,7 @@ import plants from 'reducers/plants';
 import moment from 'moment';
 import { ui } from 'reducers/ui';
 import { editPlants } from 'reducers/plants';
+import Editform from './Editform';
 
 const SinglePlant = () => {
   const dispatch = useDispatch();
@@ -55,30 +56,30 @@ const SinglePlant = () => {
     console.log(newPlantName);
   };
 
+  if (editPlant) 
+  {
+    return <Editform />;
+  }
   return (
     isLoading === false && (
       <>
         <p
-          contentEditable={editPlant}
           onKeyPress={(e) => e.key === 'Enter' && disableNewLines(e)}
-          onChange={(e) => updatedPlantName(e.target.value)}
+          onChange={(e) => updatedPlantName(e)}
         >
           {plantInfo.plantName}
         </p>
         <p
-          contentEditable={editPlant}
           onKeyPress={(e) => e.key === 'Enter' && disableNewLines(e)}
         >
           {plantInfo.plantInformation}
         </p>
         <p
-          contentEditable={editPlant}
           onKeyPress={(e) => e.key === 'Enter' && disableNewLines(e)}
         >
           {plantInfo.plantType}
         </p>
         <p
-          contentEditable={editPlant}
           onKeyPress={(e) => e.key === 'Enter' && disableNewLines(e)}
         >
           {moment(plantInfo.createdAt).fromNow()}

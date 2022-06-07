@@ -1,20 +1,24 @@
 /* eslint-disable */
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import plants from 'reducers/plants';
+import { useParams } from 'react-router-dom';
+import { API_URL } from 'utils/utils';
+
+
 
 const Editform = () => {
   const [plantName, setPlantName] = useState('');
   const [plantType, setPlantType] = useState('');
   const [plantInformation, setPlantInformation] = useState('');
-  const dispatch = useDispatch();
 
-  const onEditPlantSubmit = () => {
-    fetch(API_URL(`/plant/${plantId}/updated`), {
+  const { plantId } = useParams();
+
+  const onEditPlantSubmit = (event) => {
+    event.preventDefault();
+    console.log('oneditplantsubmit');
+    fetch(API_URL(`plant/${plantId}/updated`), {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: accessToken,
       },
       body: JSON.stringify({ plantName, plantType, plantInformation }),
     })
@@ -32,8 +36,10 @@ const Editform = () => {
   const handleEditInformationChange = (event) => {
     setPlantInformation(event.target.value);
   };
+
   return (
     <>
+      <h1>Edit plant</h1>
       <div className='form-container'>
         <form onSubmit={onEditPlantSubmit}>
           <label htmlFor='plantName'>Name of plant</label>
@@ -71,29 +77,3 @@ const Editform = () => {
 };
 
 export default Editform;
-
-// export const updateTodo = (taskId, accessToken, task, userId) => {
-//   return (dispatch) => {
-//     const options = {
-//       method: 'PATCH',
-//       headers: {
-//         'Content-Type': 'application/json',
-//         Authorization: accessToken,
-//       },
-//       body: JSON.stringify({ description: task, user: userId }),
-//     };
-
-//     dispatch(ui.actions.setLoading(true));
-//     fetch(API_URL(`tasks/${taskId}/update`), options)
-//       .then((res) => res.json())
-//       .then((data) => {
-//         if (data.success) {
-//           dispatch(showTasklist(accessToken, userId));
-//           dispatch(tasks.actions.setError(null));
-//         } else {
-//           dispatch(tasks.actions.setError(data.response));
-//         }
-//       })
-//       .finally(() => dispatch(ui.actions.setLoading(false)));
-//   };
-// };
