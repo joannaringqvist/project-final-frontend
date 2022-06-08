@@ -11,6 +11,7 @@ import Loading from 'components/Loading';
 import Register from 'components/Register';
 import Login from 'components/Login';
 import SinglePlant from 'components/SinglePlant';
+import PlantCalendar from 'components/Calendar';
 
 import plants from 'reducers/plants';
 import user from 'reducers/user';
@@ -35,6 +36,7 @@ export const App = () => {
           <Route exact path='/plants' element={<PlantFeed />}></Route>
           <Route exact path='/profile' element={<ProfilePage />}></Route>
           <Route exact path='/addplant' element={<AddNewPlantForm />}></Route>
+          <Route exact path='/calendar' element={<PlantCalendar />}></Route>
 
           <Route
             exact

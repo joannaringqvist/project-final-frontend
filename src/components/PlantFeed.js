@@ -6,10 +6,10 @@ import { useNavigate, Link } from 'react-router-dom';
 import { API_URL } from 'utils/utils';
 import moment from 'moment';
 import { PlantWrapper } from './plantfeed_styles';
+import Navbar from './reusable-components/Navbar';
 import plants from 'reducers/plants';
 import { ui } from 'reducers/ui';
 import Loading from './Loading';
-
 import user from 'reducers/user';
 
 const PlantFeed = () => {
@@ -59,6 +59,7 @@ const PlantFeed = () => {
   return (
     isLoading === false && (
       <>
+        <Navbar />
         <div>
           <p>Plantfeed for {username}!</p>
           <button

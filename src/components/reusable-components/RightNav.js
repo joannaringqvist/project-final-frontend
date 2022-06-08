@@ -1,7 +1,7 @@
 /* eslint-disable */
 import React from 'react';
 import styled from 'styled-components';
-import { useNavigate, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const Ul = styled.ul`
   list-style: none;
@@ -36,7 +36,9 @@ const RightNav = ({ open }) => {
       <Link to='/plants'>
         <li>Plantfeed</li>
       </Link>
-      <li>Contact Us</li>
+      <Link to='/calendar'>
+        <li>Calendar</li>
+      </Link>
       <li>Sign In</li>
       <li>Sign Up</li>
     </Ul>

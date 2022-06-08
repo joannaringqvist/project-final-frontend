@@ -8,6 +8,7 @@ import moment from 'moment';
 import { ui } from 'reducers/ui';
 import { editPlants } from 'reducers/plants';
 import Editform from './Editform';
+import Navbar from './reusable-components/Navbar';
 
 const SinglePlant = () => {
   const dispatch = useDispatch();
@@ -62,6 +63,7 @@ const SinglePlant = () => {
   return (
     isLoading === false && (
       <>
+        <Navbar />
         <p
           onKeyPress={(e) => e.key === 'Enter' && disableNewLines(e)}
           onChange={(e) => updatedPlantName(e)}
