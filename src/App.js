@@ -35,6 +35,7 @@ export const App = () => {
           <Route exact path='/plants' element={<PlantFeed />}></Route>
           <Route exact path='/profile' element={<ProfilePage />}></Route>
           <Route exact path='/addplant' element={<AddNewPlantForm />}></Route>
+
           <Route
             exact
             path='/plants/plant/:plantId'

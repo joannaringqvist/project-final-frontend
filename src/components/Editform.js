@@ -1,14 +1,14 @@
 /* eslint-disable */
 import React, { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { API_URL } from 'utils/utils';
-
-
 
 const Editform = () => {
   const [plantName, setPlantName] = useState('');
   const [plantType, setPlantType] = useState('');
   const [plantInformation, setPlantInformation] = useState('');
+
+  const navigate = useNavigate();
 
   const { plantId } = useParams();
 

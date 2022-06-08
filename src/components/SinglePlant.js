@@ -56,8 +56,7 @@ const SinglePlant = () => {
     console.log(newPlantName);
   };
 
-  if (editPlant) 
-  {
+  if (editPlant) {
     return <Editform />;
   }
   return (
@@ -69,19 +68,13 @@ const SinglePlant = () => {
         >
           {plantInfo.plantName}
         </p>
-        <p
-          onKeyPress={(e) => e.key === 'Enter' && disableNewLines(e)}
-        >
+        <p onKeyPress={(e) => e.key === 'Enter' && disableNewLines(e)}>
           {plantInfo.plantInformation}
         </p>
-        <p
-          onKeyPress={(e) => e.key === 'Enter' && disableNewLines(e)}
-        >
+        <p onKeyPress={(e) => e.key === 'Enter' && disableNewLines(e)}>
           {plantInfo.plantType}
         </p>
-        <p
-          onKeyPress={(e) => e.key === 'Enter' && disableNewLines(e)}
-        >
+        <p onKeyPress={(e) => e.key === 'Enter' && disableNewLines(e)}>
           {moment(plantInfo.createdAt).fromNow()}
         </p>
         <input type='checkbox'></input>
