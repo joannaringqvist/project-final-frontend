@@ -21,6 +21,7 @@ const PlantFeed = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+
   if (!accessToken) {
     navigate('/login');
   }
@@ -40,8 +41,6 @@ const PlantFeed = () => {
         if (data.success) {
           dispatch(plants.actions.setPlants(data.response));
           dispatch(ui.actions.setLoading(false));
-
-          console.log(data);
         }
       });
   }, [accessToken]);
@@ -64,8 +63,8 @@ const PlantFeed = () => {
           <button
             type='button'
             onClick={() => {
-              navigate('/login');
               dispatch(user.actions.setAccessToken(null));
+              navigate('/login');
             }}
           >
             Log out
