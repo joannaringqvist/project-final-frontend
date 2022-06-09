@@ -29,6 +29,7 @@ const SinglePlant = () => {
       .then((res) => res.json())
       .then((data) => {
         setPlantInfo(data.data);
+        console.log(plantInfo);
         dispatch(ui.actions.setLoading(false));
       });
   }, []);

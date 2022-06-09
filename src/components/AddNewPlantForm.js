@@ -5,6 +5,8 @@ import { useDispatch } from 'react-redux';
 import { API_URL } from 'utils/utils';
 import plants from 'reducers/plants';
 
+import { Formwrapper, InputWrapper } from './plantform_style';
+
 const AddNewPlantForm = () => {
   const [plantName, setPlantName] = useState('');
   const [plantType, setPlantType] = useState('');
@@ -44,38 +46,43 @@ const AddNewPlantForm = () => {
   };
 
   return (
-    <div className='form-container'>
+    <Formwrapper>
       <form onSubmit={onSaveNewPlantSubmit}>
         <label htmlFor='plantName'>Name of plant</label>
-        <input
-          id='plantName'
-          type='text'
-          value={plantName}
-          onChange={handlePlantNameChange}
-        />
+        <InputWrapper>
+          <input
+            id='plantName'
+            type='text'
+            value={plantName}
+            onChange={handlePlantNameChange}
+          />
+        </InputWrapper>
         <label htmlFor='plantType'>Type of plant</label>
-        <select
-          id='plantType'
-          name='plant'
-          value={plantType}
-          onChange={handlePlantTypeChange}
-        >
-          <option value=''>Select type of plant</option>
-          <option value='tree'>Tree</option>
-          <option value='houseplant'>Houseplant</option>
-          <option value='perennial'>Perennial</option>
-          <option value='bush'>Bush</option>
-        </select>
-
+        <InputWrapper>
+          <select
+            id='plantType'
+            name='plant'
+            value={plantType}
+            onChange={handlePlantTypeChange}
+          >
+            <option value=''>Select type of plant</option>
+            <option value='tree'>Tree</option>
+            <option value='houseplant'>Houseplant</option>
+            <option value='perennial'>Perennial</option>
+            <option value='bush'>Bush</option>
+          </select>
+        </InputWrapper>
         <label htmlFor='plantInformation'>Add more information</label>
-        <textarea
-          id='plantInformation'
-          value={plantInformation}
-          onChange={handlePlantInformationChange}
-        />
+        <InputWrapper>
+          <textarea
+            id='plantInformation'
+            value={plantInformation}
+            onChange={handlePlantInformationChange}
+          />
+        </InputWrapper>
         <button type='submit'>Save plant</button>
       </form>
-    </div>
+    </Formwrapper>
   );
 };
 

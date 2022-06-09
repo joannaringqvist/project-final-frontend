@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "dependencies": {
+    "@fullcalendar/react": "^5.11.1",
     "@reduxjs/toolkit": "^1.8.2",
     "babel-eslint": "^10.0.3",
     "bootstrap": "^5.1.3",

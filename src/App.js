@@ -14,10 +14,13 @@ import SinglePlant from 'components/SinglePlant';
 import PlantCalendar from 'components/Calendar';
 
 import plants from 'reducers/plants';
+import eventTodos from 'reducers/events';
 import user from 'reducers/user';
 import { ui } from './reducers/ui';
+import PlantTodos from 'components/PlantTodos';
 
 const reducer = combineReducers({
+  eventTodos: eventTodos.reducer,
   plants: plants.reducer,
   user: user.reducer,
   ui: ui.reducer,
@@ -36,7 +39,7 @@ export const App = () => {
           <Route exact path='/plants' element={<PlantFeed />}></Route>
           <Route exact path='/profile' element={<ProfilePage />}></Route>
           <Route exact path='/addplant' element={<AddNewPlantForm />}></Route>
-          <Route exact path='/calendar' element={<PlantCalendar />}></Route>
+          <Route exact path='/calendar' element={<PlantTodos />}></Route>
 
           <Route
             exact

@@ -1,5 +1,5 @@
 /* eslint-disable */
-import React, { useEffect } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import { useDispatch, useSelector, batch } from 'react-redux';
 import { useNavigate, Link } from 'react-router-dom';
 
@@ -17,9 +17,11 @@ const PlantFeed = () => {
   const isLoading = useSelector((store) => store.ui.isLoading);
   const accessToken = useSelector((store) => store.user.accessToken);
   const username = useSelector((store) => store.user.username);
-
+  const [plantlist, setPlantlist] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState();
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const categories = ['bush', 'tree', 'perennial', 'houseplant'];
 
   if (!accessToken) {
     navigate('/login');
@@ -40,8 +42,7 @@ const PlantFeed = () => {
         if (data.success) {
           dispatch(plants.actions.setPlants(data.response));
           dispatch(ui.actions.setLoading(false));
-
-          console.log(data);
+          setPlantlist(data);
         }
       });
   }, [accessToken]);
@@ -71,6 +72,18 @@ const PlantFeed = () => {
           >
             Log out
           </button>
+          <div className='filter-container'>
+            <div>Filter by Category:</div>
+            <div>
+              <select name='category-list' id='category-list'>
+                <option value=''>All</option>
+                <option value='bush'>bush</option>
+                <option value='tree'>tree</option>
+                <option value='houseplant'>houseplant</option>
+                <option value='perennial'>perennial</option>
+              </select>
+            </div>
+          </div>
         </div>
         <section>
           {plantsList.map((plant) => (

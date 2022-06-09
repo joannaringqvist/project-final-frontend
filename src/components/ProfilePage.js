@@ -8,10 +8,13 @@ import { useSelector, useDispatch } from 'react-redux';
 
 const ProfilePage = () => {
   const username = useSelector((store) => store.user.username);
+  const events = useSelector((store) => store.eventTodos.events);
   return (
     <>
       <Navbar />
       <p>Hello {username}!</p>
+      <p>Take a look at what you have to do next!</p>
+      <p>{events}</p>
     </>
   );
 };

@@ -9,8 +9,7 @@ import user from 'reducers/user';
 
 import {
   Loginwrapper,
-  UsernameWrapper,
-  PasswordWrapper,
+  InputWrapper,
   LoginButton,
 } from './login_register_styles';
 
@@ -71,23 +70,23 @@ const Login = () => {
       {errorMessage && <p>{errorMessage}</p>}
       <form onSubmit={onLoginFormSubmit}>
         <label htmlFor='username'>Username</label>
-        <UsernameWrapper>
+        <InputWrapper>
           <input
             type='text'
             id='username'
             value={username}
             onChange={(e) => setUsername(e.target.value)}
           />
-        </UsernameWrapper>
+        </InputWrapper>
         <label htmlFor='password'>Password</label>
-        <PasswordWrapper>
+        <InputWrapper>
           <input
             type='password'
             id='password'
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-        </PasswordWrapper>
+        </InputWrapper>
 
         <LoginButton type='submit'>Login</LoginButton>
       </form>

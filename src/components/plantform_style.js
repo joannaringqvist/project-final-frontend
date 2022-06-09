@@ -1,7 +1,7 @@
 /* eslint-disable */
 import styled from 'styled-components';
 
-export const Loginwrapper = styled.div`
+export const Formwrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -13,5 +13,3 @@ export const Loginwrapper = styled.div`
 export const InputWrapper = styled.div`
   margin: 5px 0px 15px 0px;
 `;
-
-export const LoginButton = styled.button``;
