@@ -23,6 +23,7 @@ const PlantFeed = () => {
   const dispatch = useDispatch();
   const categories = ['bush', 'tree', 'perennial', 'houseplant'];
 
+
   if (!accessToken) {
     navigate('/login');
   }
@@ -42,7 +43,10 @@ const PlantFeed = () => {
         if (data.success) {
           dispatch(plants.actions.setPlants(data.response));
           dispatch(ui.actions.setLoading(false));
+<<<<<<< HEAD
           setPlantlist(data);
+=======
+>>>>>>> bb8b792f0ded156fdeca7316afc6ce87540bdb2b
         }
       });
   }, [accessToken]);
@@ -66,8 +70,8 @@ const PlantFeed = () => {
           <button
             type='button'
             onClick={() => {
-              navigate('/login');
               dispatch(user.actions.setAccessToken(null));
+              navigate('/login');
             }}
           >
             Log out

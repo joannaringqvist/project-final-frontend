@@ -1,6 +1,7 @@
 /* eslint-disable */
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 import { API_URL } from 'utils/utils';
 import plants from 'reducers/plants';
@@ -11,6 +12,13 @@ const AddNewPlantForm = () => {
   const [plantName, setPlantName] = useState('');
   const [plantType, setPlantType] = useState('');
   const [plantInformation, setPlantInformation] = useState('');
+  const accessToken = useSelector((store) => store.user.accessToken);
+  const navigate = useNavigate();
+
+
+  if (!accessToken) {
+    navigate('/login');
+  }
 
   const dispatch = useDispatch();
 
@@ -35,7 +43,10 @@ const AddNewPlantForm = () => {
 
     fetch(API_URL('plants'), {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 
+        'Content-Type': 'application/json', 
+        Authorization: accessToken,
+    },
       body: JSON.stringify({ plantName, plantType, plantInformation }),
     })
       .then((res) => res.json())

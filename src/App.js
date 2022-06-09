@@ -26,7 +26,18 @@ const reducer = combineReducers({
   ui: ui.reducer,
 });
 
-const store = configureStore({ reducer });
+const persistedStateJSON = sessionStorage.getItem('state')
+let persistedState = {}
+
+if (persistedStateJSON) {
+  persistedState = JSON.parse(persistedStateJSON)
+}
+
+const store = configureStore({ reducer, preloadedState: persistedState });
+
+store.subscribe(() => {
+  sessionStorage.setItem('state', JSON.stringify(store.getState()))
+})
 
 export const App = () => {
   return (
