@@ -17,12 +17,14 @@ const PlantFeed = () => {
   const isLoading = useSelector((store) => store.ui.isLoading);
   const accessToken = useSelector((store) => store.user.accessToken);
   const username = useSelector((store) => store.user.username);
+  const bushCategory = plantsList.filter((plant) => plant.plantType === 'bush');
+
   const [plantlist, setPlantlist] = useState([]);
-  const [selectedCategory, setSelectedCategory] = useState();
+  const [filteredList, setFilteredList] = useState(plantsList);
+  const [selectedCategory, setSelectedCategory] = useState('');
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const categories = ['bush', 'tree', 'perennial', 'houseplant'];
-
 
   if (!accessToken) {
     navigate('/login');
@@ -43,10 +45,8 @@ const PlantFeed = () => {
         if (data.success) {
           dispatch(plants.actions.setPlants(data.response));
           dispatch(ui.actions.setLoading(false));
-<<<<<<< HEAD
           setPlantlist(data);
-=======
->>>>>>> bb8b792f0ded156fdeca7316afc6ce87540bdb2b
+          console.log(filteredList);
         }
       });
   }, [accessToken]);
@@ -60,6 +60,25 @@ const PlantFeed = () => {
         dispatch(plants.actions.deletePlant(data.response));
       });
   };
+  const filterByCategory = (filteredData) => {
+    if (!selectedCategory) {
+      return filteredData;
+    }
+
+    const filteredPlants = filteredData.filter(
+      (plant) => plant.plantType.split(' ').indexOf(selectedCategory) !== -1
+    );
+    return filteredPlants;
+  };
+
+  const handleCategoryChange = (event) => {
+    setSelectedCategory(event.target.value);
+  };
+
+  useEffect(() => {
+    let filteredData = filterByCategory(plantsList);
+    setFilteredList(filteredData);
+  }, [selectedCategory]);
 
   return (
     isLoading === false && (
@@ -79,7 +98,12 @@ const PlantFeed = () => {
           <div className='filter-container'>
             <div>Filter by Category:</div>
             <div>
-              <select name='category-list' id='category-list'>
+              <select
+                name='category-list'
+                id='category-list'
+                value={selectedCategory}
+                onChange={handleCategoryChange}
+              >
                 <option value=''>All</option>
                 <option value='bush'>bush</option>
                 <option value='tree'>tree</option>
@@ -90,7 +114,7 @@ const PlantFeed = () => {
           </div>
         </div>
         <section>
-          {plantsList.map((plant) => (
+          {filteredList.map((plant) => (
             <PlantWrapper key={plant._id}>
               <Link key={plant._id} to={`plant/${plant._id}`}>
                 {plant.plantName}

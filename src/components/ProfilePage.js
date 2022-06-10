@@ -14,7 +14,6 @@ const ProfilePage = () => {
       <Navbar />
       <p>Hello {username}!</p>
       <p>Take a look at what you have to do next!</p>
-      <p>{events}</p>
     </>
   );
 };
