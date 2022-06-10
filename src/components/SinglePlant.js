@@ -8,6 +8,8 @@ import moment from 'moment';
 import { ui } from 'reducers/ui';
 import { editPlants } from 'reducers/plants';
 import Editform from './Editform';
+import {AdvancedImage} from '@cloudinary/react';
+import {Cloudinary} from "@cloudinary/url-gen";
 
 const SinglePlant = () => {
   const dispatch = useDispatch();
@@ -56,12 +58,36 @@ const SinglePlant = () => {
     console.log(newPlantName);
   };
 
+  // -------- CLOUDINARY --------
+  // Create a Cloudinary instance and set your cloud name.
+  const cld = new Cloudinary({
+    cloud: {
+      cloudName: 'garden-planner',
+    },
+    //url: 'https://res.cloudinary.com/garden-planner/image/upload/v1654781197/test/IMG_9052_zzibtf.jpg'
+} );
+
+  // cld.image returns a CloudinaryImage with the configuration set.
+  const myImage = cld.image('test/IMG_9052_zzibtf');
+  // -------- CLOUDINARY --------
+
   if (editPlant) {
     return <Editform />;
   }
+
   return (
     isLoading === false && (
       <>
+        <div>Hejsan
+          <AdvancedImage cldImg={myImage} style={{width: '250px'}} />
+        </div>
+        {/* <CloudinaryContext cloudName="garden-planner">
+        <div>
+          <Image publicId="cld-sample-5" width="50" />
+        </div>
+          <Image publicId="cld-sample-5" width="0.5" />
+        </CloudinaryContext> */}
+
         <p
           onKeyPress={(e) => e.key === 'Enter' && disableNewLines(e)}
           onChange={(e) => updatedPlantName(e)}

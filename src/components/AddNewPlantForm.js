@@ -2,6 +2,8 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import {AdvancedImage} from '@cloudinary/react';
+import {Cloudinary} from "@cloudinary/url-gen";
 
 import { API_URL } from 'utils/utils';
 import plants from 'reducers/plants';
@@ -54,6 +56,19 @@ const AddNewPlantForm = () => {
       });
   };
 
+  const myWidget = cloudinary.createUploadWidget({
+    cloudName: 'my_cloud_name', 
+    uploadPreset: 'my_preset'}, (error, result) => { 
+      if (!error && result && result.event === "success") { 
+        console.log('Done! Here is the image info: ', result.info); 
+      }
+    }
+  )
+
+  const onClickUploadImage = () => {
+    myWidget.open();
+  }
+
   return (
     <div className='form-container'>
       <form onSubmit={onSaveNewPlantSubmit}>
@@ -84,6 +99,10 @@ const AddNewPlantForm = () => {
           value={plantInformation}
           onChange={handlePlantInformationChange}
         />
+
+        <p>ADD IMAGE</p>
+        <button type='button' id='upload_widget' onClick={onClickUploadImage}>Upload image</button>
+
         <button type='submit'>Save plant</button>
       </form>
     </div>

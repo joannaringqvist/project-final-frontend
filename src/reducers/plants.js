@@ -1,6 +1,5 @@
 /* eslint-disable */
 import { createSlice } from '@reduxjs/toolkit';
-import uniqid from 'uniqid';
 
 const plants = createSlice({
   name: 'plants',
