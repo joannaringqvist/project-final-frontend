@@ -11,8 +11,7 @@ const Weather = () => {
   const [weather, setWeather] = useState('');
   const [temperature, setTemperature] = useState(0);
   const [cityName, setCityName] = useState('');
-  const [sunrise, setSunrise] = useState('');
-  const [sunset, setSunset] = useState('');
+  const [icon, setIcon] = useState('');
   const date = moment().format('MMMM Do');
   const weekday = moment().format('dddd');
 
@@ -30,9 +29,9 @@ const Weather = () => {
       );
       console.log(res.data);
       setTemperature(res.data.current.temp);
-      setSunrise(res.data.current.sunrise);
-      setSunset(res.data.current.sunset);
-      setWeather(res.data.current.weather[0].description);
+      setWeather(res.data.current.weather[0].main);
+      setIcon(res.data.current.weather[0].icon);
+      console.log(icon);
     } catch (err) {
       console.error(err);
     }
@@ -65,8 +64,18 @@ const Weather = () => {
         <p>{cityName}</p>
         <p>{Math.round(temperature)} °C</p>
         <p>{weather}</p>
-        {(weather === 'clear sky', 'overcast clouds') && (
-          <p>Looks like a great day for your garden! </p>
+
+        <img
+          src={`http://openweathermap.org/img/wn/${icon}@2x.png`}
+          alt='Logo'
+        />
+
+        {weather === 'Clear' && <p>Looks like a sunny day for your garden! </p>}
+        {weather === 'Rain' && (
+          <p>No need to water your plants outside today! </p>
+        )}
+        {weather === 'Clouds' && (
+          <p>A good day for taking care of your plants!</p>
         )}
       </WeatherWrapper>
     </>

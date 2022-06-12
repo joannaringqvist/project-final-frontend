@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { API_URL } from 'utils/utils';
 import user from 'reducers/user';
+import swal from 'sweetalert';
 
 import { Formwrapper, InputWrapper, LoginButton } from './Styling/form_styles';
 import Login from './Login';
@@ -54,6 +55,8 @@ const Register = () => {
             dispatch(user.actions.setUserName(data.username));
             dispatch(user.actions.setEmail(data.email));
             dispatch(user.actions.setError(null));
+            swal({ text: 'You are now a user!', icon: 'success' });
+            navigate('/login');
           });
         } else {
           batch(() => {

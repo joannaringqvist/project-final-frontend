@@ -76,6 +76,7 @@ const SinglePlant = () => {
         if (data.success) {
           dispatch(plants.actions.togglePlant(plantId));
           dispatch(ui.actions.setLoading(false));
+          setIsFavourite();
           console.log('is completed!');
         }
       });
