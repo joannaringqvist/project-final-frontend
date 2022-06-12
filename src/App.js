@@ -11,7 +11,6 @@ import Loading from 'components/Loading';
 import Register from 'components/Register';
 import Login from 'components/Login';
 import SinglePlant from 'components/SinglePlant';
-import PlantCalendar from 'components/Calendar';
 
 import plants from 'reducers/plants';
 import eventTodos from 'reducers/events';
@@ -26,18 +25,18 @@ const reducer = combineReducers({
   ui: ui.reducer,
 });
 
-const persistedStateJSON = sessionStorage.getItem('state')
-let persistedState = {}
+const persistedStateJSON = sessionStorage.getItem('state');
+let persistedState = {};
 
 if (persistedStateJSON) {
-  persistedState = JSON.parse(persistedStateJSON)
+  persistedState = JSON.parse(persistedStateJSON);
 }
 
 const store = configureStore({ reducer, preloadedState: persistedState });
 
 store.subscribe(() => {
-  sessionStorage.setItem('state', JSON.stringify(store.getState()))
-})
+  sessionStorage.setItem('state', JSON.stringify(store.getState()));
+});
 
 export const App = () => {
   return (

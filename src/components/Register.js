@@ -6,11 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { API_URL } from 'utils/utils';
 import user from 'reducers/user';
 
-import {
-  Loginwrapper,
-  InputWrapper,
-  LoginButton,
-} from './login_register_styles';
+import { Formwrapper, InputWrapper, LoginButton } from './Styling/form_styles';
 import Login from './Login';
 
 const Register = () => {
@@ -72,7 +68,7 @@ const Register = () => {
   };
 
   return (
-    <Loginwrapper>
+    <Formwrapper>
       <h1>Register a new user</h1>
       {errorMessage && <p>{errorMessage}</p>}
       <form onSubmit={onRegisterFormSubmit}>
@@ -109,7 +105,7 @@ const Register = () => {
       </form>
       <p>Already a user?</p>
       <LoginButton onClick={onLogin}>Log in!</LoginButton>
-    </Loginwrapper>
+    </Formwrapper>
   );
 };
 

@@ -22,6 +22,7 @@ const SinglePlant = () => {
   const [plantInfo, setPlantInfo] = useState([]);
   const [editPlant, setEditPlant] = useState(false);
   const [newPlantName, setNewPlantName] = useState('');
+  const [isFavourite, setIsFavourite] = useState(false);
 
   useEffect(() => {
     dispatch(ui.actions.setLoading(true));
@@ -29,7 +30,6 @@ const SinglePlant = () => {
       .then((res) => res.json())
       .then((data) => {
         setPlantInfo(data.data);
-        console.log(plantInfo);
         dispatch(ui.actions.setLoading(false));
       });
   }, []);
@@ -58,6 +58,29 @@ const SinglePlant = () => {
     console.log(newPlantName);
   };
 
+  const togglePlant = (plantId, isFavourite) => {
+    const options = {
+      method: 'PATCH',
+      body: JSON.stringify({
+        isFavourite: !isFavourite,
+        _id: plantId,
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+    dispatch(ui.actions.setLoading(true));
+    fetch(API_URL(`plants/${plantId}/favourite`), options)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success) {
+          dispatch(plants.actions.togglePlant(plantId));
+          dispatch(ui.actions.setLoading(false));
+          console.log('is completed!');
+        }
+      });
+  };
+
   if (editPlant) {
     return <Editform />;
   }
@@ -80,8 +103,13 @@ const SinglePlant = () => {
         <p onKeyPress={(e) => e.key === 'Enter' && disableNewLines(e)}>
           {moment(plantInfo.createdAt).fromNow()}
         </p>
-        <input type='checkbox'></input>
         <button onClick={onBackButtonClick}>BACK</button>
+        <input
+          type='checkbox'
+          checked={plantInfo.isFavourite}
+          onChange={() => togglePlant(plantInfo._id, plantInfo.isFavourite)}
+        />
+        Favourite
         {!editPlant && <button onClick={onEditClick}>EDIT</button>}
         {editPlant && (
           <button onClick={() => onUpdatePlant(plantId)}>SAVE</button>

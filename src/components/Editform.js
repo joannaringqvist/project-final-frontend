@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { API_URL } from 'utils/utils';
+import { Formwrapper, InputWrapper } from './Styling/form_styles';
 
 const Editform = () => {
   const [plantName, setPlantName] = useState('');
@@ -40,38 +41,44 @@ const Editform = () => {
   return (
     <>
       <h1>Edit plant</h1>
-      <div className='form-container'>
+      <Formwrapper>
         <form onSubmit={onEditPlantSubmit}>
           <label htmlFor='plantName'>Name of plant</label>
-          <input
-            id='plantName'
-            type='text'
-            value={plantName}
-            onChange={handleEditNameChange}
-          />
+          <InputWrapper>
+            <input
+              id='plantName'
+              type='text'
+              value={plantName}
+              onChange={handleEditNameChange}
+            />
+          </InputWrapper>
           <label htmlFor='plantType'>Type of plant</label>
-          <select
-            id='plantType'
-            name='plant'
-            value={plantType}
-            onChange={handleEditTypeChange}
-          >
-            <option value=''>Select type of plant</option>
-            <option value='tree'>Tree</option>
-            <option value='houseplant'>Houseplant</option>
-            <option value='perennial'>Perennial</option>
-            <option value='bush'>Bush</option>
-          </select>
+          <InputWrapper>
+            <select
+              id='plantType'
+              name='plant'
+              value={plantType}
+              onChange={handleEditTypeChange}
+            >
+              <option value=''>Select type of plant</option>
+              <option value='tree'>Tree</option>
+              <option value='houseplant'>Houseplant</option>
+              <option value='perennial'>Perennial</option>
+              <option value='bush'>Bush</option>
+            </select>
+          </InputWrapper>
 
           <label htmlFor='plantInformation'>Add more information</label>
-          <textarea
-            id='plantInformation'
-            value={plantInformation}
-            onChange={handleEditInformationChange}
-          />
+          <InputWrapper>
+            <textarea
+              id='plantInformation'
+              value={plantInformation}
+              onChange={handleEditInformationChange}
+            />
+          </InputWrapper>
           <button type='submit'>Save plant</button>
         </form>
-      </div>
+      </Formwrapper>
     </>
   );
 };

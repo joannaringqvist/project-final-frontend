@@ -1,6 +1,5 @@
 /* eslint-disable */
 import { createSlice } from '@reduxjs/toolkit';
-import uniqid from 'uniqid';
 
 const plants = createSlice({
   name: 'plants',
@@ -19,6 +18,12 @@ const plants = createSlice({
       console.log(action.payload);
       const plant = store.plants.find((p) => p.id === id);
       store.plants.splice(store.plants.indexOf(plant), 1);
+    },
+    togglePlant: (store, action) => {
+      const toggledPlant = store.plants.find(
+        (plant) => plant._id === action.payload
+      );
+      toggledPlant.isFavourite = !toggledPlant.isFavourite;
     },
   },
 });

@@ -4,6 +4,8 @@ import plants from 'reducers/plants';
 import user from 'reducers/user';
 import Navbar from './reusable-components/Navbar';
 
+import Weather from './Weather';
+
 import { useSelector, useDispatch } from 'react-redux';
 
 const ProfilePage = () => {
@@ -13,7 +15,7 @@ const ProfilePage = () => {
     <>
       <Navbar />
       <p>Hello {username}!</p>
-      <p>Take a look at what you have to do next!</p>
+      <Weather />
     </>
   );
 };

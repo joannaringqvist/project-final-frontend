@@ -1,7 +1,7 @@
 /* eslint-disable */
 import styled from 'styled-components';
 
-export const Loginwrapper = styled.div`
+export const Formwrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;

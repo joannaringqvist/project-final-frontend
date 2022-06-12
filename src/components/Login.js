@@ -7,11 +7,7 @@ import { API_URL } from 'utils/utils';
 
 import user from 'reducers/user';
 
-import {
-  Loginwrapper,
-  InputWrapper,
-  LoginButton,
-} from './login_register_styles';
+import { Formwrapper, InputWrapper, LoginButton } from './Styling/form_styles';
 
 const Login = () => {
   const [username, setUsername] = useState('');
@@ -65,7 +61,7 @@ const Login = () => {
   };
 
   return (
-    <Loginwrapper>
+    <Formwrapper>
       <h1>Login</h1>
       {errorMessage && <p>{errorMessage}</p>}
       <form onSubmit={onLoginFormSubmit}>
@@ -92,7 +88,7 @@ const Login = () => {
       </form>
       <p>Not yet a user?</p>
       <LoginButton onClick={onRegister}>Sign up!</LoginButton>
-    </Loginwrapper>
+    </Formwrapper>
   );
 };
 
