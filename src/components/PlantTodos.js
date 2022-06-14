@@ -8,9 +8,11 @@ import { useParams, useNavigate } from 'react-router-dom';
 
 import eventTodos from 'reducers/events';
 import { ui } from 'reducers/ui';
+import user from 'reducers/user';
 import { API_URL } from 'utils/utils';
 
 const PlantTodos = () => {
+  const accessToken = useSelector((store) => store.user.accessToken);
   const dispatch = useDispatch();
   const eventsList = useSelector((store) => store.eventTodos.events);
   const [startDate, setStartDate] = useState(
@@ -24,6 +26,7 @@ const PlantTodos = () => {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
+        Authorization: accessToken,
       },
     };
     dispatch(ui.actions.setLoading(true));
@@ -36,7 +39,7 @@ const PlantTodos = () => {
           console.log(data);
         }
       });
-  }, []);
+  }, [accessToken]);
 
   const handleEventTitleChange = (event) => {
     setEventTitle(event.target.value);
@@ -47,7 +50,10 @@ const PlantTodos = () => {
 
     fetch(API_URL('calendarevents'), {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 
+        'Content-Type': 'application/json',         
+        Authorization: accessToken,
+    },
       body: JSON.stringify({ eventTitle, startDate }),
     })
       .then((res) => res.json())
