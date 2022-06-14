@@ -13,9 +13,13 @@ import Navbar from './reusable-components/Navbar';
 const SinglePlant = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  // ---- Reusable component ----
   const onBackButtonClick = () => {
-    navigate(-1);
+    //navigate(-1);
+    navigate('/plants/');
   };
+
   const plantsList = useSelector((store) => store.plants.plants);
   const isLoading = useSelector((store) => store.ui.isLoading);
   const { plantId } = useParams();
@@ -29,10 +33,9 @@ const SinglePlant = () => {
       .then((res) => res.json())
       .then((data) => {
         setPlantInfo(data.data);
-        console.log(plantInfo);
         dispatch(ui.actions.setLoading(false));
       });
-  }, []);
+  }, [editPlant]);
 
   const onEditClick = () => {
     setEditPlant(true);
@@ -55,11 +58,10 @@ const SinglePlant = () => {
   };
   const updatedPlantName = (event) => {
     setNewPlantName(event.target.value);
-    console.log(newPlantName);
   };
 
   if (editPlant) {
-    return <Editform />;
+    return <Editform setEditPlant={setEditPlant} />;
   }
   return (
     isLoading === false && (
@@ -81,7 +83,10 @@ const SinglePlant = () => {
           {moment(plantInfo.createdAt).fromNow()}
         </p>
         <input type='checkbox'></input>
+
+        {/* ---- Reusable component ---- */}
         <button onClick={onBackButtonClick}>BACK</button>
+
         {!editPlant && <button onClick={onEditClick}>EDIT</button>}
         {editPlant && (
           <button onClick={() => onUpdatePlant(plantId)}>SAVE</button>

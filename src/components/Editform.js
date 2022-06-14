@@ -1,20 +1,38 @@
 /* eslint-disable */
-import React, { useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
 import { API_URL } from 'utils/utils';
 
-const Editform = () => {
-  const [plantName, setPlantName] = useState('');
-  const [plantType, setPlantType] = useState('');
-  const [plantInformation, setPlantInformation] = useState('');
+import plants from 'reducers/plants';
+
+const Editform = (props) => {
+  const plantsList = useSelector((store) => store.plants.plants);
+  const { plantId } = useParams();
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  const { plantId } = useParams();
+  const currentPlant = plantsList.find((plant) => {
+    return plant._id === plantId;
+  });
+
+  const [plantName, setPlantName] = useState(currentPlant.plantName);
+  const [plantType, setPlantType] = useState(currentPlant.plantType);
+  const [plantInformation, setplantInformation] = useState(currentPlant.plantInformation);
+
+  const handleEditNameChange = (event) => {
+    setPlantName(event.target.value);
+  };
+  const handleEditTypeChange = (event) => {
+    setPlantType(event.target.value);
+  };
+  const handleEditInformationChange = (event) => {
+    setplantInformation(event.target.value);
+  };
 
   const onEditPlantSubmit = (event) => {
     event.preventDefault();
-    console.log('oneditplantsubmit');
     fetch(API_URL(`plant/${plantId}/updated`), {
       method: 'PATCH',
       headers: {
@@ -24,17 +42,15 @@ const Editform = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
+        props.setEditPlant(false); 
+        dispatch(plants.actions.updatePlant(data.response));
       });
+
   };
-  const handleEditNameChange = (event) => {
-    setPlantName(event.target.value);
-  };
-  const handleEditTypeChange = (event) => {
-    setPlantType(event.target.value);
-  };
-  const handleEditInformationChange = (event) => {
-    setPlantInformation(event.target.value);
+
+  // ---- Reusable component ----
+  const onBackButtonClick = () => {
+    navigate(`/plants/plant/${plantId}`);
   };
 
   return (
@@ -70,6 +86,10 @@ const Editform = () => {
             onChange={handleEditInformationChange}
           />
           <button type='submit'>Save plant</button>
+
+          {/* ---- Reusable component ?? ----  */}
+          <button onClick={onBackButtonClick}>BACK</button>
+
         </form>
       </div>
     </>

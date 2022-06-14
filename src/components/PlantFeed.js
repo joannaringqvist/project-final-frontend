@@ -43,10 +43,7 @@ const PlantFeed = () => {
         if (data.success) {
           dispatch(plants.actions.setPlants(data.response));
           dispatch(ui.actions.setLoading(false));
-<<<<<<< HEAD
           setPlantlist(data);
-=======
->>>>>>> bb8b792f0ded156fdeca7316afc6ce87540bdb2b
         }
       });
   }, [accessToken]);
@@ -57,6 +54,7 @@ const PlantFeed = () => {
     })
       .then((res) => res.json())
       .then((data) => {
+        console.log(data.response);
         dispatch(plants.actions.deletePlant(data.response));
       });
   };
