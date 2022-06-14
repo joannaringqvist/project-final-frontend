@@ -13,9 +13,13 @@ import Navbar from './reusable-components/Navbar';
 const SinglePlant = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  // ---- Reusable component ----
   const onBackButtonClick = () => {
-    navigate(-1);
+    //navigate(-1);
+    navigate('/plants/');
   };
+
   const plantsList = useSelector((store) => store.plants.plants);
   const isLoading = useSelector((store) => store.ui.isLoading);
   const { plantId } = useParams();
@@ -32,7 +36,7 @@ const SinglePlant = () => {
         setPlantInfo(data.data);
         dispatch(ui.actions.setLoading(false));
       });
-  }, []);
+  }, [editPlant]);
 
   const onEditClick = () => {
     setEditPlant(true);
@@ -55,7 +59,6 @@ const SinglePlant = () => {
   };
   const updatedPlantName = (event) => {
     setNewPlantName(event.target.value);
-    console.log(newPlantName);
   };
 
   const togglePlant = (plantId, isFavourite) => {
@@ -83,7 +86,7 @@ const SinglePlant = () => {
   };
 
   if (editPlant) {
-    return <Editform />;
+    return <Editform setEditPlant={setEditPlant} />;
   }
   return (
     isLoading === false && (
@@ -104,13 +107,17 @@ const SinglePlant = () => {
         <p onKeyPress={(e) => e.key === 'Enter' && disableNewLines(e)}>
           {moment(plantInfo.createdAt).fromNow()}
         </p>
-        <button onClick={onBackButtonClick}>BACK</button>
         <input
           type='checkbox'
           checked={plantInfo.isFavourite}
           onChange={() => togglePlant(plantInfo._id, plantInfo.isFavourite)}
         />
         Favourite
+        <input type='checkbox'></input>
+
+        {/* ---- Reusable component ---- */}
+        <button onClick={onBackButtonClick}>BACK</button>
+
         {!editPlant && <button onClick={onEditClick}>EDIT</button>}
         {editPlant && (
           <button onClick={() => onUpdatePlant(plantId)}>SAVE</button>

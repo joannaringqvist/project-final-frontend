@@ -57,6 +57,7 @@ const PlantFeed = () => {
     })
       .then((res) => res.json())
       .then((data) => {
+        console.log(data.response);
         dispatch(plants.actions.deletePlant(data.response));
       });
   };
