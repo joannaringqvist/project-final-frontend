@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import Weather from './Weather';
 import Header from './Header';
 import PlantfeedProfile from './PlantfeedProfile';
+import CalendarProfile from './CalendarProfile';
 
 import { useDispatch } from 'react-redux';
 
@@ -20,6 +21,7 @@ const ProfilePage = () => {
 
       <Weather />
       <PlantfeedProfile />
+      <CalendarProfile />
       <button
         type='button'
         onClick={() => {

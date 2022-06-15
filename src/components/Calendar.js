@@ -57,11 +57,10 @@ const PlantCalendar = () => {
           console.log(data);
         }
       });
-  }, []);
+  }, [accessToken]);
 
   const handleAddEvent = (event) => {
     event.preventDefault();
-    console.log(newEvent);
     fetch(API_URL('calendarevents'), {
       method: 'POST',
       headers: {
@@ -127,7 +126,7 @@ const PlantCalendar = () => {
           <p>{event.eventTitle}</p>
           <p> {moment(event.startDate).format('MMM Do YY')}</p>
           <p> {moment(event.endDate).format('MMM Do YY')}</p>
-          <button onClick={deleteEvent}>DELETE EVENT</button>
+          <button onClick={() => deleteEvent(event._id)}>DELETE EVENT</button>
         </div>
       ))}
     </div>
