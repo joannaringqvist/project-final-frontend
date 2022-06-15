@@ -4,11 +4,12 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { useDispatch, useSelector } from 'react-redux';
 import moment from 'moment';
-import { useParams, useNavigate } from 'react-router-dom';
 
-import eventTodos from 'reducers/events';
-import { ui } from 'reducers/ui';
 import { API_URL } from 'utils/utils';
+import Navbar from './reusable-components/Navbar';
+
+import { ui } from 'reducers/ui';
+import eventTodos from 'reducers/events';
 
 const PlantTodos = () => {
   const dispatch = useDispatch();
@@ -94,8 +95,7 @@ const PlantTodos = () => {
 
   return (
     <>
-      <p>Hello!</p>
-      <p>You</p>
+      <Navbar />
       <p>What do you need to do?</p>
       <input
         type='text'

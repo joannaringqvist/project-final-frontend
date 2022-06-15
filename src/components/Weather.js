@@ -3,7 +3,13 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import moment from 'moment';
 
-import { WeatherWrapper } from './Styling/weather_styles';
+import {
+  WeatherWrapper,
+  Temp,
+  City,
+  WeatherType,
+  WeatherIcon,
+} from './Styling/weather_styles';
 
 const Weather = () => {
   const [latitude, setLatitude] = useState(0);
@@ -12,8 +18,6 @@ const Weather = () => {
   const [temperature, setTemperature] = useState(0);
   const [cityName, setCityName] = useState('');
   const [icon, setIcon] = useState('');
-  const date = moment().format('MMMM Do');
-  const weekday = moment().format('dddd');
 
   const savePositionToState = (position) => {
     setLatitude(position.coords.latitude);
@@ -59,16 +63,15 @@ const Weather = () => {
   return (
     <>
       <WeatherWrapper>
-        <p>{date}</p>
-        <p>{weekday}</p>
-        <p>{cityName}</p>
-        <p>{Math.round(temperature)} °C</p>
-        <p>{weather}</p>
+        <Temp>{Math.round(temperature)} °C</Temp>
+        <City>{cityName}</City>
 
-        <img
+        <WeatherType>{weather}</WeatherType>
+
+        {/*<img
           src={`http://openweathermap.org/img/wn/${icon}@2x.png`}
           alt='Logo'
-        />
+  />*/}
 
         {weather === 'Clear' && <p>Looks like a sunny day for your garden! </p>}
         {weather === 'Rain' && (
