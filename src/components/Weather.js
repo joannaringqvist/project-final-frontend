@@ -50,7 +50,7 @@ const Weather = () => {
         `https://api.openweathermap.org/geo/1.0/reverse?lat=${latitude}&lon=${longitude}&limit=10&appid=e3359107dd6692984f64be928b7d64ae`
       );
       console.log(res.data);
-      //setCityName(res.data[0].name);
+      setCityName(res.data[0].name);
     } catch (err) {
       console.error(err);
     }

@@ -8,6 +8,7 @@ export const Formwrapper = styled.div`
   align-items: center;
   text-align: center;
   height: 400px;
+  border-radius: 10px;
 `;
 
 export const InputWrapper = styled.div`
@@ -15,3 +16,7 @@ export const InputWrapper = styled.div`
 `;
 
 export const LoginButton = styled.button``;
+
+export const Label = styled.label`
+  font-family: 'Montserrat', sans-serif;
+`;
