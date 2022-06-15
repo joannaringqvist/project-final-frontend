@@ -1,24 +1,20 @@
 /* eslint-disable */
+import format from 'date-fns/format';
+import getDay from 'date-fns/getDay';
+import parse from 'date-fns/parse';
+import startOfWeek from 'date-fns/startOfWeek';
 import React, { useState, useEffect } from 'react';
 import { Calendar, dateFnsLocalizer } from 'react-big-calendar';
-import format from 'date-fns/format';
-import parse from 'date-fns/parse';
-import { startOfWeek } from 'date-fns';
-import getDay from 'date-fns/getDay';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+import { useDispatch, useSelector } from 'react-redux';
 import moment from 'moment';
 
-import DatePicker from 'react-datepicker';
-
-import 'react-datepicker/dist/react-datepicker.css';
-import { useNavigate, Link, Navigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-
-import { EventInput, AddEventBtn } from './Styling/calendar_style';
 import { API_URL } from 'utils/utils';
 
-import eventTodos from 'reducers/events';
 import { ui } from 'reducers/ui';
+import eventTodos from 'reducers/events';
 
 const locales = {
   'en-US': require('date-fns/locale/en-US'),
@@ -31,29 +27,17 @@ const localizer = dateFnsLocalizer({
   locales,
 });
 
-const events = [
-  {
-    eventTitle: 'Big Meeting',
-    allDay: true,
-    startDate: new Date(2021, 6, 0),
-    endDate: new Date(2021, 6, 0),
-  },
-];
+const events = [{}];
 
 const PlantCalendar = () => {
-  const [newEvent, setNewEvent] = useState({
-    eventTitle: '',
-    startDate: '',
-    endDate: '',
-  });
-  const [allEvents, setAllEvents] = useState(events);
+  const [newEvent, setNewEvent] = useState({ title: '', start: '', end: '' });
   const [eventTitle, setEventTitle] = useState('');
+  const [startDate, setStartDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(new Date());
+  const [allEvents, setAllEvents] = useState(events);
   const eventsList = useSelector((store) => store.eventTodos.events);
   const dispatch = useDispatch();
-  const onChangeEventTitle = (e) => {
-    setNewEvent({ ...newEvent, eventTitle: e.target.value });
-    setEventTitle();
-  };
+
   useEffect(() => {
     const options = {
       method: 'GET',
@@ -73,18 +57,30 @@ const PlantCalendar = () => {
       });
   }, []);
 
-  const handleAddEvent = () => {
-    setAllEvents([...allEvents, newEvent]);
-
+  const handleAddEvent = (event) => {
+    event.preventDefault();
+    console.log(newEvent);
     fetch(API_URL('calendarevents'), {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ eventTitle }),
+      body: JSON.stringify({ newEvent }),
     })
       .then((res) => res.json())
       .then((data) => {
         dispatch(eventTodos.actions.addEvent(data.response));
-        setEventTitle('');
+        setAllEvents([...allEvents, newEvent]);
+        console.log(newEvent.start);
+        console.log(typeof newEvent.start);
+      });
+  };
+
+  const deleteEvent = (eventId) => {
+    fetch(API_URL(`event/${eventId}`), {
+      method: 'DELETE',
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        dispatch(eventTodos.actions.deleteEvent(data.response));
       });
   };
 
@@ -97,19 +93,19 @@ const PlantCalendar = () => {
           type='text'
           placeholder='Add Title'
           style={{ width: '20%', marginRight: '10px' }}
-          value={newEvent.eventTitle}
-          onChange={onChangeEventTitle}
+          value={newEvent.title}
+          onChange={(e) => setNewEvent({ ...newEvent, title: e.target.value })}
         />
         <DatePicker
           placeholderText='Start Date'
           style={{ marginRight: '10px' }}
-          selected={newEvent.startDate}
-          onChange={(startDate) => setNewEvent({ ...newEvent, startDate })}
+          selected={newEvent.start}
+          onChange={(start) => setNewEvent({ ...newEvent, start })}
         />
         <DatePicker
           placeholderText='End Date'
-          selected={newEvent.endDate}
-          onChange={(endDate) => setNewEvent({ ...newEvent, endDate })}
+          selected={newEvent.end}
+          onChange={(end) => setNewEvent({ ...newEvent, end })}
         />
         <button style={{ marginTop: '10px' }} onClick={handleAddEvent}>
           Add Event
@@ -118,16 +114,16 @@ const PlantCalendar = () => {
       <Calendar
         localizer={localizer}
         events={allEvents}
-        startAccessor='startDate'
-        endAccessor='endDate'
+        startAccessor='start'
+        endAccessor='end'
         style={{ height: 500, margin: '50px' }}
       />
       {eventsList.map((event) => (
         <div key={event._id}>
           <p>{event.eventTitle}</p>
           <p> {moment(event.startDate).format('MMM Do YY')}</p>
-
-          <button onClick={() => deleteEvent(event._id)}>DELETE</button>
+          <p> {moment(event.endDate).format('MMM Do YY')}</p>
+          <button onClick={deleteEvent}>DELETE EVENT</button>
         </div>
       ))}
     </div>

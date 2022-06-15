@@ -1,14 +1,22 @@
 /* eslint-disable */
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { API_URL } from 'utils/utils';
 import { useSelector, useDispatch } from 'react-redux';
-import plants from 'reducers/plants';
 import moment from 'moment';
-import { ui } from 'reducers/ui';
-import { editPlants } from 'reducers/plants';
+import SlidingPane from 'react-sliding-pane';
+import 'react-sliding-pane/dist/react-sliding-pane.css';
+
+import { API_URL } from 'utils/utils';
 import Editform from './Editform';
 import Navbar from './reusable-components/Navbar';
+import {
+  HiddenCheck,
+  CheckboxLabel,
+  CheckboxContainer,
+} from './Styling/singleplant_styles';
+
+import plants from 'reducers/plants';
+import { ui } from 'reducers/ui';
 
 const SinglePlant = () => {
   const dispatch = useDispatch();
@@ -25,8 +33,10 @@ const SinglePlant = () => {
   const { plantId } = useParams();
   const [plantInfo, setPlantInfo] = useState([]);
   const [editPlant, setEditPlant] = useState(false);
-  const [newPlantName, setNewPlantName] = useState('');
   const [isFavourite, setIsFavourite] = useState(false);
+  const [state, setState] = useState({
+    isPaneOpen: false,
+  });
 
   useEffect(() => {
     dispatch(ui.actions.setLoading(true));
@@ -79,49 +89,53 @@ const SinglePlant = () => {
         if (data.success) {
           dispatch(plants.actions.togglePlant(plantId));
           dispatch(ui.actions.setLoading(false));
-          setIsFavourite();
-          console.log('is completed!');
         }
       });
   };
 
-  if (editPlant) {
-    return <Editform setEditPlant={setEditPlant} />;
-  }
   return (
     isLoading === false && (
       <>
-        <Navbar />
-        <p
-          onKeyPress={(e) => e.key === 'Enter' && disableNewLines(e)}
-          onChange={(e) => updatedPlantName(e)}
-        >
-          {plantInfo.plantName}
-        </p>
-        <p onKeyPress={(e) => e.key === 'Enter' && disableNewLines(e)}>
-          {plantInfo.plantInformation}
-        </p>
-        <p onKeyPress={(e) => e.key === 'Enter' && disableNewLines(e)}>
-          {plantInfo.plantType}
-        </p>
-        <p onKeyPress={(e) => e.key === 'Enter' && disableNewLines(e)}>
-          {moment(plantInfo.createdAt).fromNow()}
-        </p>
-        <input
-          type='checkbox'
-          checked={plantInfo.isFavourite}
-          onChange={() => togglePlant(plantInfo._id, plantInfo.isFavourite)}
-        />
-        Favourite
-        <input type='checkbox'></input>
+        <p>{plantInfo.plantName}</p>
+        <p>{plantInfo.plantInformation}</p>
+        <p>{plantInfo.plantType}</p>
+        <p>{plantInfo.indoorOrOutdoor}</p>
+        <p>{moment(plantInfo.createdAt).fromNow()}</p>
+        <button onClick={onBackButtonClick}>BACK</button>
+        {/*<CheckboxLabel>
+          Favourite
+          <HiddenCheck
+            className='checkbox'
+            type='checkbox'
+            name={plantInfo._id}
+            id={plantInfo._id}
+            checked={plantInfo.isFavourite}
+            onChange={() => togglePlant(plantInfo._id, plantInfo.isFavourite)}
+          ></HiddenCheck>
+          <CheckboxContainer></CheckboxContainer>
+    </CheckboxLabel>*/}
 
-        {/* ---- Reusable component ---- */}
         <button onClick={onBackButtonClick}>BACK</button>
 
         {!editPlant && <button onClick={onEditClick}>EDIT</button>}
         {editPlant && (
           <button onClick={() => onUpdatePlant(plantId)}>SAVE</button>
         )}
+
+        <button onClick={() => setState({ isPaneOpen: true })}>
+          Edit plant!
+        </button>
+        <SlidingPane
+          className='some-custom-class'
+          overlayClassName='some-custom-overlay-class'
+          isOpen={state.isPaneOpen}
+          hideHeader
+          onRequestClose={() => {
+            setState({ isPaneOpen: false });
+          }}
+        >
+          <Editform />
+        </SlidingPane>
       </>
     )
   );
