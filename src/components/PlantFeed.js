@@ -17,6 +17,8 @@ import {
   PlantsLength,
   PlantsLengthWrapper,
   FilterWrapper,
+  AddBtn,
+  ButtonWrapper,
 } from './Styling/plantfeed_styles';
 import deleteicon from './images/deleteicon.png';
 import AddNewPlant from './AddNewPlantForm';
@@ -109,6 +111,11 @@ const PlantFeed = () => {
   return (
     isLoading === false && (
       <>
+        <ButtonWrapper>
+          <AddBtn onClick={() => setState({ isPaneOpen: true })}>
+            Add plant!
+          </AddBtn>
+        </ButtonWrapper>
         <FilterWrapper>
           <div className='filter-container'>
             <div>Filter by Category:</div>
@@ -155,9 +162,6 @@ const PlantFeed = () => {
             </PlantsLength>
           </PlantsLengthWrapper>
           <div>
-            <button onClick={() => setState({ isPaneOpen: true })}>
-              Add plant!
-            </button>
             <SlidingPane
               className='some-custom-class'
               overlayClassName='some-custom-overlay-class'

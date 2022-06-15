@@ -9,6 +9,8 @@ import {
   City,
   WeatherType,
   WeatherIcon,
+  CityWrapper,
+  WeatherKind,
 } from './Styling/weather_styles';
 
 const Weather = () => {
@@ -63,24 +65,27 @@ const Weather = () => {
   return (
     <>
       <WeatherWrapper>
-        <Temp>{Math.round(temperature)} °C</Temp>
-        <City>{cityName}</City>
+        <Temp>{Math.round(temperature)}°</Temp>
+        <CityWrapper>
+          <City>{cityName}</City>
 
-        <WeatherType>{weather}</WeatherType>
+          <WeatherKind>{weather}</WeatherKind>
 
-        {/*<img
+          {/*<img
           src={`http://openweathermap.org/img/wn/${icon}@2x.png`}
           alt='Logo'
   />*/}
-
-        {weather === 'Clear' && <p>Looks like a sunny day for your garden! </p>}
-        {weather === 'Rain' && (
-          <p>No need to water your plants outside today! </p>
-        )}
-        {weather === 'Clouds' && (
-          <p>A good day for taking care of your plants!</p>
-        )}
+        </CityWrapper>
       </WeatherWrapper>
+      {weather === 'Clear' && (
+        <WeatherType>Looks like a sunny day for your garden! </WeatherType>
+      )}
+      {weather === 'Rain' && (
+        <WeatherType>No need to water your plants outside today! </WeatherType>
+      )}
+      {weather === 'Clouds' && (
+        <WeatherType>A good day for taking care of your plants!</WeatherType>
+      )}
     </>
   );
 };

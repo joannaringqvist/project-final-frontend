@@ -51,9 +51,6 @@ const SinglePlant = () => {
   const onEditClick = () => {
     setEditPlant(true);
   };
-  const disableNewLines = (e) => {
-    e.preventDefault();
-  };
 
   const onUpdatePlant = (plantId) => {
     setEditPlant(false);
@@ -101,7 +98,6 @@ const SinglePlant = () => {
         <p>{plantInfo.plantType}</p>
         <p>{plantInfo.indoorOrOutdoor}</p>
         <p>{moment(plantInfo.createdAt).fromNow()}</p>
-        <button onClick={onBackButtonClick}>BACK</button>
         {/*<CheckboxLabel>
           Favourite
           <HiddenCheck

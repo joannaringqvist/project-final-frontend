@@ -36,3 +36,18 @@ export const FilterWrapper = styled.div`
   justify-content: center;
   padding: 20px;
 `;
+
+export const ButtonWrapper = styled.div`
+  display: flex;
+  justify-content: flex-end;
+`;
+
+export const AddBtn = styled.button`
+  border-radius: 20px;
+  height: 40px;
+  width: 90px;
+  margin: 20px;
+  font-family: 'Montserrat', sans-serif;
+  background-color: rgb(250, 235, 224);
+  border: none;
+`;

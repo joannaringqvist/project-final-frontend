@@ -36,6 +36,7 @@ const PlantCalendar = () => {
   const [endDate, setEndDate] = useState(new Date());
   const [allEvents, setAllEvents] = useState(events);
   const eventsList = useSelector((store) => store.eventTodos.events);
+  const accessToken = useSelector((store) => store.user.accessToken);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -43,6 +44,7 @@ const PlantCalendar = () => {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
+        Authorization: accessToken,
       },
     };
     dispatch(ui.actions.setLoading(true));
@@ -62,15 +64,17 @@ const PlantCalendar = () => {
     console.log(newEvent);
     fetch(API_URL('calendarevents'), {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: accessToken,
+      },
+
       body: JSON.stringify({ newEvent }),
     })
       .then((res) => res.json())
       .then((data) => {
         dispatch(eventTodos.actions.addEvent(data.response));
         setAllEvents([...allEvents, newEvent]);
-        console.log(newEvent.start);
-        console.log(typeof newEvent.start);
       });
   };
 

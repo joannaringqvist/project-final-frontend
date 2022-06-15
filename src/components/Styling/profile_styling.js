@@ -2,5 +2,11 @@
 import styled from 'styled-components';
 
 export const PlantfeedCard = styled.div`
-  border: 2px solid black;
+  border-top: 2px solid #c1ac95;
+  margin: 20px;
+  text-align: center;
+`;
+
+export const PlantfeedCardText = styled.p`
+  text-align: center;
 `;
