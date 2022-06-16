@@ -87,6 +87,10 @@ const PlantCalendar = () => {
       });
   };
 
+  const onSelectSlot = () => {
+    console.log('day selected');
+  };
+
   return (
     <div className='App'>
       <h1>Calendar</h1>
@@ -115,6 +119,8 @@ const PlantCalendar = () => {
         </button>
       </div>
       <Calendar
+        onSelectSlot={onSelectSlot}
+        onDrillDown={onSelectSlot}
         localizer={localizer}
         events={allEvents}
         startAccessor='start'
