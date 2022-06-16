@@ -13,6 +13,7 @@ import {
   LoginButton,
   Label,
 } from './Styling/form_styles';
+import planticon from './images/plant.png';
 
 import { Container } from './Styling/global_styles';
 
@@ -96,6 +97,7 @@ const Login = () => {
         </form>
         <p>Not yet a user?</p>
         <LoginButton onClick={onRegister}>Sign up!</LoginButton>
+        <img src={planticon}></img>
       </Formwrapper>
     </Container>
   );
