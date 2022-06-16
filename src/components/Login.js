@@ -7,7 +7,15 @@ import { API_URL } from 'utils/utils';
 
 import user from 'reducers/user';
 
-import { Formwrapper, InputWrapper, LoginButton } from './Styling/form_styles';
+import {
+  Formwrapper,
+  InputWrapper,
+  LoginButton,
+  Label,
+} from './Styling/form_styles';
+import planticon from './images/plant.png';
+
+import { Container } from './Styling/global_styles';
 
 const Login = () => {
   const [username, setUsername] = useState('');
@@ -61,34 +69,37 @@ const Login = () => {
   };
 
   return (
-    <Formwrapper>
-      <h1>Login</h1>
-      {errorMessage && <p>{errorMessage}</p>}
-      <form onSubmit={onLoginFormSubmit}>
-        <label htmlFor='username'>Username</label>
-        <InputWrapper>
-          <input
-            type='text'
-            id='username'
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-          />
-        </InputWrapper>
-        <label htmlFor='password'>Password</label>
-        <InputWrapper>
-          <input
-            type='password'
-            id='password'
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </InputWrapper>
+    <Container>
+      <Formwrapper>
+        <h1>Login</h1>
+        {errorMessage && <p>{errorMessage}</p>}
+        <form onSubmit={onLoginFormSubmit}>
+          <Label htmlFor='username'>Username</Label>
+          <InputWrapper>
+            <input
+              type='text'
+              id='username'
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+            />
+          </InputWrapper>
+          <Label htmlFor='password'>Password</Label>
+          <InputWrapper>
+            <input
+              type='password'
+              id='password'
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </InputWrapper>
 
-        <LoginButton type='submit'>Login</LoginButton>
-      </form>
-      <p>Not yet a user?</p>
-      <LoginButton onClick={onRegister}>Sign up!</LoginButton>
-    </Formwrapper>
+          <LoginButton type='submit'>Login</LoginButton>
+        </form>
+        <p>Not yet a user?</p>
+        <LoginButton onClick={onRegister}>Sign up!</LoginButton>
+        <img src={planticon}></img>
+      </Formwrapper>
+    </Container>
   );
 };
 
