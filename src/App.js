@@ -45,6 +45,7 @@ export const App = () => {
       <Loading />
       <BrowserRouter>
         <Routes>
+          <Route exact path='/' element={<ProfilePage />}></Route>
           <Route exact path='/register' element={<Register />}></Route>
           <Route exact path='/login' element={<Login />}></Route>
           <Route exact path='/plants' element={<PlantFeed />}></Route>

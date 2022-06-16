@@ -43,20 +43,20 @@ const Editform = (props) => {
     })
       .then((res) => res.json())
       .then((data) => {
-        props.setEditPlant(false); 
+        //props.setEditPlant(false);
         dispatch(plants.actions.updatePlant(data.response));
+        props.closePane(); 
       });
 
   };
 
-  // ---- Reusable component ----
   const onBackButtonClick = () => {
     navigate(`/plants/plant/${plantId}`);
   };
 
   return (
     <>
-      <h1>Edit plant</h1>
+      <h1>Edit plant HEJ</h1>
       <Formwrapper>
         <form onSubmit={onEditPlantSubmit}>
           <label htmlFor='plantName'>Name of plant</label>
@@ -94,8 +94,9 @@ const Editform = (props) => {
           </InputWrapper>
           <button type='submit'>Save plant</button>
 
-          {/* ---- Reusable component ?? ----  */}
           <button onClick={onBackButtonClick}>BACK</button>
+          {/* <button onClick={() => setState({ isPaneOpen: false })}>BACK</button> */}
+
 
         </form>
       </Formwrapper>
