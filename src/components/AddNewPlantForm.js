@@ -56,11 +56,23 @@ const AddNewPlantForm = () => {
       });
   };
 
-  const myWidget = cloudinary.createUploadWidget({
-    cloudName: 'my_cloud_name', 
-    uploadPreset: 'my_preset'}, (error, result) => { 
+  const myWidget = cloudinary.createUploadWidget(
+    {
+      cloudName: 'garden-planner',
+      uploadPreset: 'garden-planner-preset'
+    }, (error, result) => {
       if (!error && result && result.event === "success") { 
-        console.log('Done! Here is the image info: ', result.info); 
+        console.log('Done! Here is the image info: ', result.info);
+        // secure_url: "https://res.cloudinary.com/garden-planner/image/upload/v1655400840/r8is30hgcaz1axpdzt0m.png"
+        // path: "v1655400840/r8is30hgcaz1axpdzt0m.png"
+        // public_id: "r8is30hgcaz1axpdzt0m"
+        // thumbnail_url: "https://res.cloudinary.com/garden-planner/image/upload/c_limit,h_60,w_90/v1655400840/r8is30hgcaz1axpdzt0m.png"
+
+        const imageUrl = result.info.secure_url;
+        const thumbnailUrl = result.info.thumbnail_url;
+        console.log('imageUrl, thumbnailUrl', imageUrl, thumbnailUrl);
+
+
       }
     }
   )
