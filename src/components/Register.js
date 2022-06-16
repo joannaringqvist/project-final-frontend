@@ -5,14 +5,9 @@ import { useNavigate } from 'react-router-dom';
 
 import { API_URL } from 'utils/utils';
 import user from 'reducers/user';
+import swal from 'sweetalert';
 
-import {
-  Loginwrapper,
-  UsernameWrapper,
-  MailWrapper,
-  PasswordWrapper,
-  LoginButton,
-} from './login_register_styles';
+import { Formwrapper, InputWrapper, LoginButton } from './Styling/form_styles';
 import Login from './Login';
 
 const Register = () => {
@@ -60,6 +55,8 @@ const Register = () => {
             dispatch(user.actions.setUserName(data.username));
             dispatch(user.actions.setEmail(data.email));
             dispatch(user.actions.setError(null));
+            swal({ text: 'You are now a user!', icon: 'success' });
+            navigate('/login');
           });
         } else {
           batch(() => {
@@ -74,44 +71,44 @@ const Register = () => {
   };
 
   return (
-    <Loginwrapper>
+    <Formwrapper>
       <h1>Register a new user</h1>
       {errorMessage && <p>{errorMessage}</p>}
       <form onSubmit={onRegisterFormSubmit}>
         <label htmlFor='username'>Username</label>
-        <UsernameWrapper>
+        <InputWrapper>
           <input
             type='text'
             id='username'
             value={username}
             onChange={(e) => setUsername(e.target.value)}
           />
-        </UsernameWrapper>
+        </InputWrapper>
 
         <label htmlFor='email'>Email</label>
-        <MailWrapper>
+        <InputWrapper>
           <input
             type='text'
             id='email'
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
-        </MailWrapper>
+        </InputWrapper>
 
         <label htmlFor='password'>Password</label>
-        <PasswordWrapper>
+        <InputWrapper>
           <input
             type='password'
             id='password'
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-        </PasswordWrapper>
+        </InputWrapper>
         <LoginButton type='submit'>Register a new user</LoginButton>
       </form>
       <p>Already a user?</p>
       <LoginButton onClick={onLogin}>Log in!</LoginButton>
-    </Loginwrapper>
+    </Formwrapper>
   );
 };
 

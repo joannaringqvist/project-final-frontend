@@ -1,7 +1,7 @@
 /* eslint-disable */
 import React from 'react';
 import styled from 'styled-components';
-import { useNavigate, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const Ul = styled.ul`
   list-style: none;
@@ -17,9 +17,10 @@ const Ul = styled.ul`
     transform: ${({ open }) => (open ? 'translateX(0)' : 'translateX(100%)')};
     top: 0;
     right: 0;
+    margin-top: 0px;
     height: 100vh;
     width: 300px;
-    padding-top: 3.5rem;
+
     transition: transform 0.3s ease-in-out;
     li {
       color: #fff;
@@ -30,13 +31,18 @@ const Ul = styled.ul`
 const RightNav = ({ open }) => {
   return (
     <Ul open={open}>
+      <Link to='/profile'>
+        <li>My profile</li>
+      </Link>
       <Link to='/addplant'>
         <li>Add plant</li>
       </Link>
       <Link to='/plants'>
         <li>Plantfeed</li>
       </Link>
-      <li>Contact Us</li>
+      <Link to='/calendar'>
+        <li>Calendar</li>
+      </Link>
       <li>Sign In</li>
       <li>Sign Up</li>
     </Ul>

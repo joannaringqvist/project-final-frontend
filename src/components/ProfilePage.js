@@ -1,17 +1,36 @@
 /* eslint-disable */
 import React from 'react';
-import plants from 'reducers/plants';
-import user from 'reducers/user';
-import Navbar from './reusable-components/Navbar';
 
-import { useSelector, useDispatch } from 'react-redux';
+import user from 'reducers/user';
+import { useNavigate } from 'react-router-dom';
+
+import Weather from './Weather';
+import Header from './Header';
+import PlantfeedProfile from './PlantfeedProfile';
+import CalendarProfile from './CalendarProfile';
+
+import { useDispatch } from 'react-redux';
 
 const ProfilePage = () => {
-  const username = useSelector((store) => store.user.username);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   return (
     <>
-      <Navbar />
-      <p>Hello {username}!</p>
+      <Header />
+
+      <Weather />
+      <PlantfeedProfile />
+      <CalendarProfile />
+      <button
+        type='button'
+        onClick={() => {
+          dispatch(user.actions.setAccessToken(null));
+          navigate('/login');
+        }}
+      >
+        Log out
+      </button>
     </>
   );
 };

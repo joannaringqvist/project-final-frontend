@@ -13,11 +13,24 @@ const plants = createSlice({
     addPlant: (store, action) => {
       store.plants.unshift(action.payload);
     },
+    updatePlant: (store, action) => {
+      const newPlant = action.payload;
+      const oldPlant = store.plants.find((p) => p._id === newPlant._id);
+      // Delete the old plant from list
+      store.plants.splice(store.plants.indexOf(oldPlant), 1);
+      // Insert new plant at beginning of list
+      store.plants.unshift(newPlant);
+    },
     deletePlant: (store, action) => {
-      const { id } = action.payload;
-      console.log(action.payload);
-      const plant = store.plants.find((p) => p.id === id);
+      const id = action.payload._id;
+      const plant = store.plants.find((p) => p._id === id);
       store.plants.splice(store.plants.indexOf(plant), 1);
+    },
+    togglePlant: (store, action) => {
+      const toggledPlant = store.plants.find(
+        (plant) => plant._id === action.payload
+      );
+      toggledPlant.isFavourite = !toggledPlant.isFavourite;
     },
   },
 });
