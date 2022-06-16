@@ -22,7 +22,6 @@ const SinglePlant = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  // ---- Reusable component ----
   const onBackButtonClick = () => {
     //navigate(-1);
     navigate('/plants/');
@@ -48,9 +47,9 @@ const SinglePlant = () => {
       });
   }, [editPlant]);
 
-  const onEditClick = () => {
-    setEditPlant(true);
-  };
+  // const onEditClick = () => {
+  //   setEditPlant(true);
+  // };
 
   const onUpdatePlant = (plantId) => {
     setEditPlant(false);
@@ -113,10 +112,10 @@ const SinglePlant = () => {
 
         <button onClick={onBackButtonClick}>BACK</button>
 
-        {!editPlant && <button onClick={onEditClick}>EDIT</button>}
+        {/* {!editPlant && <button onClick={onEditClick}>EDIT</button>}
         {editPlant && (
           <button onClick={() => onUpdatePlant(plantId)}>SAVE</button>
-        )}
+        )} */}
 
         <button onClick={() => setState({ isPaneOpen: true })}>
           Edit plant!
@@ -130,7 +129,12 @@ const SinglePlant = () => {
             setState({ isPaneOpen: false });
           }}
         >
-          <Editform />
+          <Editform closePane={() => { setState({isPaneOpen: false}); }} />
+
+          {/* <button onClick={() => setState({ isPaneOpen: false })}>BACK NEW</button> */}
+
+
+          {/* <BackButton /> */}
         </SlidingPane>
       </>
     )

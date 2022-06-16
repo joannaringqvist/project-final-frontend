@@ -171,7 +171,7 @@ const PlantFeed = () => {
                 setState({ isPaneOpen: false });
               }}
             >
-              <AddNewPlant />
+              <AddNewPlant closePane={() => { setState({isPaneOpen: false}); }} />
             </SlidingPane>
           </div>
         </section>

@@ -11,7 +11,7 @@ import Navbar from './reusable-components/Navbar';
 
 import swal from 'sweetalert';
 
-const AddNewPlantForm = () => {
+const AddNewPlantForm = (props) => {
   const [plantName, setPlantName] = useState('');
   const [plantType, setPlantType] = useState('');
   const [plantInformation, setPlantInformation] = useState('');
@@ -66,6 +66,7 @@ const AddNewPlantForm = () => {
         dispatch(plants.actions.addPlant(data.response));
         swal({ text: 'Your plant is added!', icon: 'success' });
         resetForm();
+        props.closePane();
       });
   };
 
