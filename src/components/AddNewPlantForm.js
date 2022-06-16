@@ -77,6 +77,8 @@ const AddNewPlantForm = (props) => {
       cloudName: 'garden-planner',
       uploadPreset: 'garden-planner-preset'
     }, (error, result) => {
+      console.log('error', error);
+      console.log('result', result);
       if (!error && result && result.event === "success") { 
         console.log('Done! Here is the image info: ', result.info);
         // secure_url: "https://res.cloudinary.com/garden-planner/image/upload/v1655400840/r8is30hgcaz1axpdzt0m.png"
@@ -91,7 +93,7 @@ const AddNewPlantForm = (props) => {
 
       }
     }
-  )
+  );
 
   const onClickUploadImage = () => {
     myWidget.open();
