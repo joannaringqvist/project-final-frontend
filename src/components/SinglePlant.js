@@ -126,22 +126,6 @@ const SinglePlant = () => {
         <p>{plantInfo.plantType}</p>
         <p>{plantInfo.indoorOrOutdoor}</p>
         <p>{moment(plantInfo.createdAt).fromNow()}</p>
-<<<<<<< HEAD
-        {/*<CheckboxLabel>git branch
-          Favourite
-          <HiddenCheck
-            className='checkbox'
-            type='checkbox'
-            name={plantInfo._id}
-            id={plantInfo._id}
-            checked={plantInfo.isFavourite}
-            onChange={() => togglePlant(plantInfo._id, plantInfo.isFavourite)}
-          ></HiddenCheck>
-          <CheckboxContainer></CheckboxContainer>
-    </CheckboxLabel>*/}
-=======
->>>>>>> 7c8f9144c4228536c9d91ee9327fa554279e25c0
-
         <button onClick={onBackButtonClick}>BACK</button>
 
         {/* {!editPlant && <button onClick={onEditClick}>EDIT</button>}
