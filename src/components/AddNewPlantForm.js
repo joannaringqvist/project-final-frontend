@@ -18,6 +18,7 @@ const AddNewPlantForm = (props) => {
   const [plantType, setPlantType] = useState('');
   const [plantInformation, setPlantInformation] = useState('');
   const [indoorOrOutdoor, setIndoorOrOutdoor] = useState('');
+  const [imageUrl, setImageUrl] = useState('');
   const accessToken = useSelector((store) => store.user.accessToken);
   const navigate = useNavigate();
 
@@ -61,6 +62,7 @@ const AddNewPlantForm = (props) => {
         plantType,
         plantInformation,
         indoorOrOutdoor,
+        imageUrl,
       }),
     })
       .then((res) => res.json())
@@ -90,7 +92,7 @@ const AddNewPlantForm = (props) => {
         const thumbnailUrl = result.info.thumbnail_url;
         console.log('imageUrl, thumbnailUrl', imageUrl, thumbnailUrl);
 
-
+        setImageUrl(imageUrl);
       }
     }
   );
@@ -152,10 +154,13 @@ const AddNewPlantForm = (props) => {
             />{' '}
             Outdoor
           </InputWrapper>
+          <p>ADD IMAGE</p>
+          <button type='button' id='upload_widget' onClick={onClickUploadImage}>Upload image</button>
+          <p>imageurl:  {imageUrl}</p>
           <button type='submit'>Save plant</button>
         </form>
-        <p>ADD IMAGE</p>
-        <button type='button' id='upload_widget' onClick={onClickUploadImage}>Upload image</button>
+        
+       
       </Formwrapper>
     </>
   );
