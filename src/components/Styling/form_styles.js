@@ -7,15 +7,36 @@ export const Formwrapper = styled.div`
   justify-content: center;
   align-items: center;
   text-align: center;
-  height: 400px;
+  height: 500px;
 `;
 
 export const InputWrapper = styled.div`
   margin: 5px 0px 15px 0px;
 `;
 
-export const LoginButton = styled.button``;
-
 export const Label = styled.label`
   font-family: 'Montserrat', sans-serif;
+`;
+
+export const PlantPic = styled.img`
+  margin: 15px;
+  height: 50px;
+  width: 50px;
+`;
+
+export const LoginText = styled.p`
+  font-size: 18px;
+  font-style: italic;
+`;
+
+export const LoginButton = styled.button`
+  border-radius: 20px;
+  height: 40px;
+  font-weight: bold;
+  width: fit-content;
+  margin: 5px;
+  padding: 10px;
+  font-family: 'Montserrat', sans-serif;
+  background-color: rgb(250, 235, 224);
+  border: none;
 `;

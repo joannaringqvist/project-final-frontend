@@ -4,7 +4,15 @@ import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 import Calendar from 'react-calendar';
-import { PlantfeedCard, PlantfeedCardText } from './Styling/profile_styling';
+import {
+  PlantfeedCard,
+  PlantfeedCardTwo,
+  PlantfeedCardText,
+  PlantfeedCardTextBold,
+  PlantLady,
+} from './Styling/profile_styling';
+import { StyledBtn } from './Styling/plantfeed_styles';
+import plantgirl from './images/girlplant.png';
 
 import eventTodos from 'reducers/events';
 
@@ -19,21 +27,27 @@ const CalendarProfile = () => {
   if (eventsList.length === 0) {
     return (
       <PlantfeedCard>
+        <PlantLady src={plantgirl}></PlantLady>
         <PlantfeedCardText>
-          You don't have any planttasks yet. Don't you have something you need
-          to do?
+          You don't have <PlantfeedCardTextBold>any</PlantfeedCardTextBold>{' '}
+          planttasks yet. Don't you have something you need to do?
         </PlantfeedCardText>
-        <button onClick={navigateCalendar}>Calendar</button>
+        <StyledBtn onClick={navigateCalendar}>Calendar</StyledBtn>
       </PlantfeedCard>
     );
   } else {
     return (
-      <PlantfeedCard>
-        <PlantfeedCardText>
-          You have {eventsList.length} planttasks to do! No time to loose!
-        </PlantfeedCardText>
-        <button onClick={navigateCalendar}>Calendar</button>
-      </PlantfeedCard>
+      <>
+        <PlantfeedCardTwo>
+          <PlantLady src={plantgirl}></PlantLady>
+          <PlantfeedCardText>
+            You have{' '}
+            <PlantfeedCardTextBold>{eventsList.length}</PlantfeedCardTextBold>{' '}
+            planttasks to do! No time to loose!
+          </PlantfeedCardText>
+          <StyledBtn onClick={navigateCalendar}>Calendar</StyledBtn>
+        </PlantfeedCardTwo>
+      </>
     );
   }
 };

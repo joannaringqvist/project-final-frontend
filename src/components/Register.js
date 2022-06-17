@@ -6,8 +6,15 @@ import { useNavigate } from 'react-router-dom';
 import { API_URL } from 'utils/utils';
 import user from 'reducers/user';
 import swal from 'sweetalert';
+import planticon from './images/plant.png';
 
-import { Formwrapper, InputWrapper, LoginButton } from './Styling/form_styles';
+import {
+  Formwrapper,
+  InputWrapper,
+  LoginButton,
+  LoginText,
+  PlantPic,
+} from './Styling/form_styles';
 import Login from './Login';
 
 const Register = () => {
@@ -73,6 +80,7 @@ const Register = () => {
   return (
     <Formwrapper>
       <h1>Register a new user</h1>
+      <PlantPic src={planticon}></PlantPic>
       {errorMessage && <p>{errorMessage}</p>}
       <form onSubmit={onRegisterFormSubmit}>
         <label htmlFor='username'>Username</label>
@@ -106,7 +114,7 @@ const Register = () => {
         </InputWrapper>
         <LoginButton type='submit'>Register a new user</LoginButton>
       </form>
-      <p>Already a user?</p>
+      <LoginText>Already a user?</LoginText>
       <LoginButton onClick={onLogin}>Log in!</LoginButton>
     </Formwrapper>
   );

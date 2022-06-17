@@ -97,7 +97,7 @@ const SinglePlant = () => {
         <p>{plantInfo.plantType}</p>
         <p>{plantInfo.indoorOrOutdoor}</p>
         <p>{moment(plantInfo.createdAt).fromNow()}</p>
-        {/*<CheckboxLabel>
+        {/*<CheckboxLabel>git branch
           Favourite
           <HiddenCheck
             className='checkbox'
@@ -129,10 +129,13 @@ const SinglePlant = () => {
             setState({ isPaneOpen: false });
           }}
         >
-          <Editform closePane={() => { setState({isPaneOpen: false}); }} />
+          <Editform
+            closePane={() => {
+              setState({ isPaneOpen: false });
+            }}
+          />
 
           {/* <button onClick={() => setState({ isPaneOpen: false })}>BACK NEW</button> */}
-
 
           {/* <BackButton /> */}
         </SlidingPane>

@@ -34,8 +34,9 @@ const PlantCalendar = () => {
   const [eventTitle, setEventTitle] = useState('');
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
-  const [allEvents, setAllEvents] = useState(events);
+
   const eventsList = useSelector((store) => store.eventTodos.events);
+  const [allEvents, setAllEvents] = useState([]);
   const accessToken = useSelector((store) => store.user.accessToken);
   const dispatch = useDispatch();
 
@@ -74,6 +75,7 @@ const PlantCalendar = () => {
       .then((data) => {
         dispatch(eventTodos.actions.addEvent(data.response));
         setAllEvents([...allEvents, newEvent]);
+        console.log(allEvents);
       });
   };
 
@@ -85,10 +87,6 @@ const PlantCalendar = () => {
       .then((data) => {
         dispatch(eventTodos.actions.deleteEvent(data.response));
       });
-  };
-
-  const onSelectSlot = () => {
-    console.log('day selected');
   };
 
   return (
@@ -119,8 +117,6 @@ const PlantCalendar = () => {
         </button>
       </div>
       <Calendar
-        onSelectSlot={onSelectSlot}
-        onDrillDown={onSelectSlot}
         localizer={localizer}
         events={allEvents}
         startAccessor='start'

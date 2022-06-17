@@ -4,6 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { API_URL } from 'utils/utils';
 import { Formwrapper, InputWrapper } from './Styling/form_styles';
+import swal from 'sweetalert';
 
 import plants from 'reducers/plants';
 
@@ -20,7 +21,9 @@ const Editform = (props) => {
 
   const [plantName, setPlantName] = useState(currentPlant.plantName);
   const [plantType, setPlantType] = useState(currentPlant.plantType);
-  const [plantInformation, setplantInformation] = useState(currentPlant.plantInformation);
+  const [plantInformation, setplantInformation] = useState(
+    currentPlant.plantInformation
+  );
 
   const handleEditNameChange = (event) => {
     setPlantName(event.target.value);
@@ -45,9 +48,9 @@ const Editform = (props) => {
       .then((data) => {
         //props.setEditPlant(false);
         dispatch(plants.actions.updatePlant(data.response));
-        props.closePane(); 
+        swal({ text: 'Your plant is added!', icon: 'success' });
+        props.closePane();
       });
-
   };
 
   const onBackButtonClick = () => {
@@ -96,8 +99,6 @@ const Editform = (props) => {
 
           <button onClick={onBackButtonClick}>BACK</button>
           {/* <button onClick={() => setState({ isPaneOpen: false })}>BACK</button> */}
-
-
         </form>
       </Formwrapper>
     </>

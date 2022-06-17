@@ -13,6 +13,7 @@ import Login from 'components/Login';
 import SinglePlant from 'components/SinglePlant';
 import PlantCalendar from 'components/Calendar';
 import PlantTodos from 'components/PlantTodos';
+import About from 'components/About';
 
 import plants from 'reducers/plants';
 import eventTodos from 'reducers/events';
@@ -52,6 +53,7 @@ export const App = () => {
           <Route exact path='/profile' element={<ProfilePage />}></Route>
           <Route exact path='/addplant' element={<AddNewPlantForm />}></Route>
           <Route exact path='/calendar' element={<PlantCalendar />}></Route>
+          <Route exact path='/about' element={<About />}></Route>
 
           <Route
             exact

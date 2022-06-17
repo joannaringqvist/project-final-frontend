@@ -12,7 +12,10 @@ import {
   InputWrapper,
   LoginButton,
   Label,
+  PlantPic,
+  LoginText,
 } from './Styling/form_styles';
+import { StyledBtn } from './Styling/plantfeed_styles';
 import planticon from './images/plant.png';
 
 import { Container } from './Styling/global_styles';
@@ -72,6 +75,7 @@ const Login = () => {
     <Container>
       <Formwrapper>
         <h1>Login</h1>
+        <PlantPic src={planticon}></PlantPic>
         {errorMessage && <p>{errorMessage}</p>}
         <form onSubmit={onLoginFormSubmit}>
           <Label htmlFor='username'>Username</Label>
@@ -95,9 +99,8 @@ const Login = () => {
 
           <LoginButton type='submit'>Login</LoginButton>
         </form>
-        <p>Not yet a user?</p>
+        <LoginText>Not yet a user?</LoginText>
         <LoginButton onClick={onRegister}>Sign up!</LoginButton>
-        <img src={planticon}></img>
       </Formwrapper>
     </Container>
   );

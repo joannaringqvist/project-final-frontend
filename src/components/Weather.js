@@ -78,13 +78,15 @@ const Weather = () => {
         </CityWrapper>
       </WeatherWrapper>
       {weather === 'Clear' && (
-        <WeatherType>Looks like a sunny day for your garden! </WeatherType>
+        <WeatherType>Looks like your plants will enjoy it today! </WeatherType>
       )}
       {weather === 'Rain' && (
         <WeatherType>No need to water your plants outside today! </WeatherType>
       )}
       {weather === 'Clouds' && (
-        <WeatherType>A good day for taking care of your plants!</WeatherType>
+        <WeatherType>
+          A good day for taking care of your plants or just to rest a bit..
+        </WeatherType>
       )}
     </>
   );

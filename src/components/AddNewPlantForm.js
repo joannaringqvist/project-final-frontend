@@ -7,7 +7,8 @@ import { API_URL } from 'utils/utils';
 import plants from 'reducers/plants';
 
 import { Formwrapper, InputWrapper } from './Styling/form_styles';
-import Navbar from './reusable-components/Navbar';
+import gardenlady from './images/garden.png';
+import { AddPlantImg, Addwrapper } from './Styling/addplant_styles';
 
 import swal from 'sweetalert';
 
@@ -72,7 +73,7 @@ const AddNewPlantForm = (props) => {
 
   return (
     <>
-      <Formwrapper>
+      <Addwrapper>
         <form onSubmit={onSaveNewPlantSubmit}>
           <label htmlFor='plantName'>Name of plant</label>
           <InputWrapper>
@@ -125,7 +126,8 @@ const AddNewPlantForm = (props) => {
           </InputWrapper>
           <button type='submit'>Save plant</button>
         </form>
-      </Formwrapper>
+        <AddPlantImg src={gardenlady}></AddPlantImg>
+      </Addwrapper>
     </>
   );
 };
