@@ -9,6 +9,7 @@ export const PlantWrapper = styled.div`
   margin: 10px;
   padding: 5px;
   position: relative;
+  box-shadow: 2px 10px 10px 3px grey;
 `;
 
 export const DeleteButton = styled.button`
@@ -30,7 +31,8 @@ export const DeleteIcon = styled.img`
 
 export const PlantName = styled.p`
   color: black;
-  font-size: 18px;
+  font-size: 20px;
+  font-family: 'Lora', serif;
 `;
 
 export const PlantAdd = styled.p`
@@ -72,6 +74,11 @@ export const StyledBtn = styled.button`
   background-color: rgb(250, 235, 224);
   border: none;
   align-self: center;
+  transition: transform 0.6s;
+  cursor: pointer;
+  &:hover {
+    transform: scale(1.2);
+  }
 `;
 
 export const StyledDeleteBtn = styled.button`
@@ -86,6 +93,11 @@ export const StyledDeleteBtn = styled.button`
   font-family: 'Montserrat', sans-serif;
   background-color: rgb(250, 235, 224);
   border: none;
+  transition: transform 0.7s;
+  cursor: pointer;
+  &:hover {
+    transform: scale(1.2);
+  }
 `;
 
 export const StyledBtnAdd = styled.button`
@@ -97,6 +109,11 @@ export const StyledBtnAdd = styled.button`
   font-family: 'Montserrat', sans-serif;
   background-color: rgb(250, 235, 224);
   border: none;
+  transition: transform 0.7s;
+  cursor: pointer;
+  &:hover {
+    transform: scale(1.2);
+  }
 `;
 
 export const ArrowImg = styled.img`

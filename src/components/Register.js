@@ -7,6 +7,7 @@ import { API_URL } from 'utils/utils';
 import user from 'reducers/user';
 import swal from 'sweetalert';
 import planticon from './images/plant.png';
+import seeding from './images/seeding.png';
 
 import {
   Formwrapper,
@@ -79,8 +80,8 @@ const Register = () => {
 
   return (
     <Formwrapper>
-      <h1>Register a new user</h1>
-      <PlantPic src={planticon}></PlantPic>
+      <h1>Become our friend!</h1>
+      <PlantPic src={seeding}></PlantPic>
       {errorMessage && <p>{errorMessage}</p>}
       <form onSubmit={onRegisterFormSubmit}>
         <label htmlFor='username'>Username</label>

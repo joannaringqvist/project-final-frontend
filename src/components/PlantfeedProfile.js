@@ -7,6 +7,7 @@ import {
   PlantfeedCardText,
   PlantLady,
   PlantfeedCardTextBold,
+  PlantfeedBtnWrapper,
 } from './Styling/profile_styling';
 import plantlady from './images/plantlady.png';
 
@@ -33,20 +34,26 @@ const PlantfeedProfile = () => {
             yet. Go add some!
           </PlantfeedCardText>
         </PlantfeedCard>
-        <StyledBtn onClick={navigatePlantfeed}>Plantfeed</StyledBtn>
+        <PlantfeedBtnWrapper>
+          <StyledBtn onClick={navigatePlantfeed}>Plantfeed</StyledBtn>
+        </PlantfeedBtnWrapper>
       </>
     );
   } else {
     return (
-      <PlantfeedCard>
-        <PlantLady src={plantlady}></PlantLady>
-        <PlantfeedCardText>
-          You have{' '}
-          <PlantfeedCardTextBold>{plantList.length}</PlantfeedCardTextBold>{' '}
-          plants registered. Go take a look at your loved ones!
-        </PlantfeedCardText>
-        <StyledBtn onClick={navigatePlantfeed}>Plantfeed</StyledBtn>
-      </PlantfeedCard>
+      <>
+        <PlantfeedCard>
+          <PlantLady src={plantlady}></PlantLady>
+          <PlantfeedCardText>
+            You have{' '}
+            <PlantfeedCardTextBold>{plantList.length}</PlantfeedCardTextBold>{' '}
+            plants registered. Go take a look at your loved ones!
+          </PlantfeedCardText>
+        </PlantfeedCard>
+        <PlantfeedBtnWrapper>
+          <StyledBtn onClick={navigatePlantfeed}>Plantfeed</StyledBtn>
+        </PlantfeedBtnWrapper>
+      </>
     );
   }
 };

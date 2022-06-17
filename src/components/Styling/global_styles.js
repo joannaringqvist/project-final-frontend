@@ -13,8 +13,8 @@ export const Container = styled.div`
     margin: 0 auto;
   }
 
-  @media (min-width: 1400px) {
-    width: 1400px;
+  @media (min-width: 1200px) {
+    width: 1200px;
     margin: 0 auto;
   }
 `;

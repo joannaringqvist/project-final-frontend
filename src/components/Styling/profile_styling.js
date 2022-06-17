@@ -42,3 +42,8 @@ export const PlantfeedCardTextBold = styled.span`
 export const ProfileWrapper = styled.section`
   position: relative;
 `;
+
+export const PlantfeedBtnWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+`;

@@ -2,43 +2,30 @@
 import React from 'react';
 import styled from 'styled-components';
 
-export const HiddenCheck = styled.input.attrs({ type: 'checkbox' })`
-  height: 32px;
-  width: 48px;
-  cursor: pointer;
-  position: absolute;
-  opacity: 0;
-`;
-
-export const CheckboxLabel = styled.label`
-  min-width: 70px;
-  height: 32px;
-  border-radius: 16px;
+export const ImgContainer = styled.div`
   display: flex;
-  flex-direction: row;
-  gap: 0.5rem;
-  align-items: center;
   justify-content: center;
-  font-weight: 300;
-  color: red;
-  transition: 0.2s;
-  font-size: 14px;
-  font-weight: 400;
-  position: relative;
-  padding: 0 1rem;
-  z-index: 2;
+  margin: 20px;
 `;
-export const CheckboxContainer = styled.span`
-  display: flex;
-  width: 95%;
-  height: 32px;
-  border-radius: 32px;
-  background-color: grey;
-  pointer-events: none;
-  position: absolute;
-  z-index: -1;
 
-  ${HiddenCheck}:checked + && {
-    background-color: green;
-  }
+export const SingleTextContainer = styled.div`
+  margin: 20px;
+`;
+
+export const SingleTextDiv = styled.div`
+  margin-bottom: 10px;
+`;
+
+export const PlantText = styled.span`
+  font-weight: bold;
+`;
+
+export const PlantNameText = styled.span`
+  font-size: 18px;
+`;
+
+export const SingleButtonWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
 `;
