@@ -25,7 +25,6 @@ const SinglePlant = () => {
   const navigate = useNavigate();
 
   const onBackButtonClick = () => {
-    //navigate(-1);
     navigate('/plants/');
   };
 
@@ -49,10 +48,6 @@ const SinglePlant = () => {
       });
   }, [editPlant]);
 
-  // const onEditClick = () => {
-  //   setEditPlant(true);
-  // };
-
   const onUpdatePlant = (plantId) => {
     setEditPlant(false);
     fetch(API_URL(`plant/${plantId}/updated`), {
@@ -69,18 +64,17 @@ const SinglePlant = () => {
     setNewPlantName(event.target.value);
   };
 
-  // -------- CLOUDINARY --------
   // Create a Cloudinary instance and set your cloud name.
-  const cld = new Cloudinary({
-    cloud: {
-      cloudName: 'garden-planner',
-    },
-    //url: 'https://res.cloudinary.com/garden-planner/image/upload/v1654781197/test/IMG_9052_zzibtf.jpg'
-} );
+//   const cld = new Cloudinary({
+//     cloud: {
+//       cloudName: 'garden-planner',
+//     },
+//     //url: 'https://res.cloudinary.com/garden-planner/image/upload/v1654781197/test/IMG_9052_zzibtf.jpg'
+// } );
 
   // cld.image returns a CloudinaryImage with the configuration set.
-  const myImage = cld.image('test/IMG_9052_zzibtf');
-  // -------- CLOUDINARY --------
+  //const myImage = cld.image('test/IMG_9052_zzibtf');
+
 
   if (editPlant) {
     return <Editform />;
@@ -111,27 +105,14 @@ const SinglePlant = () => {
   return (
     isLoading === false && (
       <>
-        <div>
-          <AdvancedImage cldImg={myImage} style={{width: '250px'}} />
-        </div>
-        {/* <CloudinaryContext cloudName="garden-planner">
-        <div>
-          <Image publicId="cld-sample-5" width="50" />
-        </div>
-          <Image publicId="cld-sample-5" width="0.5" />
-        </CloudinaryContext> */}
-
         <p>{plantInfo.plantName}</p>
         <p>{plantInfo.plantInformation}</p>
         <p>{plantInfo.plantType}</p>
         <p>{plantInfo.indoorOrOutdoor}</p>
         <p>{moment(plantInfo.createdAt).fromNow()}</p>
-        <button onClick={onBackButtonClick}>BACK</button>
+        {plantInfo.imageUrl && <img src={plantInfo.imageUrl} />}
 
-        {/* {!editPlant && <button onClick={onEditClick}>EDIT</button>}
-        {editPlant && (
-          <button onClick={() => onUpdatePlant(plantId)}>SAVE</button>
-        )} */}
+        <button onClick={onBackButtonClick}>BACK</button>
 
         <button onClick={() => setState({ isPaneOpen: true })}>
           Edit plant!
@@ -150,10 +131,7 @@ const SinglePlant = () => {
               setState({ isPaneOpen: false });
             }}
           />
-
-          {/* <button onClick={() => setState({ isPaneOpen: false })}>BACK NEW</button> */}
-
-          {/* <BackButton /> */}
+          <Editform closePane={() => { setState({isPaneOpen: false}); }} />
         </SlidingPane>
       </>
     )
