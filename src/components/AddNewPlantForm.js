@@ -2,6 +2,8 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { AdvancedImage } from '@cloudinary/react';
+import { Cloudinary } from '@cloudinary/url-gen';
 
 import { API_URL } from 'utils/utils';
 import plants from 'reducers/plants';
@@ -71,6 +73,32 @@ const AddNewPlantForm = (props) => {
       });
   };
 
+  const myWidget = cloudinary.createUploadWidget(
+    {
+      cloudName: 'garden-planner',
+      uploadPreset: 'garden-planner-preset',
+    },
+    (error, result) => {
+      console.log('error', error);
+      console.log('result', result);
+      if (!error && result && result.event === 'success') {
+        console.log('Done! Here is the image info: ', result.info);
+        // secure_url: "https://res.cloudinary.com/garden-planner/image/upload/v1655400840/r8is30hgcaz1axpdzt0m.png"
+        // path: "v1655400840/r8is30hgcaz1axpdzt0m.png"
+        // public_id: "r8is30hgcaz1axpdzt0m"
+        // thumbnail_url: "https://res.cloudinary.com/garden-planner/image/upload/c_limit,h_60,w_90/v1655400840/r8is30hgcaz1axpdzt0m.png"
+
+        const imageUrl = result.info.secure_url;
+        const thumbnailUrl = result.info.thumbnail_url;
+        console.log('imageUrl, thumbnailUrl', imageUrl, thumbnailUrl);
+      }
+    }
+  );
+
+  const onClickUploadImage = () => {
+    myWidget.open();
+  };
+
   return (
     <>
       <Addwrapper>
@@ -128,6 +156,10 @@ const AddNewPlantForm = (props) => {
         </form>
         <AddPlantImg src={gardenlady}></AddPlantImg>
       </Addwrapper>
+      <p>ADD IMAGE</p>
+      <button type='button' id='upload_widget' onClick={onClickUploadImage}>
+        Upload image
+      </button>
     </>
   );
 };

@@ -8,6 +8,8 @@ import 'react-sliding-pane/dist/react-sliding-pane.css';
 
 import { API_URL } from 'utils/utils';
 import Editform from './Editform';
+import {AdvancedImage} from '@cloudinary/react';
+import {Cloudinary} from "@cloudinary/url-gen";
 import Navbar from './reusable-components/Navbar';
 import {
   HiddenCheck,
@@ -67,6 +69,23 @@ const SinglePlant = () => {
     setNewPlantName(event.target.value);
   };
 
+  // -------- CLOUDINARY --------
+  // Create a Cloudinary instance and set your cloud name.
+  const cld = new Cloudinary({
+    cloud: {
+      cloudName: 'garden-planner',
+    },
+    //url: 'https://res.cloudinary.com/garden-planner/image/upload/v1654781197/test/IMG_9052_zzibtf.jpg'
+} );
+
+  // cld.image returns a CloudinaryImage with the configuration set.
+  const myImage = cld.image('test/IMG_9052_zzibtf');
+  // -------- CLOUDINARY --------
+
+  if (editPlant) {
+    return <Editform />;
+  }
+
   const togglePlant = (plantId, isFavourite) => {
     const options = {
       method: 'PATCH',
@@ -92,11 +111,22 @@ const SinglePlant = () => {
   return (
     isLoading === false && (
       <>
+        <div>
+          <AdvancedImage cldImg={myImage} style={{width: '250px'}} />
+        </div>
+        {/* <CloudinaryContext cloudName="garden-planner">
+        <div>
+          <Image publicId="cld-sample-5" width="50" />
+        </div>
+          <Image publicId="cld-sample-5" width="0.5" />
+        </CloudinaryContext> */}
+
         <p>{plantInfo.plantName}</p>
         <p>{plantInfo.plantInformation}</p>
         <p>{plantInfo.plantType}</p>
         <p>{plantInfo.indoorOrOutdoor}</p>
         <p>{moment(plantInfo.createdAt).fromNow()}</p>
+<<<<<<< HEAD
         {/*<CheckboxLabel>git branch
           Favourite
           <HiddenCheck
@@ -109,6 +139,8 @@ const SinglePlant = () => {
           ></HiddenCheck>
           <CheckboxContainer></CheckboxContainer>
     </CheckboxLabel>*/}
+=======
+>>>>>>> 7c8f9144c4228536c9d91ee9327fa554279e25c0
 
         <button onClick={onBackButtonClick}>BACK</button>
 
