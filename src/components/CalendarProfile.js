@@ -10,6 +10,7 @@ import {
   PlantfeedCardText,
   PlantfeedCardTextBold,
   PlantLady,
+  PlantfeedBtnWrapper,
 } from './Styling/profile_styling';
 import { StyledBtn } from './Styling/plantfeed_styles';
 import plantgirl from './images/girlplant.png';
@@ -26,14 +27,18 @@ const CalendarProfile = () => {
 
   if (eventsList.length === 0) {
     return (
-      <PlantfeedCard>
-        <PlantLady src={plantgirl}></PlantLady>
-        <PlantfeedCardText>
-          You don't have <PlantfeedCardTextBold>any</PlantfeedCardTextBold>{' '}
-          planttasks yet. Don't you have something you need to do?
-        </PlantfeedCardText>
-        <StyledBtn onClick={navigateCalendar}>Calendar</StyledBtn>
-      </PlantfeedCard>
+      <>
+        <PlantfeedCard>
+          <PlantLady src={plantgirl}></PlantLady>
+          <PlantfeedCardText>
+            You don't have <PlantfeedCardTextBold>any</PlantfeedCardTextBold>{' '}
+            planttasks yet. Don't you have something you need to do?
+          </PlantfeedCardText>
+        </PlantfeedCard>
+        <PlantfeedBtnWrapper>
+          <StyledBtn onClick={navigateCalendar}>Calendar</StyledBtn>
+        </PlantfeedBtnWrapper>
+      </>
     );
   } else {
     return (
@@ -45,8 +50,10 @@ const CalendarProfile = () => {
             <PlantfeedCardTextBold>{eventsList.length}</PlantfeedCardTextBold>{' '}
             planttasks to do! No time to loose!
           </PlantfeedCardText>
-          <StyledBtn onClick={navigateCalendar}>Calendar</StyledBtn>
         </PlantfeedCardTwo>
+        <PlantfeedBtnWrapper>
+          <StyledBtn onClick={navigateCalendar}>Calendar</StyledBtn>
+        </PlantfeedBtnWrapper>
       </>
     );
   }

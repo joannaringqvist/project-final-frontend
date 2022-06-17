@@ -26,4 +26,9 @@ export const HeaderBtn = styled.button`
   font-family: 'Montserrat', sans-serif;
   background-color: rgb(250, 235, 224);
   border: none;
+  transition: transform 0.7s;
+  cursor: pointer;
+  &:hover {
+    transform: scale(1.2);
+  }
 `;

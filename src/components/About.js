@@ -11,7 +11,8 @@ export const About = () => {
       <AboutImg src={plantabout}></AboutImg>
       <p>
         Join us and get an easy way to keep track of your garden and your
-        houseplants. Who didn't water their flowers too little or too much?{' '}
+        houseplants. Who didn't water their flowers too little or too much? With
+        Plantinary that's no longer an issue.
       </p>
     </AboutWrapper>
   );

@@ -23,7 +23,7 @@ const Header = () => {
   return (
     <HeaderWrapper>
       <div>
-        <WelcomeUser>Hello {username}</WelcomeUser>
+        <WelcomeUser>Hello {username}!</WelcomeUser>
         <HeaderBtn
           type='button'
           onClick={() => {

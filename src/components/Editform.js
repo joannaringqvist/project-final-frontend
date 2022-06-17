@@ -4,6 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { API_URL } from 'utils/utils';
 import { Formwrapper, InputWrapper } from './Styling/form_styles';
+import { StyledBtn } from './Styling/plantfeed_styles';
 import swal from 'sweetalert';
 
 import plants from 'reducers/plants';
@@ -59,7 +60,7 @@ const Editform = (props) => {
 
   return (
     <>
-      <h1>Edit plant HEJ</h1>
+      <h1>Edit your plant</h1>
       <Formwrapper>
         <form onSubmit={onEditPlantSubmit}>
           <label htmlFor='plantName'>Name of plant</label>
@@ -95,9 +96,9 @@ const Editform = (props) => {
               onChange={handleEditInformationChange}
             />
           </InputWrapper>
-          <button type='submit'>Save plant</button>
+          <StyledBtn type='submit'>Save plant</StyledBtn>
 
-          <button onClick={onBackButtonClick}>BACK</button>
+          <StyledBtn onClick={onBackButtonClick}>BACK</StyledBtn>
           {/* <button onClick={() => setState({ isPaneOpen: false })}>BACK</button> */}
         </form>
       </Formwrapper>
