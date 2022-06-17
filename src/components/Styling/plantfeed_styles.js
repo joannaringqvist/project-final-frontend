@@ -79,6 +79,10 @@ export const StyledBtn = styled.button`
   &:hover {
     transform: scale(1.2);
   }
+  @media (min-width: 1200px) {
+    width: 200px;
+    font-size: 20px;
+  }
 `;
 
 export const StyledDeleteBtn = styled.button`
