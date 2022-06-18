@@ -22,6 +22,7 @@ const Header = () => {
   const navigate = useNavigate();
   return (
     <HeaderWrapper>
+      <WelcomeUser>Hello {username}</WelcomeUser>
       <div>
         <WelcomeUser>Hello {username}!</WelcomeUser>
         <HeaderBtn

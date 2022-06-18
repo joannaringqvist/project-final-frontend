@@ -75,7 +75,7 @@ const AddNewPlantForm = (props) => {
       });
   };
 
-  const myWidget = cloudinary.createUploadWidget(
+  const cldWidget = cloudinary.createUploadWidget(
     {
       cloudName: 'garden-planner',
       uploadPreset: 'garden-planner-preset',
@@ -101,8 +101,8 @@ const AddNewPlantForm = (props) => {
   );
 
   const onClickUploadImage = () => {
-    myWidget.open();
-  };
+    cldWidget.open();
+  }
 
   return (
     <>
