@@ -23,6 +23,7 @@ import {
   CalendarImg,
   DateText,
   DeleteWrapper,
+  ButtonWrapper,
 } from './Styling/calendar_style';
 import { StyledBtn } from './Styling/plantfeed_styles';
 
@@ -145,7 +146,9 @@ const PlantCalendar = () => {
 
   return (
     <div className='App'>
-      <StyledBtn onClick={backToProfile}>Back</StyledBtn>
+      <ButtonWrapper>
+        <StyledBtn onClick={backToProfile}>Back</StyledBtn>
+      </ButtonWrapper>
       <AddEventWrapper>
         <h1>Your calendar</h1>
         <DateText>{date}</DateText>
@@ -173,6 +176,19 @@ const PlantCalendar = () => {
           Add Event
         </StyledBtn>
       </AddEventWrapper>
+      {eventsList.map((event) => (
+        <div key={event._id}>
+          {isShown && (
+            <DeleteWrapper>
+              <StyledBtn onClick={() => deleteEvent(event._id)}>
+                Delete event
+              </StyledBtn>
+              <StyledBtn>Edit event</StyledBtn>
+            </DeleteWrapper>
+          )}
+        </div>
+      ))}
+
       <Calendar
         localizer={localizer}
         events={events}
@@ -188,14 +204,6 @@ const PlantCalendar = () => {
         dayPropGetter={dayStyleGetter}
         onSelectEvent={() => selectedEvent()}
       />
-      {isShown && (
-        <DeleteWrapper>
-          <StyledBtn onClick={() => deleteEvent(eventsList._id)}>
-            Delete event
-          </StyledBtn>
-          <StyledBtn>Edit event</StyledBtn>
-        </DeleteWrapper>
-      )}
 
       {/*{eventsList.map((event) => (
         <div key={event._id}>

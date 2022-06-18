@@ -26,6 +26,9 @@ import {
   StyledDeleteBtn,
   ArrowImg,
   StyledBtn,
+  PlantCardWrapper,
+  AddWrapper,
+  AddImg,
 } from './Styling/plantfeed_styles';
 
 import deleteicon from './images/delete.svg';
@@ -116,11 +119,13 @@ const PlantFeed = () => {
       <PlantFeedWrapper>
         <ButtonWrapper>
           <StyledBtn onClick={toProfile}>Back</StyledBtn>
-          <PlantBtnText>Add plants</PlantBtnText>
-          <ArrowImg src={arrow}></ArrowImg>
-          <StyledBtnAdd onClick={() => setState({ isPaneOpen: true })}>
-            <img src={addicon}></img>
-          </StyledBtnAdd>
+          <AddWrapper>
+            {/*<PlantBtnText>Add plants</PlantBtnText>
+            <ArrowImg src={arrow}></ArrowImg>*/}
+            <StyledBtnAdd onClick={() => setState({ isPaneOpen: true })}>
+              <AddImg src={addicon}></AddImg>
+            </StyledBtnAdd>
+          </AddWrapper>
         </ButtonWrapper>
         <FilterWrapper>
           <div className='filter-container'>
@@ -143,7 +148,7 @@ const PlantFeed = () => {
         </FilterWrapper>
         <section>
           {filteredList.map((plant) => (
-            <>
+            <PlantCardWrapper>
               <PlantWrapper key={plant._id}>
                 <Link
                   style={{ textDecoration: 'none' }}
@@ -157,7 +162,7 @@ const PlantFeed = () => {
                   <img src={deleteicon}></img>
                 </StyledDeleteBtn>
               </PlantWrapper>
-            </>
+            </PlantCardWrapper>
           ))}
           <PlantsLengthWrapper>
             <PlantsLength>

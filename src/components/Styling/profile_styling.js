@@ -60,3 +60,10 @@ export const PlantfeedBtnWrapper = styled.div`
   display: flex;
   justify-content: center;
 `;
+
+export const PlantfeedBtnWrapperTwo = styled.div`
+  display: flex;
+  justify-content: center;
+  border-bottom: 2px solid #c1ac95;
+  margin-bottom: 50px;
+`;
