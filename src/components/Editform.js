@@ -77,10 +77,13 @@ const Editform = (props) => {
         // thumbnail_url: "https://res.cloudinary.com/garden-planner/image/upload/c_limit,h_60,w_90/v1655400840/r8is30hgcaz1axpdzt0m.png"
 
         const imageUrl = result.info.secure_url;
-        //const thumbnailUrl = result.info.thumbnail_url;
+        const thumbnailUrl = result.info.thumbnail_url;
         console.log('imageUrl', imageUrl);
+        console.log('thumb', thumbnailUrl);
+
 
         setImageUrl(imageUrl);
+
       }
     }
   );
@@ -137,6 +140,7 @@ const Editform = (props) => {
 
           <button type='button' id='upload_widget' onClick={onClickUploadImage}>Edit image</button>
           {/* Put image thumbnail here? */}
+          {/* <p>{thumbnailUrl}</p> */}
           <button type='button' onClick={onClickDeleteImage}>Delete image</button>
           <button type='submit'>Save plant</button>
           <button onClick={onBackButtonClick}>BACK</button>
