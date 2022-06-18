@@ -54,13 +54,14 @@ const Editform = (props) => {
         //props.setEditPlant(false);
         //handleEditImageUrlChange;
         dispatch(plants.actions.updatePlant(data.response));
-        swal({ text: 'Your plant is added!', icon: 'success' });
+        swal({ text: 'Your plant is updated!', icon: 'success' });
         props.closePane();
       });
   };
 
   const onBackButtonClick = () => {
-    navigate(`/plants/plant/${plantId}`);
+    props.closePane();
+    //navigate(`/plants/plant/${plantId}`);
   };
 
   const cldWidget = cloudinary.createUploadWidget(
