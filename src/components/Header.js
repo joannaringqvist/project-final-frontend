@@ -12,6 +12,7 @@ const Header = () => {
   return (
     <HeaderWrapper>
       <WelcomeUser>Hello {username}</WelcomeUser>
+      <p>env: {process.env.REACT_APP_BASE_URL}</p>
       <div>
         <p>{date} </p> <p>{weekday}</p>
       </div>

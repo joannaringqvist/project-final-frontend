@@ -21,6 +21,8 @@ const Editform = (props) => {
   const [plantName, setPlantName] = useState(currentPlant.plantName);
   const [plantType, setPlantType] = useState(currentPlant.plantType);
   const [plantInformation, setplantInformation] = useState(currentPlant.plantInformation);
+  const [imageUrl, setImageUrl] = useState(currentPlant.imageUrl);
+
 
   const handleEditNameChange = (event) => {
     setPlantName(event.target.value);
@@ -31,6 +33,11 @@ const Editform = (props) => {
   const handleEditInformationChange = (event) => {
     setplantInformation(event.target.value);
   };
+  const handleEditImageUrlChange = (event) => {
+    setImageUrl(event.target.value);
+  };
+
+  
 
   const onEditPlantSubmit = (event) => {
     event.preventDefault();
@@ -39,11 +46,12 @@ const Editform = (props) => {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ plantName, plantType, plantInformation }),
+      body: JSON.stringify({ plantName, plantType, plantInformation, imageUrl }),
     })
       .then((res) => res.json())
       .then((data) => {
         //props.setEditPlant(false);
+        //handleEditImageUrlChange;
         dispatch(plants.actions.updatePlant(data.response));
         props.closePane(); 
       });
@@ -54,9 +62,43 @@ const Editform = (props) => {
     navigate(`/plants/plant/${plantId}`);
   };
 
+  const cldWidget = cloudinary.createUploadWidget(
+    {
+      cloudName: 'garden-planner',
+      uploadPreset: 'garden-planner-preset'
+    }, (error, result) => {
+      console.log('error', error);
+      console.log('result', result);
+      if (!error && result && result.event === "success") { 
+        console.log('Done! Here is the image info: ', result.info);
+        // secure_url: "https://res.cloudinary.com/garden-planner/image/upload/v1655400840/r8is30hgcaz1axpdzt0m.png"
+        // path: "v1655400840/r8is30hgcaz1axpdzt0m.png"
+        // public_id: "r8is30hgcaz1axpdzt0m"
+        // thumbnail_url: "https://res.cloudinary.com/garden-planner/image/upload/c_limit,h_60,w_90/v1655400840/r8is30hgcaz1axpdzt0m.png"
+
+        const imageUrl = result.info.secure_url;
+        //const thumbnailUrl = result.info.thumbnail_url;
+        console.log('imageUrl', imageUrl);
+
+        setImageUrl(imageUrl);
+      }
+    }
+  );
+
+  const onClickUploadImage = () => {
+    cldWidget.open();
+  }
+
+  const onClickDeleteImage = () => {
+    console.log('delete image');
+  }
+
+
+
+
   return (
     <>
-      <h1>Edit plant HEJ</h1>
+      <h1>Edit plant</h1>
       <Formwrapper>
         <form onSubmit={onEditPlantSubmit}>
           <label htmlFor='plantName'>Name of plant</label>
@@ -92,8 +134,11 @@ const Editform = (props) => {
               onChange={handleEditInformationChange}
             />
           </InputWrapper>
-          <button type='submit'>Save plant</button>
 
+          <button type='button' id='upload_widget' onClick={onClickUploadImage}>Edit image</button>
+          {/* Put image thumbnail here? */}
+          <button type='button' onClick={onClickDeleteImage}>Delete image</button>
+          <button type='submit'>Save plant</button>
           <button onClick={onBackButtonClick}>BACK</button>
           {/* <button onClick={() => setState({ isPaneOpen: false })}>BACK</button> */}
 
