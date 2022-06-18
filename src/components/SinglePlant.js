@@ -103,12 +103,12 @@ const SinglePlant = () => {
   return (
     isLoading === false && (
       <>
-        <ImgContainer>
+        {/* <ImgContainer>
           <AdvancedImage
             cldImg={myImage}
             style={{ width: '250px', borderRadius: '20px' }}
           />
-        </ImgContainer>
+        </ImgContainer> */}
 
         {/* <CloudinaryContext cloudName="garden-planner">
         <div>
@@ -116,6 +116,8 @@ const SinglePlant = () => {
         </div>
           <Image publicId="cld-sample-5" width="0.5" />
         </CloudinaryContext> */}
+
+        <ImgContainer>{plantInfo.imageUrl && <img src={plantInfo.imageUrl} />}</ImgContainer>
 
         <SingleTextContainer>
           <SingleTextDiv>
@@ -149,6 +151,8 @@ const SinglePlant = () => {
           ></HiddenCheck>
           <CheckboxContainer></CheckboxContainer>
     </CheckboxLabel>*/}
+        
+
 
         <SingleButtonWrapper>
           <StyledBtn onClick={onBackButtonClick}>BACK</StyledBtn>
