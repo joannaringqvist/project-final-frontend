@@ -1,12 +1,8 @@
 /* eslint-disable */
-let BASE_URL = 'https://final-project-garden-planner.herokuapp.com';
 
-if (process.env.REACT_APP_BASE_URL) {
-    BASE_URL = process.env.REACT_APP_BASE_URL;
-} 
 //const BASE_URL = 'http://localhost:8080';
 
-//const BASE_URL = 'https://final-project-garden-planner.herokuapp.com';
+const BASE_URL = 'https://final-project-garden-planner.herokuapp.com';
 
 export const API_URL = (slug) => `${BASE_URL}/${slug}`;
 
