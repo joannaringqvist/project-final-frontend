@@ -50,7 +50,7 @@ const SinglePlant = () => {
         setPlantInfo(data.data);
         dispatch(ui.actions.setLoading(false));
       });
-  }, [editPlant]);
+  }, [state]);
 
   const onUpdatePlant = (plantId) => {
     setEditPlant(false);
@@ -170,12 +170,6 @@ const SinglePlant = () => {
             setState({ isPaneOpen: false });
           }}
         >
-          <Editform
-            closePane={() => {
-              setState({ isPaneOpen: false });
-            }}
-          />
-
           <Editform
             closePane={() => {
               setState({ isPaneOpen: false });
