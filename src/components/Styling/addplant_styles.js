@@ -3,7 +3,10 @@ import React from 'react';
 import styled from 'styled-components';
 
 export const AddPlantImg = styled.img`
-  width: 250px;
+  width: 200px;
+  @media (min-width: 668px) {
+    width: 350px;
+  }
 `;
 
 export const Addwrapper = styled.div`
@@ -14,4 +17,8 @@ export const Addwrapper = styled.div`
   text-align: center;
   height: 500px;
   margin-top: 50px;
+
+  @media (min-width: 668px) {
+    height: 800px;
+  }
 `;

@@ -7,13 +7,12 @@ import SlidingPane from 'react-sliding-pane';
 import 'react-sliding-pane/dist/react-sliding-pane.css';
 
 import arrow from './images/arrow.png';
+import heart from './images/heart.png';
 
 import { API_URL } from 'utils/utils';
 import Navbar from './reusable-components/Navbar';
 import {
   PlantWrapper,
-  DeleteButton,
-  DeleteIcon,
   PlantName,
   PlantAdd,
   PlantsLength,
@@ -22,14 +21,18 @@ import {
   StyledBtnAdd,
   ButtonWrapper,
   PlantFeedWrapper,
-  PlantBtnText,
   StyledDeleteBtn,
-  ArrowImg,
   StyledBtn,
   PlantCardWrapper,
   AddWrapper,
   AddImg,
+  ButtonCheckbox,
+  CheckBoxLabel,
+  CheckboxContainer,
+  FavouriteStar,
 } from './Styling/plantfeed_styles';
+import { Dropdown } from './Styling/form_styles';
+import { PlantfeedCardTextBold } from './Styling/profile_styling';
 
 import deleteicon from './images/delete.svg';
 import AddNewPlant from './AddNewPlantForm';
@@ -43,6 +46,9 @@ const PlantFeed = () => {
   const isLoading = useSelector((store) => store.ui.isLoading);
   const accessToken = useSelector((store) => store.user.accessToken);
   const bushCategory = plantsList.filter((plant) => plant.plantType === 'bush');
+  const favouriteTasks = plantsList.filter(
+    (plant) => plant.isFavourite === true
+  );
   const [state, setState] = useState({
     isPaneOpen: false,
   });
@@ -50,9 +56,13 @@ const PlantFeed = () => {
   const [plantlist, setPlantlist] = useState([]);
   const [filteredList, setFilteredList] = useState(plantsList);
   const [selectedCategory, setSelectedCategory] = useState('');
-  const [modalIsOpen, setIsOpen] = useState(false);
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  const showFavourites = () => {
+    return favouriteTasks;
+  };
 
   const toProfile = () => {
     navigate('/profile');
@@ -94,6 +104,29 @@ const PlantFeed = () => {
         swal({ text: 'Your plant is deleted.', icon: 'success' });
       });
   };
+
+  const onTogglePlant = (plantId, isFavourite) => {
+    const options = {
+      method: 'PATCH',
+      body: JSON.stringify({
+        isFavourite: !isFavourite,
+        _id: plantId,
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+    fetch(API_URL(`plants/${plantId}/favourite`), options)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success) {
+          dispatch(plants.actions.togglePlant(plantId));
+          console.log(`${plantId} is favourite`);
+        } else {
+          console.log('didnt work');
+        }
+      });
+  };
   const filterByCategory = (filteredData) => {
     if (!selectedCategory) {
       return filteredData;
@@ -129,9 +162,9 @@ const PlantFeed = () => {
         </ButtonWrapper>
         <FilterWrapper>
           <div className='filter-container'>
-            <div>Filter by Category:</div>
             <div>
-              <select
+              <Dropdown
+                className='dropdown'
                 name='category-list'
                 id='category-list'
                 value={selectedCategory}
@@ -142,7 +175,8 @@ const PlantFeed = () => {
                 <option value='tree'>tree</option>
                 <option value='houseplant'>houseplant</option>
                 <option value='perennial'>perennial</option>
-              </select>
+              </Dropdown>
+              <StyledBtn onClick={showFavourites}>Favourites!</StyledBtn>
             </div>
           </div>
         </FilterWrapper>
@@ -161,6 +195,23 @@ const PlantFeed = () => {
                 <StyledDeleteBtn onClick={() => deleteOnePlant(plant._id)}>
                   <img src={deleteicon}></img>
                 </StyledDeleteBtn>
+                <CheckBoxLabel>
+                  {plant.isFavourite ? (
+                    <FavouriteStar src={heart}></FavouriteStar>
+                  ) : (
+                    <p>No</p>
+                  )}
+                  Favourite
+                  <ButtonCheckbox
+                    className='checkbox'
+                    type='checkbox'
+                    name={plant._id}
+                    id={plant._id}
+                    checked={plant.isFavourite}
+                    onChange={() => onTogglePlant(plant._id, plant.isFavourite)}
+                  ></ButtonCheckbox>
+                  <CheckboxContainer></CheckboxContainer>
+                </CheckBoxLabel>
               </PlantWrapper>
             </PlantCardWrapper>
           ))}
@@ -174,8 +225,8 @@ const PlantFeed = () => {
           </PlantsLengthWrapper>
           <div>
             <SlidingPane
-              className='some-custom-class'
-              overlayClassName='some-custom-overlay-class'
+              portalClassName='panestyle'
+              overlayClassName='paneoverlay'
               isOpen={state.isPaneOpen}
               hideHeader
               onRequestClose={() => {

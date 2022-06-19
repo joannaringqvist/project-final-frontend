@@ -7,7 +7,28 @@ export const Formwrapper = styled.div`
   justify-content: center;
   align-items: center;
   text-align: center;
-  height: 500px;
+  height: 600px;
+`;
+
+export const StyledBtn = styled.button`
+  border-radius: 20px;
+  height: 40px;
+  width: fit-content;
+  font-weight: bold;
+
+  font-family: 'Montserrat', sans-serif;
+  background-color: rgb(250, 235, 224);
+  border: none;
+  align-self: center;
+  transition: transform 0.6s;
+  cursor: pointer;
+  &:hover {
+    transform: scale(1.2);
+  }
+  @media (min-width: 668px) {
+    width: 200px;
+    font-size: 20px;
+  }
 `;
 
 export const LogoWrapper = styled.div`
@@ -54,4 +75,27 @@ export const LoginButton = styled.button`
   &:hover {
     transform: scale(1.2);
   }
+`;
+
+export const BtnWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
+
+export const NameInput = styled.input`
+  border-radius: 10px;
+  font-family: 'Montserrat', sans-serif;
+  border: 1px solid black;
+`;
+
+export const TextInput = styled.textarea`
+  border-radius: 10px;
+  font-family: 'Montserrat', sans-serif;
+  height: 50px;
+`;
+
+export const Dropdown = styled.select.attrs({ type: 'dropdown' })`
+  border-radius: 20px;
+  height: 30px;
+  font-family: 'Montserrat', sans-serif;
 `;

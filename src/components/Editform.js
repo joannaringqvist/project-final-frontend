@@ -3,7 +3,15 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { API_URL } from 'utils/utils';
-import { Formwrapper, InputWrapper } from './Styling/form_styles';
+import {
+  Formwrapper,
+  InputWrapper,
+  BtnWrapper,
+  NameInput,
+  TextInput,
+  Dropdown,
+} from './Styling/form_styles';
+import { AddPlantImg, Addwrapper } from './Styling/addplant_styles';
 import { StyledBtn } from './Styling/plantfeed_styles';
 import swal from 'sweetalert';
 
@@ -103,12 +111,11 @@ const Editform = (props) => {
 
   return (
     <>
-      <h1>Edit your plant</h1>
       <Formwrapper>
         <form onSubmit={onEditPlantSubmit}>
           <label htmlFor='plantName'>Name of plant</label>
           <InputWrapper>
-            <input
+            <NameInput
               id='plantName'
               type='text'
               value={plantName}
@@ -117,7 +124,7 @@ const Editform = (props) => {
           </InputWrapper>
           <label htmlFor='plantType'>Type of plant</label>
           <InputWrapper>
-            <select
+            <Dropdown
               id='plantType'
               name='plant'
               value={plantType}
@@ -128,28 +135,35 @@ const Editform = (props) => {
               <option value='houseplant'>Houseplant</option>
               <option value='perennial'>Perennial</option>
               <option value='bush'>Bush</option>
-            </select>
+            </Dropdown>
           </InputWrapper>
 
           <label htmlFor='plantInformation'>Add more information</label>
           <InputWrapper>
-            <textarea
+            <TextInput
               id='plantInformation'
               value={plantInformation}
               onChange={handleEditInformationChange}
             />
           </InputWrapper>
-
-          <button type='button' id='upload_widget' onClick={onClickUploadImage}>
-            Edit image
-          </button>
-          {/* Put image thumbnail here? */}
-          <button type='button' onClick={onClickDeleteImage}>
-            Delete image
-          </button>
-          <button type='submit'>Save plant</button>
-          <button onClick={onBackButtonClick}>BACK</button>
-          {/* <button onClick={() => setState({ isPaneOpen: false })}>BACK</button> */}
+          <BtnWrapper>
+            <StyledBtn
+              type='button'
+              id='upload_widget'
+              onClick={onClickUploadImage}
+            >
+              Edit image
+            </StyledBtn>
+            {/* Put image thumbnail here? */}
+            <StyledBtn type='button' onClick={onClickDeleteImage}>
+              Delete image
+            </StyledBtn>
+          </BtnWrapper>
+          <BtnWrapper>
+            <StyledBtn type='submit'>Save plant</StyledBtn>
+            <StyledBtn onClick={onBackButtonClick}>Cancel</StyledBtn>
+            {/* <button onClick={() => setState({ isPaneOpen: false })}>BACK</button> */}
+          </BtnWrapper>
         </form>
       </Formwrapper>
     </>

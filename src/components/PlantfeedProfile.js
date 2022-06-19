@@ -1,6 +1,8 @@
 /* eslint-disable */
-import React from 'react';
+import React, { useState } from 'react';
 import plants from 'reducers/plants';
+
+import AddNewPlant from './AddNewPlantForm';
 
 import {
   PlantfeedCard,
@@ -15,10 +17,16 @@ import { StyledBtn } from './Styling/plantfeed_styles';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import SlidingPane from 'react-sliding-pane';
+import 'react-sliding-pane/dist/react-sliding-pane.css';
 
 const PlantfeedProfile = () => {
   const plantList = useSelector((store) => store.plants.plants);
   const navigate = useNavigate();
+
+  const [state, setState] = useState({
+    isPaneOpen: false,
+  });
 
   const navigatePlantfeed = () => {
     navigate('/plants');
@@ -36,6 +44,9 @@ const PlantfeedProfile = () => {
         </PlantfeedCard>
         <PlantfeedBtnWrapper>
           <StyledBtn onClick={navigatePlantfeed}>Plantfeed</StyledBtn>
+          <StyledBtn onClick={() => setState({ isPaneOpen: true })}>
+            Add plant
+          </StyledBtn>
         </PlantfeedBtnWrapper>
       </>
     );
@@ -52,7 +63,21 @@ const PlantfeedProfile = () => {
         </PlantfeedCard>
         <PlantfeedBtnWrapper>
           <StyledBtn onClick={navigatePlantfeed}>Plantfeed</StyledBtn>
+          <StyledBtn onClick={() => setState({ isPaneOpen: true })}>
+            Add plant
+          </StyledBtn>
         </PlantfeedBtnWrapper>
+        <SlidingPane
+          className='some-custom-class'
+          overlayClassName='some-custom-overlay-class'
+          isOpen={state.isPaneOpen}
+          hideHeader
+          onRequestClose={() => {
+            setState({ isPaneOpen: false });
+          }}
+        >
+          <AddNewPlant />
+        </SlidingPane>
       </>
     );
   }

@@ -1,20 +1,57 @@
 /* eslint-disable */
 import React from 'react';
-import plantabout from './images/monstera.png';
+import { useNavigate } from 'react-router-dom';
 
-import { AboutImg, AboutHead, AboutWrapper } from './Styling/about_style';
+import plantabout from './images/monstera.png';
+import computerplant from './images/computerplant.png';
+
+import {
+  AboutImg,
+  AboutHead,
+  AboutWrapper,
+  OptionButtons,
+  ButtonWrapper,
+  AboutText,
+  AboutTextWrapper,
+  AboutHeadLine,
+  AboutWrapperTwo,
+} from './Styling/about_style';
+import { StyledBtn } from './Styling/plantfeed_styles';
 
 export const About = () => {
+  const navigate = useNavigate();
+
+  const toLogin = () => {
+    navigate('/login');
+  };
+
+  const toRegister = () => {
+    navigate('/register');
+  };
   return (
-    <AboutWrapper>
-      <AboutHead>Keep track of your plants with Plantinary</AboutHead>
-      <AboutImg src={plantabout}></AboutImg>
-      <p>
-        Join us and get an easy way to keep track of your garden and your
-        houseplants. Who didn't water their flowers too little or too much? With
-        Plantinary that's no longer an issue.
-      </p>
-    </AboutWrapper>
+    <>
+      <ButtonWrapper>
+        <StyledBtn onClick={toLogin}>Log in</StyledBtn>
+        <StyledBtn onClick={toRegister}>Sign up!</StyledBtn>
+      </ButtonWrapper>
+      <AboutHead>Plantinary</AboutHead>
+      <AboutWrapper>
+        <AboutTextWrapper>
+          <AboutHeadLine>What is Plantinary?</AboutHeadLine>
+          <AboutText>
+            Join us and get an easy way to keep track of your garden and your
+            houseplants. Who didn't water their flowers too little or too much?
+            With Plantinary that's no longer an issue.
+          </AboutText>
+        </AboutTextWrapper>
+        <AboutImg src={plantabout}></AboutImg>
+      </AboutWrapper>
+      <AboutWrapperTwo>
+        <AboutHeadLine>Who are we?</AboutHeadLine>
+        <AboutText></AboutText>
+        <AboutImg src={computerplant}></AboutImg>
+      </AboutWrapperTwo>
+    </>
   );
 };
 

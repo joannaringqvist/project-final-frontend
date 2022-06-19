@@ -162,7 +162,7 @@ const PlantCalendar = () => {
         />
         <DatePicker
           placeholderText='Start Date'
-          style={{ margin: '10px' }}
+          style={{ margin: '10px', backgroundColor: 'red' }}
           selected={newEvent.start}
           onChange={(start) => setNewEvent({ ...newEvent, start })}
         />

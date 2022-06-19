@@ -14,13 +14,15 @@ import { ProfileWrapper } from './Styling/profile_styling';
 
 const ProfilePage = () => {
   return (
-    <ProfileWrapper>
-      <Header />
-
-      <Weather />
-      <PlantfeedProfile />
-      <CalendarProfile />
-    </ProfileWrapper>
+    <>
+      <ProfileWrapper>
+        <Header />
+        <Weather />
+        <PlantfeedProfile />
+        <CalendarProfile />
+        <Footer />
+      </ProfileWrapper>
+    </>
   );
 };
 

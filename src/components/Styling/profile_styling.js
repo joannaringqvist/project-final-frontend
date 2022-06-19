@@ -7,7 +7,7 @@ export const PlantfeedCard = styled.div`
   text-align: center;
   display: flex;
   flex-direction: column;
-  @media (min-width: 1200px) {
+  @media (min-width: 668px) {
     flex-direction: row;
     justify-content: center;
   }
@@ -19,7 +19,7 @@ export const PlantfeedCardTwo = styled.div`
   text-align: center;
   display: flex;
   flex-direction: column;
-  @media (min-width: 1200px) {
+  @media (min-width: 668px) {
     flex-direction: row-reverse;
     justify-content: center;
   }
@@ -29,7 +29,7 @@ export const PlantfeedCardText = styled.p`
   text-align: center;
   font-size: 18px;
   margin: 0px;
-  @media (min-width: 1200px) {
+  @media (min-width: 668px) {
     width: 300px;
     margin-top: 220px;
     font-size: 20px;
@@ -39,7 +39,7 @@ export const PlantfeedCardText = styled.p`
 export const PlantLady = styled.img`
   width: 300px;
   margin: 0;
-  @media (min-width: 1200px) {
+  @media (min-width: 668px) {
     width: 500px;
   }
 `;
@@ -47,7 +47,7 @@ export const PlantLady = styled.img`
 export const PlantfeedCardTextBold = styled.span`
   font-weight: bold;
   font-size: 20px;
-  @media (min-width: 1200px) {
+  @media (min-width: 668px) {
     font-size: 22px;
   }
 `;

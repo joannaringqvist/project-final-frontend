@@ -2,13 +2,20 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import {AdvancedImage} from '@cloudinary/react';
-import {Cloudinary} from "@cloudinary/url-gen";
+import { AdvancedImage } from '@cloudinary/react';
+import { Cloudinary } from '@cloudinary/url-gen';
 
 import { API_URL } from 'utils/utils';
 import plants from 'reducers/plants';
 
-import { Formwrapper, InputWrapper } from './Styling/form_styles';
+import {
+  Formwrapper,
+  InputWrapper,
+  StyledBtn,
+  NameInput,
+  TextInput,
+  Dropdown,
+} from './Styling/form_styles';
 import gardenlady from './images/garden.png';
 import { AddPlantImg, Addwrapper } from './Styling/addplant_styles';
 
@@ -84,7 +91,6 @@ const AddNewPlantForm = (props) => {
       console.log('error', error);
       console.log('result', result);
       if (!error && result && result.event === 'success') {
-
         console.log('Done! Here is the image info: ', result.info);
         // secure_url: "https://res.cloudinary.com/garden-planner/image/upload/v1655400840/r8is30hgcaz1axpdzt0m.png"
         // path: "v1655400840/r8is30hgcaz1axpdzt0m.png"
@@ -102,7 +108,7 @@ const AddNewPlantForm = (props) => {
 
   const onClickUploadImage = () => {
     cldWidget.open();
-  }
+  };
 
   return (
     <>
@@ -110,7 +116,7 @@ const AddNewPlantForm = (props) => {
         <form onSubmit={onSaveNewPlantSubmit}>
           <label htmlFor='plantName'>Name of plant</label>
           <InputWrapper>
-            <input
+            <NameInput
               id='plantName'
               type='text'
               value={plantName}
@@ -119,7 +125,7 @@ const AddNewPlantForm = (props) => {
           </InputWrapper>
           <label htmlFor='plantType'>Type of plant</label>
           <InputWrapper>
-            <select
+            <Dropdown
               id='plantType'
               name='plant'
               value={plantType}
@@ -130,11 +136,11 @@ const AddNewPlantForm = (props) => {
               <option value='houseplant'>Houseplant</option>
               <option value='perennial'>Perennial</option>
               <option value='bush'>Bush</option>
-            </select>
+            </Dropdown>
           </InputWrapper>
           <label htmlFor='plantInformation'>Add more information</label>
           <InputWrapper>
-            <textarea
+            <TextInput
               id='plantInformation'
               value={plantInformation}
               onChange={handlePlantInformationChange}
@@ -157,10 +163,16 @@ const AddNewPlantForm = (props) => {
             />{' '}
             Outdoor
           </InputWrapper>
-          <p>ADD IMAGE</p>
-          <button type='button' id='upload_widget' onClick={onClickUploadImage}>Upload image</button>
-          <p>imageurl:  {imageUrl}</p>
-          <button type='submit'>Save plant</button>
+          <p>Add image of your plant:</p>
+          <StyledBtn
+            type='button'
+            id='upload_widget'
+            onClick={onClickUploadImage}
+          >
+            Upload image
+          </StyledBtn>
+          <p>{imageUrl}</p>
+          <StyledBtn type='submit'>Save plant</StyledBtn>
         </form>
         <AddPlantImg src={gardenlady}></AddPlantImg>
       </Addwrapper>
