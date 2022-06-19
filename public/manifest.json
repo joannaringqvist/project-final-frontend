@@ -1,7 +1,7 @@
 {
         "name": "Plantify",
         "short_name": "Plantify",
-        "theme_color": "#c9e4c5",
+        "theme_color": "#C9E4C5",
         "background_color": "#c9e4c5",
         "display": "standalone",
         "scope": "/",

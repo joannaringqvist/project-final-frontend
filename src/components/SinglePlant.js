@@ -19,6 +19,7 @@ import {
   PlantNameText,
   SingleButtonWrapper,
   SingleWrapper,
+  PlantImage,
 } from './Styling/singleplant_styles';
 import { StyledBtn, ButtonWrapper } from './Styling/plantfeed_styles';
 
@@ -122,7 +123,7 @@ const SinglePlant = () => {
         </CloudinaryContext> */}
         <SingleWrapper>
           <ImgContainer>
-            {plantInfo.imageUrl && <img src={plantInfo.imageUrl} />}
+            {plantInfo.imageUrl && <PlantImage src={plantInfo.imageUrl} />}
           </ImgContainer>
 
           <SingleTextContainer>

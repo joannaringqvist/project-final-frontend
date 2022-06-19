@@ -17,6 +17,13 @@ export const ImgContainer = styled.div`
   margin: 20px;
 `;
 
+export const PlantImage = styled.img`
+  height: 200px;
+  @media (min-width: 668px) {
+    height: 500px;
+  }
+`;
+
 export const SingleTextContainer = styled.div`
   margin: 20px;
   @media (min-width: 668px) {
