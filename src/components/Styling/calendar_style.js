@@ -21,6 +21,17 @@ export const AddEventWrapper = styled.div`
   flex-direction: column;
   text-align: center;
   align-items: center;
+  border-bottom: 2px solid #c1ac95;
+`;
+
+export const ButtonWrapper = styled.div`
+  border-bottom: 2px solid #c1ac95;
+  height: 120px;
+  display: flex;
+  align-items: center;
+  @media (min-width: 1200px) {
+    height: 150px;
+  }
 `;
 
 export const TitleText = styled.input`

@@ -11,6 +11,7 @@ import {
   PlantfeedCardTextBold,
   PlantLady,
   PlantfeedBtnWrapper,
+  PlantfeedBtnWrapperTwo,
 } from './Styling/profile_styling';
 import { StyledBtn } from './Styling/plantfeed_styles';
 import plantgirl from './images/girlplant.png';
@@ -35,9 +36,9 @@ const CalendarProfile = () => {
             planttasks yet. Don't you have something you need to do?
           </PlantfeedCardText>
         </PlantfeedCard>
-        <PlantfeedBtnWrapper>
+        <PlantfeedBtnWrapperTwo>
           <StyledBtn onClick={navigateCalendar}>Calendar</StyledBtn>
-        </PlantfeedBtnWrapper>
+        </PlantfeedBtnWrapperTwo>
       </>
     );
   } else {
@@ -51,9 +52,9 @@ const CalendarProfile = () => {
             planttasks to do! No time to loose!
           </PlantfeedCardText>
         </PlantfeedCardTwo>
-        <PlantfeedBtnWrapper>
+        <PlantfeedBtnWrapperTwo>
           <StyledBtn onClick={navigateCalendar}>Calendar</StyledBtn>
-        </PlantfeedBtnWrapper>
+        </PlantfeedBtnWrapperTwo>
       </>
     );
   }
