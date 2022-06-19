@@ -8,30 +8,19 @@ import Weather from './Weather';
 import Header from './Header';
 import PlantfeedProfile from './PlantfeedProfile';
 import CalendarProfile from './CalendarProfile';
-
-import { useDispatch } from 'react-redux';
+import Footer from './Footer';
+import { StyledBtn } from './Styling/plantfeed_styles';
+import { ProfileWrapper } from './Styling/profile_styling';
 
 const ProfilePage = () => {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-
   return (
-    <>
+    <ProfileWrapper>
       <Header />
 
       <Weather />
       <PlantfeedProfile />
       <CalendarProfile />
-      <button
-        type='button'
-        onClick={() => {
-          dispatch(user.actions.setAccessToken(null));
-          navigate('/login');
-        }}
-      >
-        Log out
-      </button>
-    </>
+    </ProfileWrapper>
   );
 };
 

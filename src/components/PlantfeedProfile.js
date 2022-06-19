@@ -5,8 +5,13 @@ import plants from 'reducers/plants';
 import {
   PlantfeedCard,
   PlantfeedCardText,
-  StyledBtn,
+  PlantLady,
+  PlantfeedCardTextBold,
+  PlantfeedBtnWrapper,
 } from './Styling/profile_styling';
+import plantlady from './images/plantlady.png';
+
+import { StyledBtn } from './Styling/plantfeed_styles';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -21,21 +26,34 @@ const PlantfeedProfile = () => {
 
   if (plantList.length === 0) {
     return (
-      <PlantfeedCard>
-        <PlantfeedCardText>
-          You have no plants yet! Go add some!
-        </PlantfeedCardText>
-        <button onClick={navigatePlantfeed}>Plantfeed</button>
-      </PlantfeedCard>
+      <>
+        <PlantfeedCard>
+          <PlantLady src={plantlady}></PlantLady>
+          <PlantfeedCardText>
+            You have <PlantfeedCardTextBold>no</PlantfeedCardTextBold> plants
+            yet. Go add some!
+          </PlantfeedCardText>
+        </PlantfeedCard>
+        <PlantfeedBtnWrapper>
+          <StyledBtn onClick={navigatePlantfeed}>Plantfeed</StyledBtn>
+        </PlantfeedBtnWrapper>
+      </>
     );
   } else {
     return (
-      <PlantfeedCard>
-        <PlantfeedCardText>
-          You have {plantList.length} plants! Take a look at them!
-        </PlantfeedCardText>
-        <button onClick={navigatePlantfeed}>Plantfeed</button>
-      </PlantfeedCard>
+      <>
+        <PlantfeedCard>
+          <PlantLady src={plantlady}></PlantLady>
+          <PlantfeedCardText>
+            You have{' '}
+            <PlantfeedCardTextBold>{plantList.length}</PlantfeedCardTextBold>{' '}
+            plants registered. Go take a look at your loved ones!
+          </PlantfeedCardText>
+        </PlantfeedCard>
+        <PlantfeedBtnWrapper>
+          <StyledBtn onClick={navigatePlantfeed}>Plantfeed</StyledBtn>
+        </PlantfeedBtnWrapper>
+      </>
     );
   }
 };

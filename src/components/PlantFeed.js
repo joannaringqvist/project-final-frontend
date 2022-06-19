@@ -1,15 +1,17 @@
 /* eslint-disable */
-import React, { useEffect, useState, useMemo } from 'react';
-import { useDispatch, useSelector, batch } from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, Link } from 'react-router-dom';
 import moment from 'moment';
 import SlidingPane from 'react-sliding-pane';
 import 'react-sliding-pane/dist/react-sliding-pane.css';
 
+import arrow from './images/arrow.png';
+
 import { API_URL } from 'utils/utils';
-import { PlantWrapper } from './plantfeed_styles';
 import Navbar from './reusable-components/Navbar';
 import {
+  PlantWrapper,
   DeleteButton,
   DeleteIcon,
   PlantName,
@@ -17,11 +19,21 @@ import {
   PlantsLength,
   PlantsLengthWrapper,
   FilterWrapper,
-  AddBtn,
+  StyledBtnAdd,
   ButtonWrapper,
+  PlantFeedWrapper,
+  PlantBtnText,
+  StyledDeleteBtn,
+  ArrowImg,
+  StyledBtn,
+  PlantCardWrapper,
+  AddWrapper,
+  AddImg,
 } from './Styling/plantfeed_styles';
-import deleteicon from './images/deleteicon.png';
+
+import deleteicon from './images/delete.svg';
 import AddNewPlant from './AddNewPlantForm';
+import addicon from './images/plus.svg';
 
 import plants from 'reducers/plants';
 import { ui } from 'reducers/ui';
@@ -42,19 +54,13 @@ const PlantFeed = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  const toProfile = () => {
+    navigate('/profile');
+  };
+
   if (!accessToken) {
     navigate('/login');
   }
-
-  const openModal = () => {
-    setIsOpen(true);
-  };
-
-  const afterOpenModal = () => {};
-
-  const closeModal = () => {
-    setIsOpen(false);
-  };
 
   useEffect(() => {
     const options = {
@@ -110,11 +116,16 @@ const PlantFeed = () => {
 
   return (
     isLoading === false && (
-      <>
+      <PlantFeedWrapper>
         <ButtonWrapper>
-          <AddBtn onClick={() => setState({ isPaneOpen: true })}>
-            Add plant!
-          </AddBtn>
+          <StyledBtn onClick={toProfile}>Back</StyledBtn>
+          <AddWrapper>
+            {/*<PlantBtnText>Add plants</PlantBtnText>
+            <ArrowImg src={arrow}></ArrowImg>*/}
+            <StyledBtnAdd onClick={() => setState({ isPaneOpen: true })}>
+              <AddImg src={addicon}></AddImg>
+            </StyledBtnAdd>
+          </AddWrapper>
         </ButtonWrapper>
         <FilterWrapper>
           <div className='filter-container'>
@@ -137,7 +148,7 @@ const PlantFeed = () => {
         </FilterWrapper>
         <section>
           {filteredList.map((plant) => (
-            <>
+            <PlantCardWrapper>
               <PlantWrapper key={plant._id}>
                 <Link
                   style={{ textDecoration: 'none' }}
@@ -147,16 +158,16 @@ const PlantFeed = () => {
                   <PlantName>{plant.plantName}</PlantName>
                 </Link>
                 <PlantAdd>{moment(plant.createdAt).fromNow()}</PlantAdd>
-                <DeleteButton onClick={() => deleteOnePlant(plant._id)}>
-                  <DeleteIcon src={deleteicon} />
-                </DeleteButton>
+                <StyledDeleteBtn onClick={() => deleteOnePlant(plant._id)}>
+                  <img src={deleteicon}></img>
+                </StyledDeleteBtn>
               </PlantWrapper>
-            </>
+            </PlantCardWrapper>
           ))}
           <PlantsLengthWrapper>
             <PlantsLength>
               {plantsList.length === 0 &&
-                "You have no plants yet! Let's add some plants!"}
+                "You have no plants yet. Let's add some plants!"}
               {plantsList.length > 0 &&
                 `You have ${plantsList.length} plants registered.`}
             </PlantsLength>
@@ -171,11 +182,11 @@ const PlantFeed = () => {
                 setState({ isPaneOpen: false });
               }}
             >
-              <AddNewPlant closePane={() => { setState({isPaneOpen: false}); }} />
+              <AddNewPlant />
             </SlidingPane>
           </div>
         </section>
-      </>
+      </PlantFeedWrapper>
     )
   );
 };

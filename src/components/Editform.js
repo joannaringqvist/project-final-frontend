@@ -4,8 +4,11 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { API_URL } from 'utils/utils';
 import { Formwrapper, InputWrapper } from './Styling/form_styles';
+import { StyledBtn } from './Styling/plantfeed_styles';
+import swal from 'sweetalert';
 
 import plants from 'reducers/plants';
+import { th } from 'date-fns/locale';
 
 const Editform = (props) => {
   const plantsList = useSelector((store) => store.plants.plants);
@@ -20,9 +23,11 @@ const Editform = (props) => {
 
   const [plantName, setPlantName] = useState(currentPlant.plantName);
   const [plantType, setPlantType] = useState(currentPlant.plantType);
-  const [plantInformation, setplantInformation] = useState(currentPlant.plantInformation);
+  const [plantInformation, setplantInformation] = useState(
+    currentPlant.plantInformation
+  );
   const [imageUrl, setImageUrl] = useState(currentPlant.imageUrl);
-
+  const [thumbnailUrl, setThumbnailUrl] = useState(currentPlant.thumbnailUrl);
 
   const handleEditNameChange = (event) => {
     setPlantName(event.target.value);
@@ -37,8 +42,6 @@ const Editform = (props) => {
     setImageUrl(event.target.value);
   };
 
-  
-
   const onEditPlantSubmit = (event) => {
     event.preventDefault();
     fetch(API_URL(`plant/${plantId}/updated`), {
@@ -46,30 +49,38 @@ const Editform = (props) => {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ plantName, plantType, plantInformation, imageUrl }),
+      body: JSON.stringify({
+        plantName,
+        plantType,
+        plantInformation,
+        imageUrl,
+        thumbnailUrl,
+      }),
     })
       .then((res) => res.json())
       .then((data) => {
         //props.setEditPlant(false);
         //handleEditImageUrlChange;
         dispatch(plants.actions.updatePlant(data.response));
-        props.closePane(); 
+        swal({ text: 'Your plant is updated!', icon: 'success' });
+        props.closePane();
       });
-
   };
 
   const onBackButtonClick = () => {
-    navigate(`/plants/plant/${plantId}`);
+    props.closePane();
+    //navigate(`/plants/plant/${plantId}`);
   };
 
   const cldWidget = cloudinary.createUploadWidget(
     {
       cloudName: 'garden-planner',
-      uploadPreset: 'garden-planner-preset'
-    }, (error, result) => {
+      uploadPreset: 'garden-planner-preset',
+    },
+    (error, result) => {
       console.log('error', error);
       console.log('result', result);
-      if (!error && result && result.event === "success") { 
+      if (!error && result && result.event === 'success') {
         console.log('Done! Here is the image info: ', result.info);
         // secure_url: "https://res.cloudinary.com/garden-planner/image/upload/v1655400840/r8is30hgcaz1axpdzt0m.png"
         // path: "v1655400840/r8is30hgcaz1axpdzt0m.png"
@@ -83,6 +94,7 @@ const Editform = (props) => {
 
 
         setImageUrl(imageUrl);
+        setThumbnailUrl(thumbnailUrl);
 
       }
     }
@@ -90,18 +102,15 @@ const Editform = (props) => {
 
   const onClickUploadImage = () => {
     cldWidget.open();
-  }
+  };
 
   const onClickDeleteImage = () => {
     console.log('delete image');
-  }
-
-
-
+  };
 
   return (
     <>
-      <h1>Edit plant</h1>
+      <h1>Edit your plant</h1>
       <Formwrapper>
         <form onSubmit={onEditPlantSubmit}>
           <label htmlFor='plantName'>Name of plant</label>
@@ -138,15 +147,14 @@ const Editform = (props) => {
             />
           </InputWrapper>
 
-          <button type='button' id='upload_widget' onClick={onClickUploadImage}>Edit image</button>
-          {/* Put image thumbnail here? */}
-          {/* <p>{thumbnailUrl}</p> */}
-          <button type='button' onClick={onClickDeleteImage}>Delete image</button>
+          <button type='button' id='upload_widget' onClick={onClickUploadImage}>
+            Edit image
+          </button>
+          <img src={thumbnailUrl} />
+          {/* <button type='button' onClick={onClickDeleteImage}>Delete image</button> */}
           <button type='submit'>Save plant</button>
           <button onClick={onBackButtonClick}>BACK</button>
           {/* <button onClick={() => setState({ isPaneOpen: false })}>BACK</button> */}
-
-
         </form>
       </Formwrapper>
     </>

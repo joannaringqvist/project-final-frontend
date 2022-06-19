@@ -10,8 +10,22 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { useDispatch, useSelector } from 'react-redux';
 import moment from 'moment';
+import { useNavigate } from 'react-router-dom';
+import SlidingPane from 'react-sliding-pane';
+import plant from './images/pearls.png';
 
 import { API_URL } from 'utils/utils';
+import {
+  AddEventWrapper,
+  TitleText,
+  CalendarHead,
+  CalendarEdit,
+  CalendarImg,
+  DateText,
+  DeleteWrapper,
+  ButtonWrapper,
+} from './Styling/calendar_style';
+import { StyledBtn } from './Styling/plantfeed_styles';
 
 import { ui } from 'reducers/ui';
 import eventTodos from 'reducers/events';
@@ -31,13 +45,22 @@ const events = [{}];
 
 const PlantCalendar = () => {
   const [newEvent, setNewEvent] = useState({ title: '', start: '', end: '' });
-  const [eventTitle, setEventTitle] = useState('');
-  const [startDate, setStartDate] = useState(new Date());
-  const [endDate, setEndDate] = useState(new Date());
-  const [allEvents, setAllEvents] = useState(events);
+  const [isShown, setIsShown] = useState(false);
+  const [state, setState] = useState({
+    isPaneOpen: false,
+  });
+
   const eventsList = useSelector((store) => store.eventTodos.events);
+  const [allEvents, setAllEvents] = useState([]);
   const accessToken = useSelector((store) => store.user.accessToken);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const date = moment().format('MMMM Do');
+  const weekday = moment().format('dddd');
+
+  const backToProfile = () => {
+    navigate('/profile');
+  };
 
   useEffect(() => {
     const options = {
@@ -74,6 +97,7 @@ const PlantCalendar = () => {
       .then((data) => {
         dispatch(eventTodos.actions.addEvent(data.response));
         setAllEvents([...allEvents, newEvent]);
+        console.log(allEvents);
       });
   };
 
@@ -87,47 +111,100 @@ const PlantCalendar = () => {
       });
   };
 
-  const onSelectSlot = () => {
-    console.log('day selected');
+  const events = eventsList.map(
+    (event) =>
+      (event = {
+        title: event.eventTitle,
+        start: moment(event.startDate).toDate(),
+        end: moment(event.endDate).toDate(),
+      })
+  );
+
+  const eventStyleGetter = (newEvent) => {
+    let style = {
+      backgroundColor: '#C1AC95',
+      border: 'white',
+    };
+    return {
+      style: style,
+    };
+  };
+
+  const dayStyleGetter = (newEvent) => {
+    let style = {
+      backgroundColor: '#FAEBE0',
+      border: 'white',
+    };
+    return {
+      style: style,
+    };
+  };
+
+  const selectedEvent = () => {
+    setIsShown((current) => !current);
   };
 
   return (
     <div className='App'>
-      <h1>Calendar</h1>
-      <h2>Add New Event</h2>
-      <div>
-        <input
+      <ButtonWrapper>
+        <StyledBtn onClick={backToProfile}>Back</StyledBtn>
+      </ButtonWrapper>
+      <AddEventWrapper>
+        <h1>Your calendar</h1>
+        <DateText>{date}</DateText>
+        <DateText> {weekday}</DateText>
+        <CalendarImg src={plant}></CalendarImg>
+        <TitleText
           type='text'
-          placeholder='Add Title'
-          style={{ width: '20%', marginRight: '10px' }}
+          placeholder='Add your planttask'
           value={newEvent.title}
           onChange={(e) => setNewEvent({ ...newEvent, title: e.target.value })}
         />
         <DatePicker
           placeholderText='Start Date'
-          style={{ marginRight: '10px' }}
+          style={{ margin: '10px' }}
           selected={newEvent.start}
           onChange={(start) => setNewEvent({ ...newEvent, start })}
         />
         <DatePicker
+          style={{ margin: '10px' }}
           placeholderText='End Date'
           selected={newEvent.end}
           onChange={(end) => setNewEvent({ ...newEvent, end })}
         />
-        <button style={{ marginTop: '10px' }} onClick={handleAddEvent}>
+        <StyledBtn style={{ marginTop: '10px' }} onClick={handleAddEvent}>
           Add Event
-        </button>
-      </div>
+        </StyledBtn>
+      </AddEventWrapper>
+      {eventsList.map((event) => (
+        <div key={event._id}>
+          {isShown && (
+            <DeleteWrapper>
+              <StyledBtn onClick={() => deleteEvent(event._id)}>
+                Delete event
+              </StyledBtn>
+            </DeleteWrapper>
+          )}
+        </div>
+      ))}
+
       <Calendar
-        onSelectSlot={onSelectSlot}
-        onDrillDown={onSelectSlot}
         localizer={localizer}
-        events={allEvents}
+        events={events}
         startAccessor='start'
         endAccessor='end'
-        style={{ height: 500, margin: '50px' }}
+        style={{
+          height: 500,
+          margin: '50px',
+          position: 'relative',
+          fontFamily: 'Lora, serif',
+        }}
+        eventPropGetter={eventStyleGetter}
+        dayPropGetter={dayStyleGetter}
+        onSelectEvent={() => selectedEvent()}
       />
-      {eventsList.map((event) => (
+
+      {/*{eventsList.map((event) => (
         <div key={event._id}>
           <p>{event.eventTitle}</p>
           <p> {moment(event.startDate).format('MMM Do YY')}</p>
@@ -135,6 +212,21 @@ const PlantCalendar = () => {
           <button onClick={() => deleteEvent(event._id)}>DELETE EVENT</button>
         </div>
       ))}
+      <SlidingPane
+        style={{}}
+        className='some-custom-class'
+        overlayClassName='some-custom-overlay-class'
+        isOpen={state.isPaneOpen}
+        hideHeader
+        onRequestClose={() => {
+          setState({ isPaneOpen: false });
+        }}
+      >
+        <CalendarEdit>
+          <p>Hello!</p>
+        </CalendarEdit>
+      </SlidingPane>*/}
+      <div></div>
     </div>
   );
 };

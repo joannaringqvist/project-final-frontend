@@ -9,9 +9,11 @@ import { API_URL } from 'utils/utils';
 import plants from 'reducers/plants';
 
 import { Formwrapper, InputWrapper } from './Styling/form_styles';
-import Navbar from './reusable-components/Navbar';
+import gardenlady from './images/garden.png';
+import { AddPlantImg, Addwrapper } from './Styling/addplant_styles';
 
 import swal from 'sweetalert';
+import { th } from 'date-fns/locale';
 
 const AddNewPlantForm = (props) => {
   const [plantName, setPlantName] = useState('');
@@ -19,6 +21,8 @@ const AddNewPlantForm = (props) => {
   const [plantInformation, setPlantInformation] = useState('');
   const [indoorOrOutdoor, setIndoorOrOutdoor] = useState('');
   const [imageUrl, setImageUrl] = useState('');
+  const [thumbnailUrl, setThumbnailUrl] = useState('');
+
   const accessToken = useSelector((store) => store.user.accessToken);
   const navigate = useNavigate();
 
@@ -63,6 +67,7 @@ const AddNewPlantForm = (props) => {
         plantInformation,
         indoorOrOutdoor,
         imageUrl,
+        thumbnailUrl
       }),
     })
       .then((res) => res.json())
@@ -77,11 +82,13 @@ const AddNewPlantForm = (props) => {
   const cldWidget = cloudinary.createUploadWidget(
     {
       cloudName: 'garden-planner',
-      uploadPreset: 'garden-planner-preset'
-    }, (error, result) => {
+      uploadPreset: 'garden-planner-preset',
+    },
+    (error, result) => {
       console.log('error', error);
       console.log('result', result);
-      if (!error && result && result.event === "success") { 
+      if (!error && result && result.event === 'success') {
+
         console.log('Done! Here is the image info: ', result.info);
         // secure_url: "https://res.cloudinary.com/garden-planner/image/upload/v1655400840/r8is30hgcaz1axpdzt0m.png"
         // path: "v1655400840/r8is30hgcaz1axpdzt0m.png"
@@ -90,9 +97,9 @@ const AddNewPlantForm = (props) => {
 
         const imageUrl = result.info.secure_url;
         const thumbnailUrl = result.info.thumbnail_url;
-        console.log('imageUrl, thumbnailUrl', imageUrl, thumbnailUrl);
-
         setImageUrl(imageUrl);
+        setThumbnailUrl(thumbnailUrl);
+        
       }
     }
   );
@@ -103,7 +110,7 @@ const AddNewPlantForm = (props) => {
 
   return (
     <>
-      <Formwrapper>
+      <Addwrapper>
         <form onSubmit={onSaveNewPlantSubmit}>
           <label htmlFor='plantName'>Name of plant</label>
           <InputWrapper>
@@ -156,10 +163,10 @@ const AddNewPlantForm = (props) => {
           </InputWrapper>
           <p>ADD IMAGE</p>
           <button type='button' id='upload_widget' onClick={onClickUploadImage}>Upload image</button>
-          <p>imageurl:  {imageUrl}</p>
           <button type='submit'>Save plant</button>
         </form>
-      </Formwrapper>
+        <AddPlantImg src={gardenlady}></AddPlantImg>
+      </Addwrapper>
     </>
   );
 };

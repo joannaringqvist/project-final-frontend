@@ -10,18 +10,26 @@ export const WeatherWrapper = styled.div`
 `;
 
 export const Temp = styled.h1`
-  font-size: 40px;
+  font-size: 45px;
   padding-right: 10px;
 `;
 
-export const City = styled.p``;
+export const City = styled.p`
+  font-style: italic;
+  margin: 3px;
+`;
 
 export const WeatherType = styled.p`
   text-align: center;
+  font-size: 18px;
+  margin: 0px 20px 0px 20px;
 `;
 
 export const WeatherIcon = styled.img``;
 
-export const WeatherKind = styled.p``;
+export const WeatherKind = styled.p`
+  font-size: 22px;
+  margin: 3px;
+`;
 
 export const CityWrapper = styled.div``;
