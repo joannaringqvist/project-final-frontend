@@ -2,6 +2,15 @@
 import React from 'react';
 import styled from 'styled-components';
 
+export const SingleWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  @media (min-width: 668px) {
+    flex-direction: row-reverse;
+    justify-content: center;
+  }
+`;
+
 export const ImgContainer = styled.div`
   display: flex;
   justify-content: center;
@@ -10,6 +19,12 @@ export const ImgContainer = styled.div`
 
 export const SingleTextContainer = styled.div`
   margin: 20px;
+  @media (min-width: 668px) {
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+  }
 `;
 
 export const SingleTextDiv = styled.div`

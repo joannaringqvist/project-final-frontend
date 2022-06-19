@@ -18,8 +18,9 @@ import {
   PlantText,
   PlantNameText,
   SingleButtonWrapper,
+  SingleWrapper,
 } from './Styling/singleplant_styles';
-import { StyledBtn } from './Styling/plantfeed_styles';
+import { StyledBtn, ButtonWrapper } from './Styling/plantfeed_styles';
 
 import plants from 'reducers/plants';
 import { ui } from 'reducers/ui';
@@ -103,6 +104,9 @@ const SinglePlant = () => {
   return (
     isLoading === false && (
       <>
+        <ButtonWrapper>
+          <StyledBtn onClick={onBackButtonClick}>Back</StyledBtn>
+        </ButtonWrapper>
         {/* <ImgContainer>
           <AdvancedImage
             cldImg={myImage}
@@ -116,29 +120,32 @@ const SinglePlant = () => {
         </div>
           <Image publicId="cld-sample-5" width="0.5" />
         </CloudinaryContext> */}
+        <SingleWrapper>
+          <ImgContainer>
+            {plantInfo.imageUrl && <img src={plantInfo.imageUrl} />}
+          </ImgContainer>
 
-        <ImgContainer>{plantInfo.imageUrl && <img src={plantInfo.imageUrl} />}</ImgContainer>
+          <SingleTextContainer>
+            <SingleTextDiv>
+              <PlantText>Plantname:</PlantText>
+              <PlantNameText> {plantInfo.plantName}</PlantNameText>
+            </SingleTextDiv>
 
-        <SingleTextContainer>
-          <SingleTextDiv>
-            <PlantText>Plantname:</PlantText>
-            <PlantNameText> {plantInfo.plantName}</PlantNameText>
-          </SingleTextDiv>
+            <SingleTextDiv>
+              <PlantText>Type of plant:</PlantText>
+              <span> {plantInfo.plantType}</span>
+            </SingleTextDiv>
 
-          <SingleTextDiv>
-            <PlantText>Type of plant:</PlantText>
-            <span> {plantInfo.plantType}</span>
-          </SingleTextDiv>
-
-          <SingleTextDiv>
-            <PlantText>Indoor our outdoor?</PlantText>
-            <span> {plantInfo.indoorOrOutdoor}</span>
-          </SingleTextDiv>
-          <PlantText>More information about plant:</PlantText>
-          <p>{plantInfo.plantInformation}</p>
-          <PlantText>Created at:</PlantText>
-          <span> {moment(plantInfo.createdAt).fromNow()}</span>
-        </SingleTextContainer>
+            <SingleTextDiv>
+              <PlantText>Indoor our outdoor?</PlantText>
+              <span> {plantInfo.indoorOrOutdoor}</span>
+            </SingleTextDiv>
+            <PlantText>More information about plant:</PlantText>
+            <p>{plantInfo.plantInformation}</p>
+            <PlantText>Created at:</PlantText>
+            <span> {moment(plantInfo.createdAt).fromNow()}</span>
+          </SingleTextContainer>
+        </SingleWrapper>
         {/*<CheckboxLabel>git branch
           Favourite
           <HiddenCheck
@@ -151,8 +158,6 @@ const SinglePlant = () => {
           ></HiddenCheck>
           <CheckboxContainer></CheckboxContainer>
     </CheckboxLabel>*/}
-        
-
 
         <SingleButtonWrapper>
           <StyledBtn onClick={onBackButtonClick}>BACK</StyledBtn>

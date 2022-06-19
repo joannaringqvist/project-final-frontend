@@ -6,7 +6,14 @@ import { useNavigate } from 'react-router-dom';
 import { API_URL } from 'utils/utils';
 import plants from 'reducers/plants';
 
-import { Formwrapper, InputWrapper } from './Styling/form_styles';
+import {
+  Formwrapper,
+  InputWrapper,
+  StyledBtn,
+  NameInput,
+  TextInput,
+  Dropdown,
+} from './Styling/form_styles';
 import gardenlady from './images/garden.png';
 import { AddPlantImg, Addwrapper } from './Styling/addplant_styles';
 
@@ -65,7 +72,7 @@ const AddNewPlantForm = (props) => {
         plantInformation,
         indoorOrOutdoor,
         imageUrl,
-        thumbnailUrl
+        thumbnailUrl,
       }),
     })
       .then((res) => res.json())
@@ -77,28 +84,25 @@ const AddNewPlantForm = (props) => {
       });
   };
 
-  const [uploadedImage, setUploadedImage] = useState("");
+  const [uploadedImage, setUploadedImage] = useState('');
   const uploadImage = (e) => {
     e.preventDefault();
     const data = new FormData();
     data.append('file', uploadedImage);
     data.append('upload_preset', 'garden-planner-preset');
     data.append('cloud_name', 'garden-planner');
-    fetch(
-      'https://api.cloudinary.com/v1_1/garden-planner/image/upload',
-      {
-        method: 'post',
-        body: data
-      }
-    )
-    .then((res) => res.json())
-    .then((data) => {
-      console.log('data', data);
-      console.log(data.secure_url)
-      setImageUrl(data.secure_url);
-      //setThumbnailUrl(data.thumbnail_url);
+    fetch('https://api.cloudinary.com/v1_1/garden-planner/image/upload', {
+      method: 'post',
+      body: data,
     })
-    .catch((err) => console.log(err));  
+      .then((res) => res.json())
+      .then((data) => {
+        console.log('data', data);
+        console.log(data.secure_url);
+        setImageUrl(data.secure_url);
+        //setThumbnailUrl(data.thumbnail_url);
+      })
+      .catch((err) => console.log(err));
   };
 
   return (
@@ -107,7 +111,7 @@ const AddNewPlantForm = (props) => {
         <form onSubmit={onSaveNewPlantSubmit}>
           <label htmlFor='plantName'>Name of plant</label>
           <InputWrapper>
-            <input
+            <NameInput
               id='plantName'
               type='text'
               value={plantName}
@@ -116,7 +120,7 @@ const AddNewPlantForm = (props) => {
           </InputWrapper>
           <label htmlFor='plantType'>Type of plant</label>
           <InputWrapper>
-            <select
+            <Dropdown
               id='plantType'
               name='plant'
               value={plantType}
@@ -127,11 +131,11 @@ const AddNewPlantForm = (props) => {
               <option value='houseplant'>Houseplant</option>
               <option value='perennial'>Perennial</option>
               <option value='bush'>Bush</option>
-            </select>
+            </Dropdown>
           </InputWrapper>
           <label htmlFor='plantInformation'>Add more information</label>
           <InputWrapper>
-            <textarea
+            <TextInput
               id='plantInformation'
               value={plantInformation}
               onChange={handlePlantInformationChange}
@@ -155,9 +159,12 @@ const AddNewPlantForm = (props) => {
             Outdoor
           </InputWrapper>
           <p>ADD IMAGE</p>
-          <input type="file" onChange={(e) => setUploadedImage(e.target.files[0])} />
+          <input
+            type='file'
+            onChange={(e) => setUploadedImage(e.target.files[0])}
+          />
           <button onClick={uploadImage}>Upload image</button>
-          {imageUrl && <img src={imageUrl} width="300" />}
+          {imageUrl && <img src={imageUrl} width='300' />}
           <button type='submit'>Save plant</button>
         </form>
         <AddPlantImg src={gardenlady}></AddPlantImg>

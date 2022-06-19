@@ -16,6 +16,7 @@ import {
   LoginText,
   LogoWrapper,
   LogoText,
+  ErrorMessage,
 } from './Styling/form_styles';
 import { StyledBtn } from './Styling/plantfeed_styles';
 import planticon from './images/plant.png';
@@ -80,7 +81,7 @@ const Login = () => {
         <LogoText>Already a friend?</LogoText>
         <PlantPic src={seeding}></PlantPic>
 
-        {errorMessage && <p>{errorMessage}</p>}
+        {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
         <form onSubmit={onLoginFormSubmit}>
           <Label htmlFor='username'>Username</Label>
           <InputWrapper>

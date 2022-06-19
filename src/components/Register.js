@@ -15,6 +15,7 @@ import {
   LoginButton,
   LoginText,
   PlantPic,
+  ErrorMessage,
 } from './Styling/form_styles';
 import Login from './Login';
 
@@ -82,7 +83,7 @@ const Register = () => {
     <Formwrapper>
       <h1>Become our friend!</h1>
       <PlantPic src={seeding}></PlantPic>
-      {errorMessage && <p>{errorMessage}</p>}
+      {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
       <form onSubmit={onRegisterFormSubmit}>
         <label htmlFor='username'>Username</label>
         <InputWrapper>

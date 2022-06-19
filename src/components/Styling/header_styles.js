@@ -7,20 +7,20 @@ export const HeaderWrapper = styled.div`
   justify-content: space-between;
   border-bottom: 2px solid #c1ac95;
   background-color: #c9e4c5;
-  @media (min-width: 1200px) {
+  @media (min-width: 668px) {
     height: 150px;
   }
 `;
 
 export const WelcomeUser = styled.h1`
   margin: 15px 0px 0px 15px;
-  @media (min-width: 1200px) {
+  @media (min-width: 668px) {
   }
 `;
 
 export const DateText = styled.p`
   margin: 15px;
-  @media (min-width: 1200px) {
+  @media (min-width: 668px) {
     font-size: 20px;
   }
 `;
@@ -39,7 +39,7 @@ export const HeaderBtn = styled.button`
   &:hover {
     transform: scale(1.2);
   }
-  @media (min-width: 1200px) {
+  @media (min-width: 668px) {
     width: 200px;
     font-size: 20px;
   }

@@ -29,13 +29,13 @@ const CalendarProfile = () => {
   if (eventsList.length === 0) {
     return (
       <>
-        <PlantfeedCard>
+        <PlantfeedCardTwo>
           <PlantLady src={plantgirl}></PlantLady>
           <PlantfeedCardText>
             You don't have <PlantfeedCardTextBold>any</PlantfeedCardTextBold>{' '}
             planttasks yet. Don't you have something you need to do?
           </PlantfeedCardText>
-        </PlantfeedCard>
+        </PlantfeedCardTwo>
         <PlantfeedBtnWrapperTwo>
           <StyledBtn onClick={navigateCalendar}>Calendar</StyledBtn>
         </PlantfeedBtnWrapperTwo>

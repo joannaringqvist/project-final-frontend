@@ -36,6 +36,9 @@ export const ButtonWrapper = styled.div`
 
 export const TitleText = styled.input`
   margin: 10px;
+  border-radius: 10px;
+  border: 1px solid black;
+  font-family: 'Montserrat', sans-serif;
 `;
 
 export const DateText = styled.p`

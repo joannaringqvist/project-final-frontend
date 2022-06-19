@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 export const PlantFeedWrapper = styled.div`
   border-bottom: 2px solid #c1ac95;
-  @media (min-width: 1200px) {
+  @media (min-width: 668px) {
   }
 `;
 
@@ -55,12 +55,16 @@ export const PlantBtnText = styled.p``;
 
 export const PlantsLengthWrapper = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: center;
 `;
 
 export const PlantsLength = styled.p`
   font-size: 18px;
   text-align: center;
+  @media (min-width: 668px) {
+    font-size: 20px;
+  }
 `;
 
 export const FilterWrapper = styled.div`
@@ -74,7 +78,7 @@ export const ButtonWrapper = styled.div`
   justify-content: space-between;
   border-bottom: 2px solid #c1ac95;
   height: 120px;
-  @media (min-width: 1200px) {
+  @media (min-width: 668px) {
     height: 150px;
   }
 `;
@@ -94,7 +98,7 @@ export const StyledBtn = styled.button`
   &:hover {
     transform: scale(1.2);
   }
-  @media (min-width: 1200px) {
+  @media (min-width: 668px) {
     width: 200px;
     font-size: 20px;
   }
@@ -133,7 +137,7 @@ export const StyledBtnAdd = styled.button`
   &:hover {
     transform: scale(1.2);
   }
-  @media (min-width: 1200px) {
+  @media (min-width: 668px) {
     height: 80px;
     width: 80px;
   }
@@ -141,11 +145,56 @@ export const StyledBtnAdd = styled.button`
 
 export const AddImg = styled.img`
   height: 50px;
-  @media (min-width: 1200px) {
+  @media (min-width: 668px) {
     height: 60px;
   }
 `;
 
 export const ArrowImg = styled.img`
   height: 100px;
+`;
+
+export const FavouriteStar = styled.img`
+  height: 25px;
+`;
+
+export const ButtonCheckbox = styled.input.attrs({ type: 'checkbox' })`
+  height: 32px;
+  width: 40px;
+  cursor: pointer;
+  position: absolute;
+  opacity: 0;
+`;
+
+export const CheckboxContainer = styled.span`
+  display: flex;
+  width: 50%;
+  height: 32px;
+  border-radius: 32px;
+  background-color: rgb(250, 235, 224);
+  position: absolute;
+  z-index: -1;
+
+  ${ButtonCheckbox}:checked + && {
+    background-color: #d57e7e;
+  }
+`;
+
+export const CheckBoxLabel = styled.label`
+  min-width: 70px;
+  height: 32px;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: center;
+  font-weight: 300;
+  color: var(--grey-600);
+  transition: 0.2s;
+  font-size: 14px;
+  font-weight: 400;
+  position: relative;
+  padding: 0 1rem;
+  z-index: 2;
 `;
