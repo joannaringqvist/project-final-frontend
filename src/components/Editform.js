@@ -38,9 +38,6 @@ const Editform = (props) => {
   const handleEditInformationChange = (event) => {
     setplantInformation(event.target.value);
   };
-  const handleEditImageUrlChange = (event) => {
-    setImageUrl(event.target.value);
-  };
 
   const onEditPlantSubmit = (event) => {
     event.preventDefault();
@@ -72,44 +69,33 @@ const Editform = (props) => {
     //navigate(`/plants/plant/${plantId}`);
   };
 
-  const cldWidget = cloudinary.createUploadWidget(
-    {
-      cloudName: 'garden-planner',
-      uploadPreset: 'garden-planner-preset',
-    },
-    (error, result) => {
-      console.log('error', error);
-      console.log('result', result);
-      if (!error && result && result.event === 'success') {
-        console.log('Done! Here is the image info: ', result.info);
-        // secure_url: "https://res.cloudinary.com/garden-planner/image/upload/v1655400840/r8is30hgcaz1axpdzt0m.png"
-        // path: "v1655400840/r8is30hgcaz1axpdzt0m.png"
-        // public_id: "r8is30hgcaz1axpdzt0m"
-        // thumbnail_url: "https://res.cloudinary.com/garden-planner/image/upload/c_limit,h_60,w_90/v1655400840/r8is30hgcaz1axpdzt0m.png"
-
-        const imageUrl = result.info.secure_url;
-        const thumbnailUrl = result.info.thumbnail_url;
-        console.log('imageUrl', imageUrl);
-        console.log('thumb', thumbnailUrl);
-
-
-        setImageUrl(imageUrl);
-        setThumbnailUrl(thumbnailUrl);
-
+  const [uploadedImage, setUploadedImage] = useState("");
+  const uploadImage = (e) => {
+    e.preventDefault();
+    const data = new FormData();
+    data.append('file', uploadedImage);
+    data.append('upload_preset', 'garden-planner-preset');
+    data.append('cloud_name', 'garden-planner');
+    fetch(
+      'https://api.cloudinary.com/v1_1/garden-planner/image/upload',
+      {
+        method: 'post',
+        body: data
       }
-    }
-  );
-
-  const onClickUploadImage = () => {
-    cldWidget.open();
-  };
-
-  const onClickDeleteImage = () => {
-    console.log('delete image');
+    )
+    .then((res) => res.json())
+    .then((data) => {
+      console.log('data', data);
+      console.log(data.secure_url)
+      setImageUrl(data.secure_url);
+      //setThumbnailUrl(data.thumbnail_url);
+    })
+    .catch((err) => console.log(err));  
   };
 
   return (
     <>
+      <p>{imageUrl}</p>
       <h1>Edit your plant</h1>
       <Formwrapper>
         <form onSubmit={onEditPlantSubmit}>
@@ -147,14 +133,17 @@ const Editform = (props) => {
             />
           </InputWrapper>
 
-          <button type='button' id='upload_widget' onClick={onClickUploadImage}>
-            Edit image
-          </button>
           <img src={thumbnailUrl} />
           {/* <button type='button' onClick={onClickDeleteImage}>Delete image</button> */}
           <button type='submit'>Save plant</button>
           <button onClick={onBackButtonClick}>BACK</button>
-          {/* <button onClick={() => setState({ isPaneOpen: false })}>BACK</button> */}
+
+          <input type="file" onChange={(e) => setUploadedImage(e.target.files[0])} />
+          {/* Disable upload button until image is chosen */}
+          <button onClick={uploadImage}>Upload</button>
+          <p>Uploaded image: {imageUrl}</p>
+          <p>Thumbnail image: {thumbnailUrl}</p>
+        
         </form>
       </Formwrapper>
     </>

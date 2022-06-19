@@ -2,8 +2,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import {AdvancedImage} from '@cloudinary/react';
-import {Cloudinary} from "@cloudinary/url-gen";
 
 import { API_URL } from 'utils/utils';
 import plants from 'reducers/plants';
@@ -79,34 +77,29 @@ const AddNewPlantForm = (props) => {
       });
   };
 
-  const cldWidget = cloudinary.createUploadWidget(
-    {
-      cloudName: 'garden-planner',
-      uploadPreset: 'garden-planner-preset',
-    },
-    (error, result) => {
-      console.log('error', error);
-      console.log('result', result);
-      if (!error && result && result.event === 'success') {
-
-        console.log('Done! Here is the image info: ', result.info);
-        // secure_url: "https://res.cloudinary.com/garden-planner/image/upload/v1655400840/r8is30hgcaz1axpdzt0m.png"
-        // path: "v1655400840/r8is30hgcaz1axpdzt0m.png"
-        // public_id: "r8is30hgcaz1axpdzt0m"
-        // thumbnail_url: "https://res.cloudinary.com/garden-planner/image/upload/c_limit,h_60,w_90/v1655400840/r8is30hgcaz1axpdzt0m.png"
-
-        const imageUrl = result.info.secure_url;
-        const thumbnailUrl = result.info.thumbnail_url;
-        setImageUrl(imageUrl);
-        setThumbnailUrl(thumbnailUrl);
-        
+  const [uploadedImage, setUploadedImage] = useState("");
+  const uploadImage = (e) => {
+    e.preventDefault();
+    const data = new FormData();
+    data.append('file', uploadedImage);
+    data.append('upload_preset', 'garden-planner-preset');
+    data.append('cloud_name', 'garden-planner');
+    fetch(
+      'https://api.cloudinary.com/v1_1/garden-planner/image/upload',
+      {
+        method: 'post',
+        body: data
       }
-    }
-  );
-
-  const onClickUploadImage = () => {
-    cldWidget.open();
-  }
+    )
+    .then((res) => res.json())
+    .then((data) => {
+      console.log('data', data);
+      console.log(data.secure_url)
+      setImageUrl(data.secure_url);
+      //setThumbnailUrl(data.thumbnail_url);
+    })
+    .catch((err) => console.log(err));  
+  };
 
   return (
     <>
@@ -162,7 +155,9 @@ const AddNewPlantForm = (props) => {
             Outdoor
           </InputWrapper>
           <p>ADD IMAGE</p>
-          <button type='button' id='upload_widget' onClick={onClickUploadImage}>Upload image</button>
+          <input type="file" onChange={(e) => setUploadedImage(e.target.files[0])} />
+          <button onClick={uploadImage}>Upload image</button>
+          {imageUrl && <img src={imageUrl} width="300" />}
           <button type='submit'>Save plant</button>
         </form>
         <AddPlantImg src={gardenlady}></AddPlantImg>
