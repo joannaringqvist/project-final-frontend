@@ -56,9 +56,14 @@ const PlantFeed = () => {
   const [plantlist, setPlantlist] = useState([]);
   const [filteredList, setFilteredList] = useState(plantsList);
   const [selectedCategory, setSelectedCategory] = useState('');
+  const [visible, setVisible] = useState(10);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  const showMoreItems = () => {
+    setVisible((prevValue) => prevValue + 10);
+  };
 
   const showFavourites = () => {
     return favouriteTasks;
@@ -180,8 +185,14 @@ const PlantFeed = () => {
             </div>
           </div>
         </FilterWrapper>
+        <PlantsLength>
+          {plantsList.length === 0 &&
+            "You have no plants yet. Let's add some plants!"}
+          {plantsList.length > 0 &&
+            `You have ${plantsList.length} plants registered.`}
+        </PlantsLength>
         <section>
-          {filteredList.map((plant) => (
+          {filteredList?.slice(0, visible).map((plant) => (
             <PlantCardWrapper>
               <PlantWrapper key={plant._id}>
                 <Link
@@ -216,12 +227,13 @@ const PlantFeed = () => {
             </PlantCardWrapper>
           ))}
           <PlantsLengthWrapper>
-            <PlantsLength>
-              {plantsList.length === 0 &&
-                "You have no plants yet. Let's add some plants!"}
-              {plantsList.length > 0 &&
-                `You have ${plantsList.length} plants registered.`}
-            </PlantsLength>
+            {plantsList.length >= 10 ? (
+              <StyledBtn className='hey' onClick={showMoreItems}>
+                Load more plants
+              </StyledBtn>
+            ) : (
+              <p></p>
+            )}
           </PlantsLengthWrapper>
           <div>
             <SlidingPane

@@ -99,3 +99,12 @@ export const Dropdown = styled.select.attrs({ type: 'dropdown' })`
   height: 30px;
   font-family: 'Montserrat', sans-serif;
 `;
+
+export const ErrorMessage = styled.p`
+  background-color: rgb(250, 235, 224);
+  border-radius: 10px;
+  padding: 5px;
+  @media (min-width: 668px) {
+    font-size: 22px;
+  }
+`;

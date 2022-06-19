@@ -55,12 +55,16 @@ export const PlantBtnText = styled.p``;
 
 export const PlantsLengthWrapper = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: center;
 `;
 
 export const PlantsLength = styled.p`
   font-size: 18px;
   text-align: center;
+  @media (min-width: 668px) {
+    font-size: 20px;
+  }
 `;
 
 export const FilterWrapper = styled.div`
