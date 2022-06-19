@@ -183,7 +183,6 @@ const PlantCalendar = () => {
               <StyledBtn onClick={() => deleteEvent(event._id)}>
                 Delete event
               </StyledBtn>
-              <StyledBtn>Edit event</StyledBtn>
             </DeleteWrapper>
           )}
         </div>

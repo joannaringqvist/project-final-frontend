@@ -22,7 +22,9 @@ const Editform = (props) => {
 
   const [plantName, setPlantName] = useState(currentPlant.plantName);
   const [plantType, setPlantType] = useState(currentPlant.plantType);
-  const [plantInformation, setplantInformation] = useState(currentPlant.plantInformation);
+  const [plantInformation, setplantInformation] = useState(
+    currentPlant.plantInformation
+  );
   const [imageUrl, setImageUrl] = useState(currentPlant.imageUrl);
 
   const handleEditNameChange = (event) => {
@@ -38,8 +40,6 @@ const Editform = (props) => {
     setImageUrl(event.target.value);
   };
 
-  
-
   const onEditPlantSubmit = (event) => {
     event.preventDefault();
     fetch(API_URL(`plant/${plantId}/updated`), {
@@ -47,7 +47,12 @@ const Editform = (props) => {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ plantName, plantType, plantInformation, imageUrl }),
+      body: JSON.stringify({
+        plantName,
+        plantType,
+        plantInformation,
+        imageUrl,
+      }),
     })
       .then((res) => res.json())
       .then((data) => {
@@ -67,11 +72,12 @@ const Editform = (props) => {
   const cldWidget = cloudinary.createUploadWidget(
     {
       cloudName: 'garden-planner',
-      uploadPreset: 'garden-planner-preset'
-    }, (error, result) => {
+      uploadPreset: 'garden-planner-preset',
+    },
+    (error, result) => {
       console.log('error', error);
       console.log('result', result);
-      if (!error && result && result.event === "success") { 
+      if (!error && result && result.event === 'success') {
         console.log('Done! Here is the image info: ', result.info);
         // secure_url: "https://res.cloudinary.com/garden-planner/image/upload/v1655400840/r8is30hgcaz1axpdzt0m.png"
         // path: "v1655400840/r8is30hgcaz1axpdzt0m.png"
@@ -89,14 +95,11 @@ const Editform = (props) => {
 
   const onClickUploadImage = () => {
     cldWidget.open();
-  }
+  };
 
   const onClickDeleteImage = () => {
     console.log('delete image');
-  }
-
-
-
+  };
 
   return (
     <>
@@ -137,9 +140,13 @@ const Editform = (props) => {
             />
           </InputWrapper>
 
-          <button type='button' id='upload_widget' onClick={onClickUploadImage}>Edit image</button>
+          <button type='button' id='upload_widget' onClick={onClickUploadImage}>
+            Edit image
+          </button>
           {/* Put image thumbnail here? */}
-          <button type='button' onClick={onClickDeleteImage}>Delete image</button>
+          <button type='button' onClick={onClickDeleteImage}>
+            Delete image
+          </button>
           <button type='submit'>Save plant</button>
           <button onClick={onBackButtonClick}>BACK</button>
           {/* <button onClick={() => setState({ isPaneOpen: false })}>BACK</button> */}
