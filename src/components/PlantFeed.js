@@ -181,7 +181,6 @@ const PlantFeed = () => {
                 <option value='houseplant'>houseplant</option>
                 <option value='perennial'>perennial</option>
               </Dropdown>
-              <StyledBtn onClick={showFavourites}>Favourites!</StyledBtn>
             </div>
           </div>
         </FilterWrapper>
