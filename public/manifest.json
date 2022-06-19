@@ -5,7 +5,7 @@
         "background_color": "#c9e4c5",
         "display": "standalone",
         "scope": "/",
-        "start_url": "/",
+        "start_url": "/login",
         "icons": [
             {
                 "src": "monstera192.png",
