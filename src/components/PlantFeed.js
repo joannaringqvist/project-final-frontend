@@ -205,7 +205,13 @@ const PlantFeed = () => {
                 <StyledDeleteBtn onClick={() => deleteOnePlant(plant._id)}>
                   <img src={deleteicon}></img>
                 </StyledDeleteBtn>
-                {/*<CheckBoxLabel>
+                <CheckBoxLabel
+                  style={
+                    state.isPaneOpen
+                      ? { display: 'none' }
+                      : { display: 'inlineBlock' }
+                  }
+                >
                   {plant.isFavourite ? (
                     <FavouriteStar src={heart}></FavouriteStar>
                   ) : (
@@ -213,6 +219,11 @@ const PlantFeed = () => {
                   )}
                   Favourite
                   <ButtonCheckbox
+                    style={
+                      state.isPaneOpen
+                        ? { display: 'none' }
+                        : { display: 'inline' }
+                    }
                     className='checkbox'
                     type='checkbox'
                     name={plant._id}
@@ -220,8 +231,14 @@ const PlantFeed = () => {
                     checked={plant.isFavourite}
                     onChange={() => onTogglePlant(plant._id, plant.isFavourite)}
                   ></ButtonCheckbox>
-                  <CheckboxContainer></CheckboxContainer>
-                  </CheckBoxLabel>*/}
+                  <CheckboxContainer
+                    style={
+                      state.isPaneOpen
+                        ? { display: 'none' }
+                        : { display: 'block' }
+                    }
+                  ></CheckboxContainer>
+                </CheckBoxLabel>
               </PlantWrapper>
             </PlantCardWrapper>
           ))}
