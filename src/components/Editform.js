@@ -96,6 +96,7 @@ const Editform = (props) => {
 
   return (
     <>
+      <button onClick={onBackButtonClick}>Cancel</button>
       <h1>Edit your plant</h1>
       <Formwrapper>
         <form onSubmit={onEditPlantSubmit}>
@@ -142,7 +143,6 @@ const Editform = (props) => {
           }
           <img src={imageUrl} />
           <button type='submit'>Save plant</button>
-          <button onClick={onBackButtonClick}>Cancel</button>
         </form>
       </Formwrapper>
     </>

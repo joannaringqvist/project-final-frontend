@@ -84,6 +84,10 @@ const AddNewPlantForm = (props) => {
       });
   };
 
+  const onBackButtonClick = () => {
+    props.closePane();
+  };
+
   const [uploadedImage, setUploadedImage] = useState('');
   const uploadImage = (e) => {
     e.preventDefault();
@@ -100,7 +104,6 @@ const AddNewPlantForm = (props) => {
         console.log('data', data);
         console.log(data.secure_url);
         setImageUrl(data.secure_url);
-        //setThumbnailUrl(data.thumbnail_url);
       })
       .catch((err) => console.log(err));
   };
@@ -109,6 +112,7 @@ const AddNewPlantForm = (props) => {
     <>
       <Addwrapper>
         <form onSubmit={onSaveNewPlantSubmit}>
+          <button onClick={onBackButtonClick}>Go back</button>
           <label htmlFor='plantName'>Name of plant</label>
           <InputWrapper>
             <NameInput
@@ -141,29 +145,33 @@ const AddNewPlantForm = (props) => {
               onChange={handlePlantInformationChange}
             />
           </InputWrapper>
-          <label htmlFor='IndoorOrOutdoor'>Indoor or outdoor plant?</label>
+          <p>Indoor or outdoor plant?</p>
           <InputWrapper>
+            <label htmlFor='indoorPlant'>Indoor</label>
             <input
               type='radio'
+              id='indoorPlant'
               value='Indoor'
               name='indoorOrOutdoor'
               onChange={handleIndoorOrOutdoor}
             />{' '}
-            Indoor
+            <label htmlFor='outdoorPlant'>Indoor</label>
             <input
               type='radio'
+              id='outdoorPlant'
               value='Outdoor'
               name='indoorOrOutdoor'
               onChange={handleIndoorOrOutdoor}
             />{' '}
-            Outdoor
           </InputWrapper>
           <p>ADD IMAGE</p>
           <input
             type='file'
             onChange={(e) => setUploadedImage(e.target.files[0])}
           />
-          <button onClick={uploadImage}>Upload image</button>
+          {uploadedImage && 
+            <button onClick={uploadImage}>Upload image</button>
+          }
           {imageUrl && <img src={imageUrl} width='300' />}
           <button type='submit'>Save plant</button>
         </form>

@@ -76,7 +76,9 @@ const PlantfeedProfile = () => {
             setState({ isPaneOpen: false });
           }}
         >
-          <AddNewPlant />
+          <AddNewPlant closePane={() => {
+              setState({ isPaneOpen: false });
+            }} />
         </SlidingPane>
       </>
     );

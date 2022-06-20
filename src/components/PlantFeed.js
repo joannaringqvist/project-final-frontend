@@ -53,7 +53,6 @@ const PlantFeed = () => {
     isPaneOpen: false,
   });
 
-  const [plantlist, setPlantlist] = useState([]);
   const [filteredList, setFilteredList] = useState(plantsList);
   const [selectedCategory, setSelectedCategory] = useState('');
   const [visible, setVisible] = useState(10);
@@ -92,11 +91,11 @@ const PlantFeed = () => {
         if (data.success) {
           dispatch(plants.actions.setPlants(data.response));
           dispatch(ui.actions.setLoading(false));
-          setPlantlist(data);
+          //setPlantlist(data);
           console.log(filteredList);
         }
       });
-  }, [accessToken]);
+  }, [accessToken, state]);
 
   const deleteOnePlant = (plantId) => {
     fetch(API_URL(`plant/${plantId}`), {
@@ -104,9 +103,8 @@ const PlantFeed = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data.response);
-        dispatch(plants.actions.deletePlant(data.response));
         swal({ text: 'Your plant is deleted.', icon: 'success' });
+        dispatch(plants.actions.deletePlant(data.response));
       });
   };
 
@@ -150,7 +148,7 @@ const PlantFeed = () => {
   useEffect(() => {
     let filteredData = filterByCategory(plantsList);
     setFilteredList(filteredData);
-  }, [selectedCategory]);
+  }, [selectedCategory, plantsList]);
 
   return (
     isLoading === false && (
