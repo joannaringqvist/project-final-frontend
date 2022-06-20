@@ -64,8 +64,6 @@ const Editform = (props) => {
     })
       .then((res) => res.json())
       .then((data) => {
-        //props.setEditPlant(false);
-        //handleEditImageUrlChange;
         dispatch(plants.actions.updatePlant(data.response));
         swal({ text: 'Your plant is updated!', icon: 'success' });
         props.closePane();
@@ -74,7 +72,6 @@ const Editform = (props) => {
 
   const onBackButtonClick = () => {
     props.closePane();
-    //navigate(`/plants/plant/${plantId}`);
   };
 
   const [uploadedImage, setUploadedImage] = useState('');
@@ -93,14 +90,12 @@ const Editform = (props) => {
         console.log('data', data);
         console.log(data.secure_url);
         setImageUrl(data.secure_url);
-        //setThumbnailUrl(data.thumbnail_url);
       })
       .catch((err) => console.log(err));
   };
 
   return (
     <>
-      <p>{imageUrl}</p>
       <h1>Edit your plant</h1>
       <Formwrapper>
         <form onSubmit={onEditPlantSubmit}>
@@ -138,19 +133,16 @@ const Editform = (props) => {
             />
           </InputWrapper>
 
-          <img src={thumbnailUrl} />
-          {/* <button type='button' onClick={onClickDeleteImage}>Delete image</button> */}
-          <button type='submit'>Save plant</button>
-          <button onClick={onBackButtonClick}>BACK</button>
-
           <input
             type='file'
             onChange={(e) => setUploadedImage(e.target.files[0])}
           />
-          {/* Disable upload button until image is chosen */}
-          <button onClick={uploadImage}>Upload</button>
-          <p>Uploaded image: {imageUrl}</p>
-          <p>Thumbnail image: {thumbnailUrl}</p>
+          {uploadedImage && 
+            <button onClick={uploadImage}>Upload image</button>
+          }
+          <img src={imageUrl} />
+          <button type='submit'>Save plant</button>
+          <button onClick={onBackButtonClick}>Cancel</button>
         </form>
       </Formwrapper>
     </>
