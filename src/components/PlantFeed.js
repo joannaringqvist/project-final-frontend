@@ -174,10 +174,12 @@ const PlantFeed = () => {
                 onChange={handleCategoryChange}
               >
                 <option value=''>All</option>
-                <option value='bush'>bush</option>
-                <option value='tree'>tree</option>
-                <option value='houseplant'>houseplant</option>
-                <option value='perennial'>perennial</option>
+                <option value='bush'>Bush</option>
+                <option value='tree'>Tree</option>
+                <option value='houseplant'>Houseplant</option>
+                <option value='perennial'>Perennial</option>
+                <option value='vegetable'>Vegetable</option>
+                <option value='other'>Other</option>
               </Dropdown>
             </div>
           </div>
@@ -203,7 +205,7 @@ const PlantFeed = () => {
                 <StyledDeleteBtn onClick={() => deleteOnePlant(plant._id)}>
                   <img src={deleteicon}></img>
                 </StyledDeleteBtn>
-                <CheckBoxLabel>
+                {/*<CheckBoxLabel>
                   {plant.isFavourite ? (
                     <FavouriteStar src={heart}></FavouriteStar>
                   ) : (
@@ -219,7 +221,7 @@ const PlantFeed = () => {
                     onChange={() => onTogglePlant(plant._id, plant.isFavourite)}
                   ></ButtonCheckbox>
                   <CheckboxContainer></CheckboxContainer>
-                </CheckBoxLabel>
+                  </CheckBoxLabel>*/}
               </PlantWrapper>
             </PlantCardWrapper>
           ))}
@@ -242,7 +244,11 @@ const PlantFeed = () => {
                 setState({ isPaneOpen: false });
               }}
             >
-              <AddNewPlant closePane={() => {setState({ isPaneOpen: false });}} />
+              <AddNewPlant
+                closePane={() => {
+                  setState({ isPaneOpen: false });
+                }}
+              />
             </SlidingPane>
           </div>
         </section>

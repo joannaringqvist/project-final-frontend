@@ -137,10 +137,6 @@ const SinglePlant = () => {
               <span> {plantInfo.plantType}</span>
             </SingleTextDiv>
 
-            <SingleTextDiv>
-              <PlantText>Indoor our outdoor?</PlantText>
-              <span> {plantInfo.indoorOrOutdoor}</span>
-            </SingleTextDiv>
             <PlantText>More information about plant:</PlantText>
             <p>{plantInfo.plantInformation}</p>
             <PlantText>Created at:</PlantText>

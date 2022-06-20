@@ -15,7 +15,14 @@ import {
   Dropdown,
 } from './Styling/form_styles';
 import gardenlady from './images/garden.png';
-import { AddPlantImg, Addwrapper } from './Styling/addplant_styles';
+import arrow from './images/arrow.png';
+import star from './images/star.png';
+import {
+  AddPlantImg,
+  Addwrapper,
+  BackBtn,
+  BackBtnImg,
+} from './Styling/addplant_styles';
 
 import swal from 'sweetalert';
 import { th } from 'date-fns/locale';
@@ -112,7 +119,9 @@ const AddNewPlantForm = (props) => {
     <>
       <Addwrapper>
         <form onSubmit={onSaveNewPlantSubmit}>
-          <button onClick={onBackButtonClick}>Go back</button>
+          <div>
+            <BackBtnImg onClick={onBackButtonClick} src={arrow}></BackBtnImg>
+          </div>
           <label htmlFor='plantName'>Name of plant</label>
           <InputWrapper>
             <NameInput
@@ -135,6 +144,8 @@ const AddNewPlantForm = (props) => {
               <option value='houseplant'>Houseplant</option>
               <option value='perennial'>Perennial</option>
               <option value='bush'>Bush</option>
+              <option value='vegetable'>Vegetable</option>
+              <option value='other'>Other</option>
             </Dropdown>
           </InputWrapper>
           <label htmlFor='plantInformation'>Add more information</label>
@@ -145,35 +156,18 @@ const AddNewPlantForm = (props) => {
               onChange={handlePlantInformationChange}
             />
           </InputWrapper>
-          <p>Indoor or outdoor plant?</p>
           <InputWrapper>
-            <label htmlFor='indoorPlant'>Indoor</label>
+            <p>Add image:</p>
             <input
-              type='radio'
-              id='indoorPlant'
-              value='Indoor'
-              name='indoorOrOutdoor'
-              onChange={handleIndoorOrOutdoor}
-            />{' '}
-            <label htmlFor='outdoorPlant'>Indoor</label>
-            <input
-              type='radio'
-              id='outdoorPlant'
-              value='Outdoor'
-              name='indoorOrOutdoor'
-              onChange={handleIndoorOrOutdoor}
-            />{' '}
+              type='file'
+              onChange={(e) => setUploadedImage(e.target.files[0])}
+            />
+            {uploadedImage && (
+              <StyledBtn onClick={uploadImage}>Upload image</StyledBtn>
+            )}
+            {imageUrl && <img src={imageUrl} width='300' />}
           </InputWrapper>
-          <p>ADD IMAGE</p>
-          <input
-            type='file'
-            onChange={(e) => setUploadedImage(e.target.files[0])}
-          />
-          {uploadedImage && 
-            <button onClick={uploadImage}>Upload image</button>
-          }
-          {imageUrl && <img src={imageUrl} width='300' />}
-          <button type='submit'>Save plant</button>
+          <StyledBtn type='submit'>Save plant</StyledBtn>
         </form>
         <AddPlantImg src={gardenlady}></AddPlantImg>
       </Addwrapper>

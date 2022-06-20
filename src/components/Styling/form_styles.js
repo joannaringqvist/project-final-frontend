@@ -7,7 +7,7 @@ export const Formwrapper = styled.div`
   justify-content: center;
   align-items: center;
   text-align: center;
-  height: 600px;
+  height: 500px;
 `;
 
 export const StyledBtn = styled.button`
