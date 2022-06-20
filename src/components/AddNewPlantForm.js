@@ -135,6 +135,8 @@ const AddNewPlantForm = (props) => {
               <option value='houseplant'>Houseplant</option>
               <option value='perennial'>Perennial</option>
               <option value='bush'>Bush</option>
+              <option value='vegetable'>Vegetable</option>
+              <option value='other'>Other</option>
             </Dropdown>
           </InputWrapper>
           <label htmlFor='plantInformation'>Add more information</label>
@@ -145,33 +147,12 @@ const AddNewPlantForm = (props) => {
               onChange={handlePlantInformationChange}
             />
           </InputWrapper>
-          <p>Indoor or outdoor plant?</p>
-          <InputWrapper>
-            <label htmlFor='indoorPlant'>Indoor</label>
-            <input
-              type='radio'
-              id='indoorPlant'
-              value='Indoor'
-              name='indoorOrOutdoor'
-              onChange={handleIndoorOrOutdoor}
-            />{' '}
-            <label htmlFor='outdoorPlant'>Indoor</label>
-            <input
-              type='radio'
-              id='outdoorPlant'
-              value='Outdoor'
-              name='indoorOrOutdoor'
-              onChange={handleIndoorOrOutdoor}
-            />{' '}
-          </InputWrapper>
           <p>ADD IMAGE</p>
           <input
             type='file'
             onChange={(e) => setUploadedImage(e.target.files[0])}
           />
-          {uploadedImage && 
-            <button onClick={uploadImage}>Upload image</button>
-          }
+          {uploadedImage && <button onClick={uploadImage}>Upload image</button>}
           {imageUrl && <img src={imageUrl} width='300' />}
           <button type='submit'>Save plant</button>
         </form>
