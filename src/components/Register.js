@@ -18,6 +18,7 @@ import {
   ErrorMessage,
 } from './Styling/form_styles';
 import Login from './Login';
+import { text } from '@cloudinary/url-gen/qualifiers/source';
 
 const Register = () => {
   const [username, setUsername] = useState('');
@@ -41,6 +42,7 @@ const Register = () => {
 
   const onRegisterFormSubmit = (event) => {
     event.preventDefault();
+    validateForm();
 
     const options = {
       method: 'POST',
@@ -79,26 +81,37 @@ const Register = () => {
       });
   };
 
+  const [textValidationName, setTextValidationName] = useState('');
+  const validateForm = () => {
+    let registerValidationName = document.forms['register']['username'].value;
+    if (registerValidationName === '') {
+      setTextValidationName('You must enter a username');
+      return false;
+    }
+  }
+
   return (
     <Formwrapper>
       <h1>Become our friend!</h1>
       <PlantPic src={seeding}></PlantPic>
       {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
-      <form onSubmit={onRegisterFormSubmit}>
+      <form onSubmit={onRegisterFormSubmit} name="register">
         <label htmlFor='username'>Username</label>
         <InputWrapper>
           <input
             type='text'
+            name='username'
             id='username'
             value={username}
             onChange={(e) => setUsername(e.target.value)}
           />
         </InputWrapper>
+        <p>{textValidationName}</p>
 
         <label htmlFor='email'>Email</label>
         <InputWrapper>
           <input
-            type='text'
+            type='email'
             id='email'
             value={email}
             onChange={(e) => setEmail(e.target.value)}
