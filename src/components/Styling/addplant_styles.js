@@ -22,3 +22,19 @@ export const Addwrapper = styled.div`
     height: 800px;
   }
 `;
+
+export const BackBtnImg = styled.img`
+  height: 50px;
+  width: 50px;
+  margin: 0px 0px 10px 0px;
+  transition: transform 0.6s;
+  cursor: pointer;
+  &:hover {
+    transform: scale(1.2);
+  }
+`;
+
+export const EditThumbnail = styled.img`
+  height: 200px;
+  width: 200px;
+`;

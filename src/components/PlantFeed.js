@@ -53,7 +53,6 @@ const PlantFeed = () => {
     isPaneOpen: false,
   });
 
-  const [plantlist, setPlantlist] = useState([]);
   const [filteredList, setFilteredList] = useState(plantsList);
   const [selectedCategory, setSelectedCategory] = useState('');
   const [visible, setVisible] = useState(10);
@@ -92,11 +91,11 @@ const PlantFeed = () => {
         if (data.success) {
           dispatch(plants.actions.setPlants(data.response));
           dispatch(ui.actions.setLoading(false));
-          setPlantlist(data);
+          //setPlantlist(data);
           console.log(filteredList);
         }
       });
-  }, [accessToken]);
+  }, [accessToken, state]);
 
   const deleteOnePlant = (plantId) => {
     fetch(API_URL(`plant/${plantId}`), {
@@ -104,9 +103,8 @@ const PlantFeed = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data.response);
-        dispatch(plants.actions.deletePlant(data.response));
         swal({ text: 'Your plant is deleted.', icon: 'success' });
+        dispatch(plants.actions.deletePlant(data.response));
       });
   };
 
@@ -150,7 +148,7 @@ const PlantFeed = () => {
   useEffect(() => {
     let filteredData = filterByCategory(plantsList);
     setFilteredList(filteredData);
-  }, [selectedCategory]);
+  }, [selectedCategory, plantsList]);
 
   return (
     isLoading === false && (
@@ -176,10 +174,12 @@ const PlantFeed = () => {
                 onChange={handleCategoryChange}
               >
                 <option value=''>All</option>
-                <option value='bush'>bush</option>
-                <option value='tree'>tree</option>
-                <option value='houseplant'>houseplant</option>
-                <option value='perennial'>perennial</option>
+                <option value='bush'>Bush</option>
+                <option value='tree'>Tree</option>
+                <option value='houseplant'>Houseplant</option>
+                <option value='perennial'>Perennial</option>
+                <option value='vegetable'>Vegetable</option>
+                <option value='other'>Other</option>
               </Dropdown>
             </div>
           </div>
@@ -205,7 +205,13 @@ const PlantFeed = () => {
                 <StyledDeleteBtn onClick={() => deleteOnePlant(plant._id)}>
                   <img src={deleteicon}></img>
                 </StyledDeleteBtn>
-                <CheckBoxLabel>
+                <CheckBoxLabel
+                  style={
+                    state.isPaneOpen
+                      ? { display: 'none' }
+                      : { display: 'inlineBlock' }
+                  }
+                >
                   {plant.isFavourite ? (
                     <FavouriteStar src={heart}></FavouriteStar>
                   ) : (
@@ -213,6 +219,11 @@ const PlantFeed = () => {
                   )}
                   Favourite
                   <ButtonCheckbox
+                    style={
+                      state.isPaneOpen
+                        ? { display: 'none' }
+                        : { display: 'inline' }
+                    }
                     className='checkbox'
                     type='checkbox'
                     name={plant._id}
@@ -220,7 +231,13 @@ const PlantFeed = () => {
                     checked={plant.isFavourite}
                     onChange={() => onTogglePlant(plant._id, plant.isFavourite)}
                   ></ButtonCheckbox>
-                  <CheckboxContainer></CheckboxContainer>
+                  <CheckboxContainer
+                    style={
+                      state.isPaneOpen
+                        ? { display: 'none' }
+                        : { display: 'block' }
+                    }
+                  ></CheckboxContainer>
                 </CheckBoxLabel>
               </PlantWrapper>
             </PlantCardWrapper>
@@ -244,7 +261,11 @@ const PlantFeed = () => {
                 setState({ isPaneOpen: false });
               }}
             >
-              <AddNewPlant closePane={() => {setState({ isPaneOpen: false });}} />
+              <AddNewPlant
+                closePane={() => {
+                  setState({ isPaneOpen: false });
+                }}
+              />
             </SlidingPane>
           </div>
         </section>

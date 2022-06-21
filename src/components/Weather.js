@@ -3,6 +3,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import moment from 'moment';
 
+import { API_KEY } from 'api/api';
+
 import {
   WeatherWrapper,
   Temp,
@@ -31,7 +33,7 @@ const Weather = () => {
         savePositionToState
       );
       const res = await axios.get(
-        `https://api.openweathermap.org/data/3.0/onecall?lat=${latitude}&lon=${longitude}&units=metric&appid=e3359107dd6692984f64be928b7d64ae`
+        `https://api.openweathermap.org/data/3.0/onecall?lat=${latitude}&lon=${longitude}&units=metric&appid=${API_KEY}`
       );
       console.log(res.data);
       setTemperature(res.data.current.temp);
