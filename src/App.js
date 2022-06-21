@@ -14,6 +14,7 @@ import SinglePlant from 'components/SinglePlant';
 import PlantCalendar from 'components/Calendar';
 import PlantTodos from 'components/PlantTodos';
 import About from 'components/About';
+import NotFound from 'components/NotFound';
 
 import plants from 'reducers/plants';
 import eventTodos from 'reducers/events';
@@ -47,6 +48,7 @@ export const App = () => {
       <BrowserRouter>
         <Routes>
           <Route exact path='/' element={<Login />}></Route>
+          <Route exact path='*' element={<NotFound />}></Route>
           <Route exact path='/register' element={<Register />}></Route>
           <Route exact path='/login' element={<Login />}></Route>
           <Route exact path='/plants' element={<PlantFeed />}></Route>
