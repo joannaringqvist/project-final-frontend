@@ -108,3 +108,8 @@ export const ErrorMessage = styled.p`
     font-size: 22px;
   }
 `;
+
+export const EditPlantImage = styled.img `
+  max-width: 100px;
+`;
+

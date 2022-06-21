@@ -10,6 +10,7 @@ import {
   NameInput,
   TextInput,
   Dropdown,
+  EditPlantImage,
 } from './Styling/form_styles';
 import { AddPlantImg, Addwrapper } from './Styling/addplant_styles';
 import { StyledBtn } from './Styling/plantfeed_styles';
@@ -140,9 +141,11 @@ const Editform = (props) => {
           {uploadedImage && 
             <button onClick={uploadImage}>Upload image</button>
           }
-          <img src={imageUrl} />
-          <button type='submit'>Save plant</button>
+          <InputWrapper>
+            <EditPlantImage src={imageUrl} />
+          </InputWrapper>
           <button onClick={onBackButtonClick}>Cancel</button>
+          <button type='submit'>Save plant</button>
         </form>
       </Formwrapper>
     </>
