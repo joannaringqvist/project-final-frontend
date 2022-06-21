@@ -60,7 +60,10 @@ const Weather = () => {
         `https://api.openweathermap.org/geo/1.0/reverse?lat=${latitude}&lon=${longitude}&limit=10&appid=${API_KEY}`
       );
       console.log(res.data);
-      setCityName(res.data[0].name);
+      if (res.data && res.data[0] && res.data[0].name) {
+        setCityName(res.data[0].name);
+      }
+      
     } catch (err) {
       console.error(err);
     }
