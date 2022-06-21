@@ -3,7 +3,12 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import moment from 'moment';
 
-import { API_KEY } from 'api/api';
+//import { API_KEY } from 'api/api';
+
+// const dotenv = require('dotenv');
+// dotenv.config({ path: '.env' });
+
+const API_KEY = process.env.REACT_APP_API_KEY;
 
 import {
   WeatherWrapper,
@@ -16,6 +21,7 @@ import {
 } from './Styling/weather_styles';
 
 const Weather = () => {
+
   const [latitude, setLatitude] = useState(0);
   const [longitude, setLongitude] = useState(0);
   const [weather, setWeather] = useState('');
@@ -51,7 +57,7 @@ const Weather = () => {
         savePositionToState
       );
       const res = await axios.get(
-        `https://api.openweathermap.org/geo/1.0/reverse?lat=${latitude}&lon=${longitude}&limit=10&appid=e3359107dd6692984f64be928b7d64ae`
+        `https://api.openweathermap.org/geo/1.0/reverse?lat=${latitude}&lon=${longitude}&limit=10&appid=${API_KEY}`
       );
       console.log(res.data);
       setCityName(res.data[0].name);
