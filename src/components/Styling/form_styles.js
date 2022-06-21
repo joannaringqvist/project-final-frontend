@@ -109,7 +109,16 @@ export const ErrorMessage = styled.p`
   }
 `;
 
-export const EditPlantImage = styled.img `
+export const EditAddPlantImage = styled.img `
   max-width: 100px;
+  max-height: 100px;
+  margin-top: 10px;
 `;
 
+export const InputWrapperImage = styled.div`
+  margin: 0 0 30px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+`;

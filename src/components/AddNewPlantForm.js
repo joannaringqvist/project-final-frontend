@@ -13,6 +13,8 @@ import {
   NameInput,
   TextInput,
   Dropdown,
+  InputWrapperImage,
+  EditAddPlantImage
 } from './Styling/form_styles';
 import gardenlady from './images/garden.png';
 import arrow from './images/arrow.png';
@@ -156,7 +158,7 @@ const AddNewPlantForm = (props) => {
               onChange={handlePlantInformationChange}
             />
           </InputWrapper>
-          <InputWrapper>
+          <InputWrapperImage>
             <p>Add image:</p>
             <input
               type='file'
@@ -165,8 +167,8 @@ const AddNewPlantForm = (props) => {
             {uploadedImage && (
               <StyledBtn onClick={uploadImage}>Upload image</StyledBtn>
             )}
-            {imageUrl && <img src={imageUrl} width='300' />}
-          </InputWrapper>
+            {imageUrl && <EditAddPlantImage src={imageUrl} width='300' />}
+          </InputWrapperImage>
           <StyledBtn type='submit'>Save plant</StyledBtn>
         </form>
         <AddPlantImg src={gardenlady}></AddPlantImg>

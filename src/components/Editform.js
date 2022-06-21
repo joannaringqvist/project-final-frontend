@@ -10,7 +10,9 @@ import {
   NameInput,
   TextInput,
   Dropdown,
-  EditPlantImage,
+  EditAddPlantImage,
+  StyledBtn,
+  InputWrapperImage,
 } from './Styling/form_styles';
 import {
   AddPlantImg,
@@ -18,7 +20,7 @@ import {
   EditThumbnail,
   BackBtnImg,
 } from './Styling/addplant_styles';
-import { StyledBtn } from './Styling/plantfeed_styles';
+// import { StyledBtn } from './Styling/plantfeed_styles';
 import swal from 'sweetalert';
 
 import arrow from './images/arrow.png';
@@ -140,19 +142,17 @@ const Editform = (props) => {
               onChange={handleEditInformationChange}
             />
           </InputWrapper>
-          <InputWrapper>
-
+          <InputWrapperImage>
             <input
               type='file'
               onChange={(e) => setUploadedImage(e.target.files[0])}
             />
             {uploadedImage && 
-              <button onClick={uploadImage}>Upload image</button>
+              <StyledBtn onClick={uploadImage}>Upload image</StyledBtn>
             }
-            <EditPlantImage src={imageUrl} />
-          </InputWrapper>
-          <button onClick={onBackButtonClick}>Cancel</button>
-          <button type='submit'>Save plant</button>
+            <EditAddPlantImage src={imageUrl} />
+          </InputWrapperImage>
+          <StyledBtn type='submit'>Save plant</StyledBtn>
 
         </form>
       </Formwrapper>
