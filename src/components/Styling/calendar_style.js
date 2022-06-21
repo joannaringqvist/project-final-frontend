@@ -59,3 +59,7 @@ export const DeleteWrapper = styled.div`
   text-align: center;
   margin-top: 0px;
 `;
+
+export const DatePickerWrap = styled.div`
+  margin-left: 0px;
+`;
