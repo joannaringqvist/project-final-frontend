@@ -95,7 +95,6 @@ const PlantCalendar = () => {
       .then((data) => {
         dispatch(eventTodos.actions.addEvent(data.response));
         setAllEvents([...allEvents, newEvent]);
-        console.log(allEvents);
       });
   };
 

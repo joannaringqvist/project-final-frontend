@@ -19,9 +19,6 @@ import {
   InputWrapperImage,
 } from './Styling/form_styles';
 import {
-  AddPlantImg,
-  Addwrapper,
-  EditThumbnail,
   BackBtnImg,
 } from './Styling/addplant_styles';
 import arrow from './images/arrow.png';
@@ -95,8 +92,6 @@ const Editform = (props) => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log('data', data);
-        console.log(data.secure_url);
         setImageUrl(data.secure_url);
       })
       .catch((err) => console.log(err));

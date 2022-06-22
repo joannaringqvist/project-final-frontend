@@ -96,8 +96,6 @@ const AddNewPlantForm = (props) => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log('data', data);
-        console.log(data.secure_url);
         setImageUrl(data.secure_url);
       })
       .catch((err) => console.log(err));
