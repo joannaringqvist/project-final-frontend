@@ -6,6 +6,8 @@ import { useNavigate } from 'react-router-dom';
 import { API_URL } from 'utils/utils';
 
 import user from 'reducers/user';
+import plants from 'reducers/plants';
+
 
 import {
   Formwrapper,
@@ -64,6 +66,20 @@ const Login = () => {
             dispatch(user.actions.setUserName(data.username));
             dispatch(user.actions.setError(null));
           });
+          const options = {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: data.accessToken,
+            },
+          };
+          fetch(API_URL('plants'), options)
+            .then((res) => res.json())
+            .then((data) => {
+              if (data.success) {
+                dispatch(plants.actions.setPlants(data.response));
+              }
+            });
         } else {
           batch(() => {
             dispatch(user.actions.setError(data.response));
