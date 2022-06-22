@@ -121,3 +121,50 @@ export const InputWrapperImage = styled.div`
   flex-direction: column;
   align-items: center;
 `;
+
+export const Modal = styled.div`
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+export const ModalContent = styled.div`
+  width: 500px;
+  background-color: #fff;
+  border-radius: 20px;
+  line-height: 1.7;
+  font-size: 18px;
+`;
+
+export const ModalBody = styled.div`
+  padding: 10px;
+`;
+
+export const ModalTitle = styled.h1``;
+
+export const ModalImg = styled.img`
+  width: 50px;
+`;
+
+export const ModalButton = styled.button`
+  border-radius: 20px;
+  height: 40px;
+  font-weight: bold;
+  width: fit-content;
+  margin: 35px 5px 5px 5px;
+  padding: 10px;
+  font-family: 'Montserrat', sans-serif;
+  background-color: rgb(250, 235, 224);
+  border: none;
+  transition: transform 0.6s;
+  cursor: pointer;
+  &:hover {
+    transform: scale(1.2);
+  }
+`;
