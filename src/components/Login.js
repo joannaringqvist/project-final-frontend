@@ -138,7 +138,7 @@ const Login = () => {
         <LoginButton onClick={onRegister}>Sign up!</LoginButton>
 
         {show === true && (
-          <Modal>
+          <Modal onClick={() => setShow(false)}>
             <ModalContent>
               <ModalTitle>Who are we?</ModalTitle>
               <ModalBody>
