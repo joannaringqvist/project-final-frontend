@@ -2,13 +2,11 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector, batch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-
-import { API_URL } from 'utils/utils';
-
 import user from 'reducers/user';
 import plants from 'reducers/plants';
 import eventTodos from 'reducers/events';
 
+import { API_URL } from 'utils/utils';
 
 import {
   Formwrapper,
@@ -17,12 +15,9 @@ import {
   Label,
   PlantPic,
   LoginText,
-  LogoWrapper,
   LogoText,
   ErrorMessage,
 } from './Styling/form_styles';
-import { StyledBtn } from './Styling/plantfeed_styles';
-import planticon from './images/plant.png';
 import seeding from './images/seeding.png';
 
 import { Container } from './Styling/global_styles';

@@ -3,6 +3,10 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import { configureStore, combineReducers } from '@reduxjs/toolkit';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import plants from 'reducers/plants';
+import eventTodos from 'reducers/events';
+import user from 'reducers/user';
+import { ui } from './reducers/ui';
 
 import PlantFeed from 'components/PlantFeed';
 import AddNewPlantForm from 'components/AddNewPlantForm';
@@ -12,14 +16,8 @@ import Register from 'components/Register';
 import Login from 'components/Login';
 import SinglePlant from 'components/SinglePlant';
 import PlantCalendar from 'components/Calendar';
-import PlantTodos from 'components/PlantTodos';
 import About from 'components/About';
 import NotFound from 'components/NotFound';
-
-import plants from 'reducers/plants';
-import eventTodos from 'reducers/events';
-import user from 'reducers/user';
-import { ui } from './reducers/ui';
 
 const reducer = combineReducers({
   eventTodos: eventTodos.reducer,
@@ -55,15 +53,11 @@ export const App = () => {
           <Route exact path='/profile' element={<ProfilePage />}></Route>
           <Route exact path='/addplant' element={<AddNewPlantForm />}></Route>
           <Route exact path='/calendar' element={<PlantCalendar />}></Route>
-          <Route exact path='/about' element={<About />}></Route>
-
           <Route
             exact
             path='/plants/plant/:plantId'
             element={<SinglePlant />}
           ></Route>
-          {/* <Route exact path='movie/:movieId' element={<Details />}></Route> */}
-          {/* <AddNewPlantForm /> */}
         </Routes>
       </BrowserRouter>
     </Provider>

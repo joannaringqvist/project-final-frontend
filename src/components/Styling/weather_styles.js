@@ -7,11 +7,16 @@ export const WeatherWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  @media (min-width: 668px) {
+  }
 `;
 
 export const Temp = styled.h1`
   font-size: 45px;
   padding-right: 10px;
+  @media (min-width: 668px) {
+    margin-top: 0;
+  }
 `;
 
 export const City = styled.p`

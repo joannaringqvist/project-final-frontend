@@ -16,9 +16,7 @@ const plants = createSlice({
     updatePlant: (store, action) => {
       const newPlant = action.payload;
       const oldPlant = store.plants.find((p) => p._id === newPlant._id);
-      // Delete the old plant from list
       store.plants.splice(store.plants.indexOf(oldPlant), 1);
-      // Insert new plant at beginning of list
       store.plants.unshift(newPlant);
     },
     deletePlant: (store, action) => {

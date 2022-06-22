@@ -25,12 +25,12 @@ export const AddEventWrapper = styled.div`
 `;
 
 export const ButtonWrapper = styled.div`
-  border-bottom: 2px solid #c1ac95;
   height: 120px;
   display: flex;
   align-items: center;
-  @media (min-width: 1200px) {
+  @media (min-width: 668px) {
     height: 150px;
+    justify-self: flex-start;
   }
 `;
 
@@ -44,12 +44,6 @@ export const TitleText = styled.input`
 export const DateText = styled.p`
   margin: 0px;
 `;
-export const CalendarEdit = styled.div`
-  background-color: red;
-  height: 100vh;
-  position: absolute;
-  z-index: 2;
-`;
 
 export const CalendarImg = styled.img`
   height: 200px;
@@ -58,4 +52,23 @@ export const CalendarImg = styled.img`
 export const DeleteWrapper = styled.div`
   text-align: center;
   margin-top: 0px;
+`;
+
+export const DatePickerWrap = styled.div`
+  margin-left: 0px;
+`;
+
+export const HeaderWrapper = styled.div`
+  display: flex;
+  border-bottom: 2px solid #c1ac95;
+
+  @media (min-width: 668px) {
+    justify-content: space-between;
+  }
+`;
+
+export const InvisibleDiv = styled.div`
+  @media (min-width: 668px) {
+    width: 250px;
+  }
 `;

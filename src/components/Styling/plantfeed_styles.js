@@ -17,7 +17,12 @@ export const PlantWrapper = styled.div`
   box-shadow: 2px 10px 10px 3px grey;
 `;
 
-export const AddWrapper = styled.div``;
+export const AddWrapper = styled.div`
+  @media (min-width: 668px) {
+    width: 250px;
+    text-align: right;
+  }
+`;
 
 export const PlantCardWrapper = styled.div`
   display: flex;

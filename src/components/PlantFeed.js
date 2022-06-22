@@ -5,12 +5,12 @@ import { useNavigate, Link } from 'react-router-dom';
 import moment from 'moment';
 import SlidingPane from 'react-sliding-pane';
 import 'react-sliding-pane/dist/react-sliding-pane.css';
+import plants from 'reducers/plants';
+import { ui } from 'reducers/ui';
 
-import arrow from './images/arrow.png';
+import leaf from './images/leaf.png';
 import heart from './images/heart.png';
-
 import { API_URL } from 'utils/utils';
-import Navbar from './reusable-components/Navbar';
 import {
   PlantWrapper,
   PlantName,
@@ -31,15 +31,12 @@ import {
   CheckboxContainer,
   FavouriteStar,
 } from './Styling/plantfeed_styles';
+import { Logo, LogoImg, LogoText } from './Styling/header_styles';
 import { Dropdown } from './Styling/form_styles';
 import { PlantfeedCardTextBold } from './Styling/profile_styling';
-
 import deleteicon from './images/delete.svg';
 import AddNewPlant from './AddNewPlantForm';
 import addicon from './images/plus.svg';
-
-import plants from 'reducers/plants';
-import { ui } from 'reducers/ui';
 
 const PlantFeed = () => {
   const plantsList = useSelector((store) => store.plants.plants);
@@ -62,10 +59,6 @@ const PlantFeed = () => {
 
   const showMoreItems = () => {
     setVisible((prevValue) => prevValue + 10);
-  };
-
-  const showFavourites = () => {
-    return favouriteTasks;
   };
 
   const toProfile = () => {
@@ -91,8 +84,6 @@ const PlantFeed = () => {
         if (data.success) {
           dispatch(plants.actions.setPlants(data.response));
           dispatch(ui.actions.setLoading(false));
-          //setPlantlist(data);
-          console.log(filteredList);
         }
       });
   }, [accessToken, state]);
@@ -124,9 +115,6 @@ const PlantFeed = () => {
       .then((data) => {
         if (data.success) {
           dispatch(plants.actions.togglePlant(plantId));
-          console.log(`${plantId} is favourite`);
-        } else {
-          console.log('didnt work');
         }
       });
   };
@@ -155,14 +143,17 @@ const PlantFeed = () => {
       <PlantFeedWrapper>
         <ButtonWrapper>
           <StyledBtn onClick={toProfile}>Back</StyledBtn>
+          <Logo>
+            <LogoImg src={leaf} />
+            <LogoText>Plantinary</LogoText>
+          </Logo>
           <AddWrapper>
-            {/*<PlantBtnText>Add plants</PlantBtnText>
-            <ArrowImg src={arrow}></ArrowImg>*/}
             <StyledBtnAdd onClick={() => setState({ isPaneOpen: true })}>
               <AddImg src={addicon}></AddImg>
             </StyledBtnAdd>
           </AddWrapper>
         </ButtonWrapper>
+
         <FilterWrapper>
           <div className='filter-container'>
             <div>

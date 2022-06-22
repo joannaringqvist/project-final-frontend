@@ -2,13 +2,11 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector, batch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-
-import { API_URL } from 'utils/utils';
 import user from 'reducers/user';
 import swal from 'sweetalert';
-import planticon from './images/plant.png';
-import seeding from './images/seeding.png';
 
+import { API_URL } from 'utils/utils';
+import seeding from './images/seeding.png';
 import {
   Formwrapper,
   InputWrapper,
@@ -17,8 +15,6 @@ import {
   PlantPic,
   ErrorMessage,
 } from './Styling/form_styles';
-import Login from './Login';
-import { text } from '@cloudinary/url-gen/qualifiers/source';
 
 const Register = () => {
   const [username, setUsername] = useState('');
@@ -88,14 +84,14 @@ const Register = () => {
       setTextValidationName('You must enter a username');
       return false;
     }
-  }
+  };
 
   return (
     <Formwrapper>
       <h1>Become our friend!</h1>
       <PlantPic src={seeding}></PlantPic>
       {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
-      <form onSubmit={onRegisterFormSubmit} name="register">
+      <form onSubmit={onRegisterFormSubmit} name='register'>
         <label htmlFor='username'>Username</label>
         <InputWrapper>
           <input
