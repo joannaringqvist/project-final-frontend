@@ -72,6 +72,12 @@ export const LogoTwo = styled.div`
   }
 `;
 
+export const LogoThree = styled.div`
+  @media (min-width: 668px) {
+    margin-bottom: 20px;
+  }
+`;
+
 export const LogoText = styled.h1`
   font-size: 15px;
   letter-spacing: 2px;
@@ -79,6 +85,14 @@ export const LogoText = styled.h1`
   @media (min-width: 668px) {
     letter-spacing: 4px;
     font-size: 30px;
+  }
+`;
+
+export const LogoTextTwo = styled.h1`
+  font-size: 16px;
+  letter-spacing: 2px;
+  @media (min-width: 668px) {
+    font-size: 25px;
   }
 `;
 

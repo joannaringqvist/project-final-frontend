@@ -13,18 +13,27 @@ import {
   InputWrapper,
   LoginButton,
   Label,
-  PlantPic,
   LoginText,
   LogoText,
   ErrorMessage,
+  Modal,
+  ModalContent,
+  ModalBody,
+  ModalTitle,
+  ModalImg,
+  ModalButton,
 } from './Styling/form_styles';
-import seeding from './images/seeding.png';
+import { LogoThree, LogoTextTwo, LogoImg } from './Styling/header_styles';
+import leaf from './images/leaf.png';
+import snakeplant from './images/snakeplant.png';
 
 import { Container } from './Styling/global_styles';
+import { StyledBtn } from './Styling/plantfeed_styles';
 
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [show, setShow] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const accessToken = useSelector((store) => store.user.accessToken);
@@ -96,9 +105,12 @@ const Login = () => {
   return (
     <Container>
       <Formwrapper>
+        <LogoThree>
+          <LogoImg src={leaf} />
+          <LogoTextTwo>Plantinary</LogoTextTwo>
+        </LogoThree>
+        <ModalButton onClick={() => setShow(true)}>About us!</ModalButton>
         <LogoText>Already a friend?</LogoText>
-        <PlantPic src={seeding}></PlantPic>
-
         {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
         <form onSubmit={onLoginFormSubmit}>
           <Label htmlFor='username'>Username</Label>
@@ -124,6 +136,23 @@ const Login = () => {
         </form>
         <LoginText>Not yet a user?</LoginText>
         <LoginButton onClick={onRegister}>Sign up!</LoginButton>
+
+        {show === true && (
+          <Modal>
+            <ModalContent>
+              <ModalTitle>Who are we?</ModalTitle>
+              <ModalBody>
+                We are two plant-lovers who attended the Technigo Bootcamp in
+                spring 2022. Plantinary is our finalproject - a perfect tool to
+                keep track of your plants. Sign up and add your plants! Enjoy!
+              </ModalBody>
+              <div>
+                <ModalImg src={snakeplant}></ModalImg>
+              </div>
+              <StyledBtn onClick={() => setShow(false)}>CLOSE</StyledBtn>
+            </ModalContent>
+          </Modal>
+        )}
       </Formwrapper>
     </Container>
   );
