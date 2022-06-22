@@ -19,9 +19,13 @@ import {
   PlantNameText,
   SingleButtonWrapper,
   SingleWrapper,
-  PlantImage,
+  PlantImage
 } from './Styling/singleplant_styles';
+import { LogoTwo, LogoImg, LogoText, HeaderWrapper } from './Styling/header_styles';
+import { InvisibleDiv } from './Styling/calendar_style';
 import { StyledBtn, ButtonWrapper } from './Styling/plantfeed_styles';
+
+import leaf from './images/leaf.png';
 
 const SinglePlant = () => {
   const dispatch = useDispatch();
@@ -63,35 +67,37 @@ const SinglePlant = () => {
   return (
     isLoading === false && (
       <>
-        <ButtonWrapper>
-          <StyledBtn onClick={onBackButtonClick}>Back</StyledBtn>
-        </ButtonWrapper>
+        <HeaderWrapper>
+          <ButtonWrapper>
+            <StyledBtn onClick={onBackButtonClick}>Back</StyledBtn>
+          </ButtonWrapper>
+          <LogoTwo>
+            <LogoImg src={leaf} />
+            <LogoText>Plantinary</LogoText>
+          </LogoTwo>
+          <InvisibleDiv></InvisibleDiv>
+        </HeaderWrapper>
         <SingleWrapper>
           <ImgContainer>
             {plantInfo.imageUrl && <PlantImage src={plantInfo.imageUrl} />}
           </ImgContainer>
-
           <SingleTextContainer>
             <SingleTextDiv>
               <PlantText>Plantname:</PlantText>
               <PlantNameText> {plantInfo.plantName}</PlantNameText>
             </SingleTextDiv>
-
             <SingleTextDiv>
               <PlantText>Type of plant:</PlantText>
               <span> {plantInfo.plantType}</span>
             </SingleTextDiv>
-
             <PlantText>More information about plant:</PlantText>
             <p>{plantInfo.plantInformation}</p>
             <PlantText>Created at:</PlantText>
             <span> {moment(plantInfo.createdAt).fromNow()}</span>
           </SingleTextContainer>
         </SingleWrapper>
-
         <SingleButtonWrapper>
           <StyledBtn onClick={onBackButtonClick}>BACK</StyledBtn>
-
           <StyledBtn onClick={() => setState({ isPaneOpen: true })}>
             Edit plant!
           </StyledBtn>
