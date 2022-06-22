@@ -15,20 +15,13 @@ import {
   LoginText,
   LogoText,
   ErrorMessage,
-  Modal,
-  ModalContent,
-  ModalBody,
-  ModalTitle,
-  ModalImg,
   ModalButton,
 } from './Styling/form_styles';
 import { LogoThree, LogoTextTwo, LogoImg } from './Styling/header_styles';
 import leaf from './images/leaf.png';
-import snakeplant from './images/snakeplant.png';
 import About from './About';
 
 import { Container } from './Styling/global_styles';
-import { StyledBtn } from './Styling/plantfeed_styles';
 
 const Login = () => {
   const [username, setUsername] = useState('');
