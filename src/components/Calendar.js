@@ -24,6 +24,7 @@ import {
   DateText,
   DeleteWrapper,
   ButtonWrapper,
+  DatePickerWrap,
 } from './Styling/calendar_style';
 import { StyledBtn } from './Styling/plantfeed_styles';
 
@@ -160,18 +161,23 @@ const PlantCalendar = () => {
           value={newEvent.title}
           onChange={(e) => setNewEvent({ ...newEvent, title: e.target.value })}
         />
-        <DatePicker
-          placeholderText='Start Date'
-          style={{ margin: '10px' }}
-          selected={newEvent.start}
-          onChange={(start) => setNewEvent({ ...newEvent, start })}
-        />
-        <DatePicker
-          style={{ margin: '10px' }}
-          placeholderText='End Date'
-          selected={newEvent.end}
-          onChange={(end) => setNewEvent({ ...newEvent, end })}
-        />
+        <DatePickerWrap>
+          <DatePicker
+            placeholderText='Start Date'
+            style={{ margin: '10px' }}
+            selected={newEvent.start}
+            onChange={(start) => setNewEvent({ ...newEvent, start })}
+          />
+        </DatePickerWrap>
+        <DatePickerWrap>
+          <DatePicker
+            wrapperClassName='date-picker'
+            style={{ marginLeft: '300px' }}
+            placeholderText='End Date'
+            selected={newEvent.end}
+            onChange={(end) => setNewEvent({ ...newEvent, end })}
+          />
+        </DatePickerWrap>
         <StyledBtn style={{ marginTop: '10px' }} onClick={handleAddEvent}>
           Add Event
         </StyledBtn>

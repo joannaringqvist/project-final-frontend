@@ -163,6 +163,7 @@ const PlantFeed = () => {
             </StyledBtnAdd>
           </AddWrapper>
         </ButtonWrapper>
+
         <FilterWrapper>
           <div className='filter-container'>
             <div>
