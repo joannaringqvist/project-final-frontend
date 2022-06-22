@@ -84,13 +84,13 @@ const Login = () => {
                 dispatch(plants.actions.setPlants(data.response));
               }
             });
-            fetch(API_URL('calendarevents'), options)
-              .then((res) => res.json())
-              .then((data) => {
-                if (data.success) {
-                  dispatch(eventTodos.actions.setEvent(data.response));
-                }
-              });
+          fetch(API_URL('calendarevents'), options)
+            .then((res) => res.json())
+            .then((data) => {
+              if (data.success) {
+                dispatch(eventTodos.actions.setEvent(data.response));
+              }
+            });
         } else {
           batch(() => {
             dispatch(user.actions.setError(data.response));
@@ -149,7 +149,7 @@ const Login = () => {
               <div>
                 <ModalImg src={snakeplant}></ModalImg>
               </div>
-              <StyledBtn onClick={() => setShow(false)}>CLOSE</StyledBtn>
+              <StyledBtn onClick={() => setShow(false)}>Back</StyledBtn>
             </ModalContent>
           </Modal>
         )}
