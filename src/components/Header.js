@@ -4,11 +4,9 @@ import { useSelector } from 'react-redux';
 import moment from 'moment';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import user from 'reducers/user';
 
 import leaf from './images/leaf.png';
-
-import user from 'reducers/user';
-import growth from './images/growth.png';
 import {
   HeaderWrapper,
   WelcomeUser,
@@ -20,10 +18,8 @@ import {
   DateWrapper,
   BtnWrapper,
 } from './Styling/header_styles';
-import { StyledBtn } from './Styling/plantfeed_styles';
 
 const Header = () => {
-  const username = useSelector((store) => store.user.username);
   const date = moment().format('MMMM Do');
   const weekday = moment().format('dddd');
   const dispatch = useDispatch();

@@ -1,9 +1,11 @@
 /* eslint-disable */
 import React, { useState } from 'react';
-import plants from 'reducers/plants';
+import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import SlidingPane from 'react-sliding-pane';
+import 'react-sliding-pane/dist/react-sliding-pane.css';
 
 import AddNewPlant from './AddNewPlantForm';
-
 import {
   PlantfeedCard,
   PlantfeedCardText,
@@ -12,13 +14,7 @@ import {
   PlantfeedBtnWrapper,
 } from './Styling/profile_styling';
 import plantlady from './images/plantlady.png';
-
 import { StyledBtn } from './Styling/plantfeed_styles';
-
-import { useSelector, useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import SlidingPane from 'react-sliding-pane';
-import 'react-sliding-pane/dist/react-sliding-pane.css';
 
 const PlantfeedProfile = () => {
   const plantList = useSelector((store) => store.plants.plants);
@@ -76,9 +72,11 @@ const PlantfeedProfile = () => {
             setState({ isPaneOpen: false });
           }}
         >
-          <AddNewPlant closePane={() => {
+          <AddNewPlant
+            closePane={() => {
               setState({ isPaneOpen: false });
-            }} />
+            }}
+          />
         </SlidingPane>
       </>
     );

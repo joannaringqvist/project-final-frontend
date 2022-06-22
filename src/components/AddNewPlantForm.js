@@ -2,32 +2,22 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import plants from 'reducers/plants';
+import swal from 'sweetalert';
 
 import { API_URL } from 'utils/utils';
-import plants from 'reducers/plants';
-
 import {
-  Formwrapper,
   InputWrapper,
   StyledBtn,
   NameInput,
   TextInput,
   Dropdown,
   InputWrapperImage,
-  EditAddPlantImage
+  EditAddPlantImage,
 } from './Styling/form_styles';
 import gardenlady from './images/garden.png';
 import arrow from './images/arrow.png';
-import star from './images/star.png';
-import {
-  AddPlantImg,
-  Addwrapper,
-  BackBtn,
-  BackBtnImg,
-} from './Styling/addplant_styles';
-
-import swal from 'sweetalert';
-import { th } from 'date-fns/locale';
+import { AddPlantImg, Addwrapper, BackBtnImg } from './Styling/addplant_styles';
 
 const AddNewPlantForm = (props) => {
   const [plantName, setPlantName] = useState('');
@@ -60,10 +50,6 @@ const AddNewPlantForm = (props) => {
   };
   const handlePlantInformationChange = (event) => {
     setPlantInformation(event.target.value);
-  };
-
-  const handleIndoorOrOutdoor = (event) => {
-    setIndoorOrOutdoor(event.target.value);
   };
 
   const onSaveNewPlantSubmit = (event) => {

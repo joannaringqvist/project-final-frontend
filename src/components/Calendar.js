@@ -1,9 +1,9 @@
 /* eslint-disable */
+import React, { useState, useEffect } from 'react';
 import format from 'date-fns/format';
 import getDay from 'date-fns/getDay';
 import parse from 'date-fns/parse';
 import startOfWeek from 'date-fns/startOfWeek';
-import React, { useState, useEffect } from 'react';
 import { Calendar, dateFnsLocalizer } from 'react-big-calendar';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import DatePicker from 'react-datepicker';
@@ -11,15 +11,14 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { useDispatch, useSelector } from 'react-redux';
 import moment from 'moment';
 import { useNavigate } from 'react-router-dom';
-import SlidingPane from 'react-sliding-pane';
-import plant from './images/pearls.png';
+import { ui } from 'reducers/ui';
+import eventTodos from 'reducers/events';
 
+import plant from './images/pearls.png';
 import { API_URL } from 'utils/utils';
 import {
   AddEventWrapper,
   TitleText,
-  CalendarHead,
-  CalendarEdit,
   CalendarImg,
   DateText,
   DeleteWrapper,
@@ -32,9 +31,6 @@ import { LogoTwo, LogoImg, LogoText } from './Styling/header_styles';
 import { StyledBtn } from './Styling/plantfeed_styles';
 import leaf from './images/leaf.png';
 
-import { ui } from 'reducers/ui';
-import eventTodos from 'reducers/events';
-
 const locales = {
   'en-US': require('date-fns/locale/en-US'),
 };
@@ -45,8 +41,6 @@ const localizer = dateFnsLocalizer({
   getDay,
   locales,
 });
-
-const events = [{}];
 
 const PlantCalendar = () => {
   const [newEvent, setNewEvent] = useState({ title: '', start: '', end: '' });
@@ -82,7 +76,6 @@ const PlantCalendar = () => {
         if (data.success) {
           dispatch(eventTodos.actions.setEvent(data.response));
           dispatch(ui.actions.setLoading(false));
-          console.log(data);
         }
       });
   }, [accessToken]);
@@ -220,29 +213,6 @@ const PlantCalendar = () => {
         dayPropGetter={dayStyleGetter}
         onSelectEvent={() => selectedEvent()}
       />
-
-      {/*{eventsList.map((event) => (
-        <div key={event._id}>
-          <p>{event.eventTitle}</p>
-          <p> {moment(event.startDate).format('MMM Do YY')}</p>
-          <p> {moment(event.endDate).format('MMM Do YY')}</p>
-          <button onClick={() => deleteEvent(event._id)}>DELETE EVENT</button>
-        </div>
-      ))}
-      <SlidingPane
-        style={{}}
-        className='some-custom-class'
-        overlayClassName='some-custom-overlay-class'
-        isOpen={state.isPaneOpen}
-        hideHeader
-        onRequestClose={() => {
-          setState({ isPaneOpen: false });
-        }}
-      >
-        <CalendarEdit>
-          <p>Hello!</p>
-        </CalendarEdit>
-      </SlidingPane>*/}
       <div></div>
     </div>
   );

@@ -3,6 +3,10 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { API_URL } from 'utils/utils';
+import swal from 'sweetalert';
+import plants from 'reducers/plants';
+import { th } from 'date-fns/locale';
+
 import {
   Formwrapper,
   InputWrapper,
@@ -20,13 +24,7 @@ import {
   EditThumbnail,
   BackBtnImg,
 } from './Styling/addplant_styles';
-// import { StyledBtn } from './Styling/plantfeed_styles';
-import swal from 'sweetalert';
-
 import arrow from './images/arrow.png';
-
-import plants from 'reducers/plants';
-import { th } from 'date-fns/locale';
 
 const Editform = (props) => {
   const plantsList = useSelector((store) => store.plants.plants);
@@ -147,13 +145,12 @@ const Editform = (props) => {
               type='file'
               onChange={(e) => setUploadedImage(e.target.files[0])}
             />
-            {uploadedImage && 
+            {uploadedImage && (
               <StyledBtn onClick={uploadImage}>Upload image</StyledBtn>
-            }
+            )}
             <EditAddPlantImage src={imageUrl} />
           </InputWrapperImage>
           <StyledBtn type='submit'>Save plant</StyledBtn>
-
         </form>
       </Formwrapper>
     </>

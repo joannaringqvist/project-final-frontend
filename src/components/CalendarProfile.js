@@ -3,20 +3,15 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
-import Calendar from 'react-calendar';
 import {
-  PlantfeedCard,
   PlantfeedCardTwo,
   PlantfeedCardText,
   PlantfeedCardTextBold,
   PlantLady,
-  PlantfeedBtnWrapper,
   PlantfeedBtnWrapperTwo,
 } from './Styling/profile_styling';
 import { StyledBtn } from './Styling/plantfeed_styles';
 import plantgirl from './images/girlplant.png';
-
-import eventTodos from 'reducers/events';
 
 const CalendarProfile = () => {
   const navigate = useNavigate();

@@ -44,12 +44,6 @@ export const TitleText = styled.input`
 export const DateText = styled.p`
   margin: 0px;
 `;
-export const CalendarEdit = styled.div`
-  background-color: red;
-  height: 100vh;
-  position: absolute;
-  z-index: 2;
-`;
 
 export const CalendarImg = styled.img`
   height: 200px;

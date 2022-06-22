@@ -43,11 +43,9 @@ const Weather = () => {
       const res = await axios.get(
         `https://api.openweathermap.org/data/3.0/onecall?lat=${latitude}&lon=${longitude}&units=metric&appid=${API_KEY}`
       );
-      console.log(res.data);
       setTemperature(res.data.current.temp);
       setWeather(res.data.current.weather[0].main);
       setIcon(res.data.current.weather[0].icon);
-      console.log(icon);
     } catch (err) {
       console.error(err);
     }
@@ -61,7 +59,7 @@ const Weather = () => {
       const res = await axios.get(
         `https://api.openweathermap.org/geo/1.0/reverse?lat=${latitude}&lon=${longitude}&limit=10&appid=${API_KEY}`
       );
-      console.log(res.data);
+
       if (res.data && res.data[0] && res.data[0].name) {
         setCityName(res.data[0].name);
       }
@@ -81,13 +79,7 @@ const Weather = () => {
         <Temp>{Math.round(temperature)}°</Temp>
         <CityWrapper>
           <City>{cityName}</City>
-
           <WeatherKind>{weather}</WeatherKind>
-
-          {/*<img
-          src={`http://openweathermap.org/img/wn/${icon}@2x.png`}
-          alt='Logo'
-  />*/}
         </CityWrapper>
       </WeatherWrapper>
       {weather === 'Clear' && (
