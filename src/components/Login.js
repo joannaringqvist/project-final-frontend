@@ -12,12 +12,12 @@ import {
   InputWrapper,
   LoginButton,
   Label,
-  PlantPic,
   LoginText,
   LogoText,
   ErrorMessage,
 } from './Styling/form_styles';
-import seeding from './images/seeding.png';
+import { LogoThree, LogoTextTwo, LogoImg } from './Styling/header_styles';
+import leaf from './images/leaf.png';
 
 import { Container } from './Styling/global_styles';
 
@@ -89,9 +89,11 @@ const Login = () => {
   return (
     <Container>
       <Formwrapper>
+        <LogoThree>
+          <LogoImg src={leaf} />
+          <LogoTextTwo>Plantinary</LogoTextTwo>
+        </LogoThree>
         <LogoText>Already a friend?</LogoText>
-        <PlantPic src={seeding}></PlantPic>
-
         {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
         <form onSubmit={onLoginFormSubmit}>
           <Label htmlFor='username'>Username</Label>
@@ -117,6 +119,7 @@ const Login = () => {
         </form>
         <LoginText>Not yet a user?</LoginText>
         <LoginButton onClick={onRegister}>Sign up!</LoginButton>
+        <LoginButton onClick={onRegister}>About us!</LoginButton>
       </Formwrapper>
     </Container>
   );

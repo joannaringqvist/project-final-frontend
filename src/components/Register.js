@@ -6,15 +6,15 @@ import user from 'reducers/user';
 import swal from 'sweetalert';
 
 import { API_URL } from 'utils/utils';
-import seeding from './images/seeding.png';
+import leaf from './images/leaf.png';
 import {
   Formwrapper,
   InputWrapper,
   LoginButton,
   LoginText,
-  PlantPic,
   ErrorMessage,
 } from './Styling/form_styles';
+import { LogoThree, LogoTextTwo, LogoImg } from './Styling/header_styles';
 
 const Register = () => {
   const [username, setUsername] = useState('');
@@ -88,8 +88,11 @@ const Register = () => {
 
   return (
     <Formwrapper>
+      <LogoThree>
+        <LogoImg src={leaf} />
+        <LogoTextTwo>Plantinary</LogoTextTwo>
+      </LogoThree>
       <h1>Become our friend!</h1>
-      <PlantPic src={seeding}></PlantPic>
       {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
       <form onSubmit={onRegisterFormSubmit} name='register'>
         <label htmlFor='username'>Username</label>

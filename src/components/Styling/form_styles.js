@@ -7,7 +7,7 @@ export const Formwrapper = styled.div`
   justify-content: center;
   align-items: center;
   text-align: center;
-  height: 500px;
+  height: 600px;
 `;
 
 export const StyledBtn = styled.button`
@@ -109,7 +109,7 @@ export const ErrorMessage = styled.p`
   }
 `;
 
-export const EditAddPlantImage = styled.img `
+export const EditAddPlantImage = styled.img`
   max-width: 100px;
   max-height: 100px;
   margin-top: 10px;
@@ -120,5 +120,4 @@ export const InputWrapperImage = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-
 `;

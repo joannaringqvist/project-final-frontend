@@ -129,6 +129,8 @@ const Editform = (props) => {
               <option value='houseplant'>Houseplant</option>
               <option value='perennial'>Perennial</option>
               <option value='bush'>Bush</option>
+              <option value='vegetable'>Vegetable</option>
+              <option value='other'>Other</option>
             </Dropdown>
           </InputWrapper>
 
