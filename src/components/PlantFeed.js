@@ -6,7 +6,7 @@ import moment from 'moment';
 import SlidingPane from 'react-sliding-pane';
 import 'react-sliding-pane/dist/react-sliding-pane.css';
 
-import arrow from './images/arrow.png';
+import leaf from './images/leaf.png';
 import heart from './images/heart.png';
 
 import { API_URL } from 'utils/utils';
@@ -31,6 +31,8 @@ import {
   CheckboxContainer,
   FavouriteStar,
 } from './Styling/plantfeed_styles';
+
+import { Logo, LogoImg, LogoText } from './Styling/header_styles';
 import { Dropdown } from './Styling/form_styles';
 import { PlantfeedCardTextBold } from './Styling/profile_styling';
 
@@ -155,6 +157,10 @@ const PlantFeed = () => {
       <PlantFeedWrapper>
         <ButtonWrapper>
           <StyledBtn onClick={toProfile}>Back</StyledBtn>
+          <Logo>
+            <LogoImg src={leaf} />
+            <LogoText>Plantinary</LogoText>
+          </Logo>
           <AddWrapper>
             {/*<PlantBtnText>Add plants</PlantBtnText>
             <ArrowImg src={arrow}></ArrowImg>*/}

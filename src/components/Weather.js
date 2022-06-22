@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import moment from 'moment';
+import { useDispatch, useSelector } from 'react-redux';
 
 //import { API_KEY } from 'api/api';
 
@@ -19,15 +20,16 @@ import {
   CityWrapper,
   WeatherKind,
 } from './Styling/weather_styles';
+import { WelcomeUser } from './Styling/header_styles';
 
 const Weather = () => {
-
   const [latitude, setLatitude] = useState(0);
   const [longitude, setLongitude] = useState(0);
   const [weather, setWeather] = useState('');
   const [temperature, setTemperature] = useState(0);
   const [cityName, setCityName] = useState('');
   const [icon, setIcon] = useState('');
+  const username = useSelector((store) => store.user.username);
 
   const savePositionToState = (position) => {
     setLatitude(position.coords.latitude);
@@ -63,7 +65,6 @@ const Weather = () => {
       if (res.data && res.data[0] && res.data[0].name) {
         setCityName(res.data[0].name);
       }
-      
     } catch (err) {
       console.error(err);
     }
@@ -75,6 +76,7 @@ const Weather = () => {
   }, [latitude, longitude]);
   return (
     <>
+      <WelcomeUser>Hello {username}!</WelcomeUser>
       <WeatherWrapper>
         <Temp>{Math.round(temperature)}°</Temp>
         <CityWrapper>

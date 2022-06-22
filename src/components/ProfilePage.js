@@ -20,7 +20,6 @@ const ProfilePage = () => {
         <Weather />
         <PlantfeedProfile />
         <CalendarProfile />
-        <Footer />
       </ProfileWrapper>
     </>
   );

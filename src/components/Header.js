@@ -5,12 +5,20 @@ import moment from 'moment';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
+import leaf from './images/leaf.png';
+
 import user from 'reducers/user';
+import growth from './images/growth.png';
 import {
   HeaderWrapper,
   WelcomeUser,
   DateText,
   HeaderBtn,
+  Logo,
+  LogoText,
+  LogoImg,
+  DateWrapper,
+  BtnWrapper,
 } from './Styling/header_styles';
 import { StyledBtn } from './Styling/plantfeed_styles';
 
@@ -22,10 +30,8 @@ const Header = () => {
   const navigate = useNavigate();
   return (
     <HeaderWrapper>
-      <div>
-        <WelcomeUser>Hello {username}!</WelcomeUser>
+      <BtnWrapper>
         <HeaderBtn
-          type='button'
           onClick={() => {
             dispatch(user.actions.setAccessToken(null));
             navigate('/login');
@@ -33,10 +39,14 @@ const Header = () => {
         >
           Log out
         </HeaderBtn>
-      </div>
-      <div>
+      </BtnWrapper>
+      <Logo>
+        <LogoImg src={leaf} />
+        <LogoText>Plantinary</LogoText>
+      </Logo>
+      <DateWrapper>
         <DateText>{date} </DateText> <DateText>{weekday}</DateText>
-      </div>
+      </DateWrapper>
     </HeaderWrapper>
   );
 };

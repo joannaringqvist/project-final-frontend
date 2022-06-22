@@ -25,8 +25,12 @@ import {
   DeleteWrapper,
   ButtonWrapper,
   DatePickerWrap,
+  HeaderWrapper,
+  InvisibleDiv,
 } from './Styling/calendar_style';
+import { LogoTwo, LogoImg, LogoText } from './Styling/header_styles';
 import { StyledBtn } from './Styling/plantfeed_styles';
+import leaf from './images/leaf.png';
 
 import { ui } from 'reducers/ui';
 import eventTodos from 'reducers/events';
@@ -147,9 +151,16 @@ const PlantCalendar = () => {
 
   return (
     <div className='App'>
-      <ButtonWrapper>
-        <StyledBtn onClick={backToProfile}>Back</StyledBtn>
-      </ButtonWrapper>
+      <HeaderWrapper>
+        <ButtonWrapper>
+          <StyledBtn onClick={backToProfile}>Back</StyledBtn>
+        </ButtonWrapper>
+        <LogoTwo>
+          <LogoImg src={leaf} />
+          <LogoText>Plantinary</LogoText>
+        </LogoTwo>
+        <InvisibleDiv></InvisibleDiv>
+      </HeaderWrapper>
       <AddEventWrapper>
         <h1>Your calendar</h1>
         <DateText>{date}</DateText>
