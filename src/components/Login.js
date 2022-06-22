@@ -7,6 +7,7 @@ import { API_URL } from 'utils/utils';
 
 import user from 'reducers/user';
 import plants from 'reducers/plants';
+import eventTodos from 'reducers/events';
 
 
 import {
@@ -80,6 +81,13 @@ const Login = () => {
                 dispatch(plants.actions.setPlants(data.response));
               }
             });
+            fetch(API_URL('calendarevents'), options)
+              .then((res) => res.json())
+              .then((data) => {
+                if (data.success) {
+                  dispatch(eventTodos.actions.setEvent(data.response));
+                }
+              });
         } else {
           batch(() => {
             dispatch(user.actions.setError(data.response));
