@@ -16,19 +16,13 @@ import {
   LoginText,
   LogoText,
   ErrorMessage,
-  Modal,
-  ModalContent,
-  ModalBody,
-  ModalTitle,
-  ModalImg,
   ModalButton,
 } from './Styling/form_styles';
 import { LogoThree, LogoTextTwo, LogoImg } from './Styling/header_styles';
 import leaf from './images/leaf.png';
-import snakeplant from './images/snakeplant.png';
+import About from './About';
 
 import { Container } from './Styling/global_styles';
-import { StyledBtn } from './Styling/plantfeed_styles';
 
 const Login = () => {
   const [username, setUsername] = useState('');
@@ -137,22 +131,7 @@ const Login = () => {
         <LoginText>Not yet a user?</LoginText>
         <LoginButton onClick={onRegister}>Sign up!</LoginButton>
 
-        {show === true && (
-          <Modal onClick={() => setShow(false)}>
-            <ModalContent>
-              <ModalTitle>Who are we?</ModalTitle>
-              <ModalBody>
-                We are two plant-lovers who attended the Technigo Bootcamp in
-                spring 2022. Plantinary is our finalproject - a perfect tool to
-                keep track of your plants. Sign up and add your plants! Enjoy!
-              </ModalBody>
-              <div>
-                <ModalImg src={snakeplant}></ModalImg>
-              </div>
-              <StyledBtn onClick={() => setShow(false)}>Back</StyledBtn>
-            </ModalContent>
-          </Modal>
-        )}
+        {show === true && <About setShow={setShow} />}
       </Formwrapper>
     </Container>
   );
