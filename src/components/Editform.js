@@ -40,7 +40,6 @@ const Editform = (props) => {
     currentPlant.plantInformation
   );
   const [imageUrl, setImageUrl] = useState(currentPlant.imageUrl);
-  const [thumbnailUrl, setThumbnailUrl] = useState(currentPlant.thumbnailUrl);
 
   const handleEditNameChange = (event) => {
     setPlantName(event.target.value);
@@ -64,7 +63,6 @@ const Editform = (props) => {
         plantType,
         plantInformation,
         imageUrl,
-        thumbnailUrl,
       }),
     })
       .then((res) => res.json())

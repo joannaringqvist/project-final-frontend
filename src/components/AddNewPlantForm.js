@@ -25,7 +25,6 @@ const AddNewPlantForm = (props) => {
   const [plantInformation, setPlantInformation] = useState('');
   const [indoorOrOutdoor, setIndoorOrOutdoor] = useState('');
   const [imageUrl, setImageUrl] = useState('');
-  const [thumbnailUrl, setThumbnailUrl] = useState('');
 
   const accessToken = useSelector((store) => store.user.accessToken);
   const navigate = useNavigate();
@@ -67,7 +66,6 @@ const AddNewPlantForm = (props) => {
         plantInformation,
         indoorOrOutdoor,
         imageUrl,
-        thumbnailUrl,
       }),
     })
       .then((res) => res.json())
